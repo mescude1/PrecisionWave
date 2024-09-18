@@ -11,10 +11,10 @@ services:
     depends_on:
       - db
     environment:
-      - POSTGRES_DB=your_db
-      - POSTGRES_USER=your_user
-      - POSTGRES_PASSWORD=your_password
-      - POSTGRES_HOST=db
+      - POSTGRES_DB=waveDB
+      - POSTGRES_USER=waveUser
+      - POSTGRES_PASSWORD=thisisnotasecret
+      - POSTGRES_HOST=db.precisionwave.orb.local
       - POSTGRES_PORT=5432
 
   frontend:
@@ -33,7 +33,7 @@ services:
     environment:
       POSTGRES_DB: waveDB
       POSTGRES_USER: waveUser
-      POSTGRES_PASSWORD: 610c608f98b4587971831acf884a5d83
+      POSTGRES_PASSWORD: thisisnotasecret
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
