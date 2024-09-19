@@ -10,12 +10,6 @@ services:
       - app-network
     depends_on:
       - db
-    environment:
-      - POSTGRES_DB=waveDB
-      - POSTGRES_USER=waveUser
-      - POSTGRES_PASSWORD=thisisnotasecret
-      - POSTGRES_HOST=db.precisionwave.orb.local
-      - POSTGRES_PORT=5432
 
   frontend:
     build: ./frontend
