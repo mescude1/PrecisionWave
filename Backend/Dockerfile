@@ -11,4 +11,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["/bin/bash"]
+CMD ["waitress-serve", "--call", "app:create_app"]
