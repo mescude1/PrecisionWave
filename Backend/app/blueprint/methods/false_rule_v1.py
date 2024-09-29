@@ -1,31 +1,33 @@
-import numpy as np
+import math
+import pandas as pd
 
-def regla_falsa(f, a, b, tol, Nmax):
+
+def false_rule(f, a, b, tol, Nmax):
     """
-    Este programa halla la solución a la ecuación f(x) = 0 en el intervalo [a, b]
-    usando el método de la regla falsa.
+    This program finds the solution to the equation f(x) = 0 en el interval [a, b] using the method of the false rule
 
-    Entradas:
-    f: función continua
-    a: extremo izquierdo del intervalo inicial
-    b: extremo derecho del intervalo inicial
-    tol: tolerancia
-    Nmax: número máximo de iteraciones
+    Inputs:
+    f: continious function
+    a: left endpoint of the initial interval
+    b: right endpoint of the initial interval
+    tol: tolerance
+    Nmax: maximum number of iterations
 
-    Salidas:
-    x: solución aproximada
-    iter: número de iteraciones
-    err: error estimado
+    Outputs:
+    x: aproximate solution
+    iter: number of iterations
+    err: estimated error
     """
-    # Inicialización
+    # Initialization
     fa = f(a)
     fb = f(b)
     pm = (fb * a - fa * b) / (fb - fa)
     fpm = f(pm)
-    E = 1000  # Error inicial grande
-    cont = 1  # Contador de iteraciones
+    E = 1000  # Initial large error
+    cont = 1  # Iteration counted
     
-    # Ciclo de la regla falsa
+    # loop of the false rule method
+    result_array = []
     while E > tol and cont < Nmax:
         if fa * fpm < 0:
             b = pm
@@ -33,42 +35,43 @@ def regla_falsa(f, a, b, tol, Nmax):
         else:
             a = pm
             fa = fpm
-        
-        # Actualización del punto anterior
+
+
+        # Updating previous point
         p0 = pm
         pm = (fb * a - fa * b) / (fb - fa)
         fpm = f(pm)
         E = abs(pm - p0)
+
+        result = {
+            'i': cont,
+            'x_i': pm,
+            'f_xi': fpm,
+            'e': abs(pm - p0)
+        }
+        result_array.append(result)
+
         cont += 1
     
-    # Resultados
+    # Results
     x = pm
     iter = cont
     err = E
-    return x, iter, err
+    return x, iter, err, result_array
 
-# Ejemplo de uso:
 if __name__ == "__main__":
-    # Definir la función continua f(x)
+    # Define a continuous function f(x)
     def f(x):
-        return np.cos(x) - x  # Ejemplo: cos(x) - x, tiene una raíz en x ≈ 0.739
+        return math.log((math.sin(x)**2) + 1 ) - 1/2  # define your f function here
     
-    def f1(y):
-        return y**2  
-    
-    # Parámetros iniciales
-    a = 0  # Extremo izquierdo del intervalo
-    b = 1  # Extremo derecho del intervalo
-    tol = 1e-5  # Tolerancia
-    Nmax = 500  # Número máximo de iteraciones
+    # Initial parameters
+    a = 0
+    b = 1
+    tol = 1e-7
+    Nmax = 100
 
-    # Llamar a la función
-    x, iter, err = regla_falsa(f, a, b, tol, Nmax)
-    print(f"Solución aproximada: x = {x}, Iteraciones: {iter}, Error: {err}")
-
-    c = -1
-    d = 0.9  
-    
-
-    y, itery, errr = regla_falsa(f1, c, d, tol, Nmax)
-    print(f"Solución aproximada: y = {y}, Iteraciones: {itery}, Error: {errr}")
+    # function invocation
+    x, iter, err, result_array = false_rule(f, a, b, tol, Nmax)
+    print(f"Aproximate solution: x = {x}, Iterations: {iter}, Error: {err}")
+    result_dataframe = pd.DataFrame(result_array)
+    print(f"Result data frame:\n{result_dataframe}")
