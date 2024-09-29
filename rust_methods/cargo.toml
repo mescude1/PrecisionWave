@@ -1,0 +1,9 @@
+[package]
+name = "PrecisionWave Rust Library"
+version = "0.1.0"
+authors = ["Mauricio Escudero <mescude1@eafit.edu.co>"]
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]

@@ -1,0 +1,97 @@
+\documentclass{article}
+\usepackage{minted}
+
+\title{EAFIT University - Department of Information and Computer Sciences}
+\author{Mauricio Escudero Restrepo \\
+        César Esteban Peñuela Cubides \\
+        Diego Mesa Ospina}
+\date{August 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Objetivo}
+Review the progress of the final project and the work methodologies of the workgroups
+
+\section{Course}
+Numerical Analisis
+
+\section{Responsible Faculty Member}
+Edwar Samir Posada Murillo
+
+\section{Current Report Delivery Date}
+October 1st 2024
+    
+\section[]{Numerical Methods}
+    The following numerical methods will be presented in this document in the following manner, first a pseudocode 
+    version of the method algorith will be presented, after the code for the implementation of the method in both 
+    languages selected will be presented, finally proof for the execution and results of the methods will be provided.
+    
+    \subsection{Incremental Search}
+
+    Incremental Search Method is a numerical method used to find the roots of a function
+    (i.e., where the function equals zero).
+    This method works by iteratively narrowing down an interval where a root
+    lies.
+    The goal is to find an approximation of the root with increasing precision.
+
+    \subsection{Method Implementation}
+    \subsection{Python}
+    \begin{minted}{python}
+        def incremental_search(f, x0, h, Nmax):
+    """
+    This program finds an interval where f(x) has a sign change using the incremental search method.
+    Inputs:
+    f: continuous function
+    x0: initial point
+    h: step
+    Nmax: maximum number of iterations
+
+    Outputs:
+    a: left endpoint of the interval
+    b: right endpoint of the interval
+    iter: number of iterations
+    """
+
+    # Initialization
+
+    xant = x0
+    fant = f(xant)
+    xact = xant + h
+    fact = f(xact)
+    result_array = []
+    # Loop
+    for i in range(1, Nmax+1):
+        if fant * fact < 0:
+            result = {
+                'i': i,
+                'x_i': xact,
+                'f_xi': fact,
+                'e': abs(xact - xant)
+            }
+            result_array.append(result)
+            break
+        result = {
+            'i': i,
+            'x_i': xact,
+            'f_xi': fact,
+            'e': abs(xact - xant)
+        }
+        result_array.append(result)
+        xant = xact
+        fant = fact
+        xact = xant + h
+        fact = f(xact)
+
+    # Result delivery
+
+    a = xant
+    b = xact
+    iter = i
+    result_data_frame = pd.DataFrame(result_array)
+    return a, b, iter, result_data_frame
+        \end{minted}
+
+
+\end{document}
