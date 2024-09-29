@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{minted}
+\usepackage{textcomp}
 
 \title{EAFIT University - Department of Information and Computer Sciences}
 \author{Mauricio Escudero Restrepo \\
@@ -35,6 +36,8 @@ October 1st 2024
     This method works by iteratively narrowing down an interval where a root
     lies.
     The goal is to find an approximation of the root with increasing precision.
+
+    \subsection{Pseudo-code}
 
     \subsection{Method Implementation}
     \subsection{Python}
@@ -92,6 +95,251 @@ October 1st 2024
     result_data_frame = pd.DataFrame(result_array)
     return a, b, iter, result_data_frame
         \end{minted}
+
+    \subsection{Rust}\label{subsec:rust}
+
+\begin{minted}{Rust}
+        :EPSILON;
+
+// Define a struct to hold the result for each iteration
+#[derive(Debug)]
+struct SearchResult {
+    iteration: usize,
+    x_i: f64,
+    f_xi: f64,
+    error: f64,
+}
+
+// Function for incremental search in Rust
+fn incremental_search<F>(f: F, x0: f64, h: f64, nmax: usize) -> (f64, f64, usize, Vec<SearchResult>)
+where
+    F: Fn(f64) -> f64,
+{
+    // Initialization
+    let mut xant = x0;
+    let mut fant = f(xant);
+    let mut xact = xant + h;
+    let mut fact = f(xact);
+
+    // Create a Vec to store the results
+    let mut result_array: Vec<SearchResult> = Vec::new();
+
+    // Iteration variable
+    let mut iterations = 0;
+
+    // Loop
+    for i in 1..=nmax {
+        iterations = i;
+
+        // Store the current iteration result
+        let result = SearchResult {
+            iteration: i,
+            x_i: xact,
+            f_xi: fact,
+            error: (xact - xant).abs(),
+        };
+        result_array.push(result);
+
+        // Check for sign change
+        if fant * fact < 0.0 {
+            break;
+        }
+
+        // Update
+        xant = xact;
+        fant = fact;
+        xact = xant + h;
+        fact = f(xact);
+
+        // Stopping condition if the step size is too small
+        if (xact - xant).abs() < EPSILON {
+            break;
+        }
+    }
+
+    // Return the result: interval endpoints, number of iterations, and the results array
+    (xant, xact, iterations, result_array)
+}
+        \end{minted}
+
+    \subsection{Method Tests}\label{subsec:method-tests}
+
+The test parameters are as follows:
+        - \textflorin = math.log((math.sin(x)**2) + 1 ) - 1/2
+        - x0 = -3
+        - step = 0.5
+        - Tol = 1x10-7
+        - N = 100
+
+    Result:
+        Interval: [-2.5, -2.0], Iterations: 2
+
+        \begin{table}[Execution Resuts]
+        \begin{tabular}{llll}
+        i & x\_i & f\_xi     & e   \\
+        1 & -2.5 & -0.193863 & 0.5 \\
+        2 & -2.0 & 0.102578  & 0.5
+        \end{tabular}\label{tab:table}
+        \end{table}
+
+    \subsection{Bisection}\label{subsec:bisection}
+
+    The bisection method is based on the Intermediate Value Theorem, which states that if a continuous function changes
+    sign over an interval, there is at least one root in that interval. The method systematically reduces the interval
+    in which the root lies by repeatedly bisecting it.
+
+    \subsection{Pseudo-code}
+
+    \subsection{Method Implementation}
+    \subsection{Python}
+
+    \begin{minted}{Python}
+        def bisection_method(f, a, b, tolerance=1e-7, max_iterations=100):
+    """
+    Bisection method to find the root of f(x) in the interval [a, b].
+
+    Parameters:
+    f : function
+        The function for which we are trying to find a root.
+    a, b : float
+        The interval [a, b] in which the root is located.
+    tolerance : float, optional
+        The stopping criterion for the algorithm.
+    max_iterations : int, optional
+        The maximum number of iterations to perform.
+
+    Returns:
+    c : float
+        The approximate root.
+    iterations : int
+        The number of iterations performed.
+    converged : bool
+        Whether the algorithm converged or not.
+    """
+    if f(a) * f(b) >= 0:
+        raise ValueError("f(a) and f(b) must have opposite signs.")
+    c = (a + b) / 2  # Midpoint initial
+    result_array = []
+    for i in range(max_iterations):
+        c = (a + b) / 2  # Midpoint
+        if abs(b - a) < tolerance or abs(f(c)) < tolerance:
+            df_result = pd.DataFrame(data=result_array)
+            print(df_result)
+            return c, i + 1, True, df_result  # Converged
+
+        # Narrow the interval based on the sign of f(c)
+        if f(a) * f(c) < 0:
+            b = c  # The root is in [a, c]
+        else:
+            a = c  # The root is in [c, b]
+
+        result = {'i': i, 'x_i': c, 'f_x_i': f(c), 'e': abs(b - a)}
+        result_array.append(result)
+
+    return c, max_iterations, False  # Did not converge within max_iterations
+
+    \end{minted}
+
+    \subsection{Rust}
+    \begin{minted}{Rust}
+        #[derive(Debug)]
+struct BisectionResult {
+    iteration: usize,
+    x_i: f64,
+    f_x_i: f64,
+    error: f64,
+}
+
+// Bisection method function in Rust
+fn bisection_method<F>(
+    f: F,
+    mut a: f64,
+    mut b: f64,
+    tolerance: f64,
+    max_iterations: usize,
+) -> (f64, usize, bool, Vec<BisectionResult>)
+where
+    F: Fn(f64) -> f64,
+{
+    // Check if f(a) and f(b) have opposite signs
+    if f(a) * f(b) >= 0.0 {
+        panic!("f(a) and f(b) must have opposite signs.");
+    }
+
+    // Create a Vec to store the results for each iteration
+    let mut result_array: Vec<BisectionResult> = Vec::new();
+
+    let mut c = (a + b) / 2.0; // Midpoint initialization
+
+    // Bisection loop
+    for i in 0..max_iterations {
+        c = (a + b) / 2.0; // Midpoint
+
+        // Check if the solution has converged
+        if (b - a).abs() < tolerance || f(c).abs() < tolerance {
+            return (c, i + 1, true, result_array); // Converged
+        }
+
+        // Narrow the interval based on the sign of f(c)
+        if f(a) * f(c) < 0.0 {
+            b = c; // The root is in [a, c]
+        } else {
+            a = c; // The root is in [c, b]
+        }
+
+        // Store the result of the current iteration
+        let result = BisectionResult {
+            iteration: i + 1,
+            x_i: c,
+            f_x_i: f(c),
+            error: (b - a).abs(),
+        };
+        result_array.push(result);
+    }
+
+    // If the loop finishes without converging, return the last midpoint and results
+    (c, max_iterations, false, result_array) // Did not converge within max_iterations
+}
+    \end{minted}
+
+\subsection{Method Test}\label{subsec:method-test}
+The test parameters are as follows:
+        - \textflorin = math.log((math.sin(x)**2) + 1 ) - 1/2
+        - a = 0
+        - b = 1
+        - Tol = 1x10-7
+        - N = 100
+
+    Result:
+        Interval: [-2.5, -2.0], Iterations: 2
+
+\begin{table}[]
+\begin{tabular}{llll}
+i  & x\_i               & f\_x\_i                 & e                   \\
+0  & 0.5                & -0.2931087267313766     & 0.5                 \\
+1  & 0.75               & -0.11839639385347844    & 0.25                \\
+2  & 0.875              & -0.036817690757380506   & 0.125               \\
+3  & 0.9375             & 0.0006339161592386899   & 0.0625              \\
+4  & 0.90625            & -0.017772289226861138   & 0.03125             \\
+5  & 0.921875           & -0.008486582211768012   & 0.015625            \\
+6  & 0.9296875          & -0.0039053586270640928  & 0.0078125           \\
+7  & 0.93359375         & -0.0016304381170096915  & 0.00390625          \\
+8  & 0.935546875        & -0.0004969353153196909  & 0.001953125         \\
+9  & 0.9365234375       & 6.882244496264622e-05   & 0.0009765625        \\
+10 & 0.93603515625      & -0.00021397350516405567 & 0.00048828125       \\
+11 & 0.936279296875     & -7.255478812057126e-05  & 0.000244140625      \\
+12 & 0.9364013671875    & -1.860984900181606e-06  & 0.0001220703125     \\
+13 & 0.93646240234375   & 3.348202684883006e-05   & 6.103515625e-05     \\
+14 & 0.936431884765625  & 1.581084516011355e-05   & 3.0517578125e-05    \\
+15 & 0.9364166259765625 & 6.975011174192858e-06   & 1.52587890625e-05   \\
+16 & 0.9364089965820312 & 2.5570333977986692e-06  & 7.62939453125e-06   \\
+17 & 0.9364051818847656 & 3.4802931392352576e-07  & 3.814697265625e-06  \\
+18 & 0.9364032745361328 & -7.564765268641693e-07  & 1.9073486328125e-06 \\
+19 & 0.9364042282104492 & -2.042232898902263e-07  & 9.5367431640625e-07
+\end{tabular}\label{tab:table2}
+    \end{table}
+
+
 
 
 \end{document}

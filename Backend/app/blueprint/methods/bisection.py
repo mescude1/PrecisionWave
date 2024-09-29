@@ -2,7 +2,7 @@ from numpy._core._multiarray_umath import sqrt, sin
 import pandas as pd
 
 
-def bisection_method(f, a, b, tolerance=1e-7, max_iterations=1000):
+def bisection_method(f, a, b, tolerance=1e-7, max_iterations=100):
     """
     Bisection method to find the root of f(x) in the interval [a, b].
 
@@ -61,9 +61,12 @@ def f_x_quiz(x):
 def f_x_parcial(x):
     return x**2 - x + 1 - math.exp(x) + 45/200
 
+def f_x(x):
+    return math.log((math.sin(x)**2) + 1 ) - 1/2
+
 
 # Apply the bisection method
-root, iterations, converged, df_result= bisection_method(f_x_parcial, -0.5, 1)
+root, iterations, converged, df_result= bisection_method(f_x, -0, 1)
 
 print(f"Root: {root}")
 print(f"Iterations: {iterations}")

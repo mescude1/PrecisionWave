@@ -1,3 +1,5 @@
+import math
+
 import numpy as np
 import pandas as pd
 
@@ -56,16 +58,17 @@ def incremental_search(f, x0, h, Nmax):
 
 # Ejemplo de uso:
 if __name__ == "__main__":
-    # Definir la función continua f(x)
+    # Define a continuous function f(x)
     def f(x):
-        return np.sin(x)  # Puedes cambiar la función según tus necesidades
+        return math.log((math.sin(x)**2) + 1 ) - 1/2  # change this to any function desired
 
-    # Parámetros iniciales
-    x0 = 0  # Punto inicial
-    h = 0.1  # Paso
-    Nmax = 100  # Número máximo de iteraciones
+    # Initial parameters
+    x0 = -3  # Starting point
+    h = 0.5  # Step
+    Nmax = 100  # Maximum number of iterations
 
-    # Llamar a la función
+    # function invocation
+
     a, b, i, result_data_frame = incremental_search(f, x0, h, Nmax)
     print(f"Interval: [{a}, {b}], Iterations: {i}")
     print(f"Result data frame:\n{result_data_frame}")
