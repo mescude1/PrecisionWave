@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  30 SEP 2024 16:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  30 SEP 2024 17:04
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -239,7 +239,7 @@ File: l3backend-pdftex.def 2024-02-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count296
 \l__pdf_internal_box=\box60
 )
-No file informe_2.aux.
+(/Users/mauricioescudero/PrecisionWave/out/informe_2.aux)
 \openout1 = `informe_2.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 11.
@@ -256,6 +256,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 11.
 LaTeX Font Info:    ... okay on input line 11.
+
 (/usr/local/texlive/2024/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count297
@@ -293,8 +294,8 @@ See the catchfile package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.99         \end{minted}
-                         
+l.99                     \end{minted}
+                                     
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -309,8 +310,8 @@ See the catchfile package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.99         \end{minted}
-                         
+l.99                     \end{minted}
+                                     
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
@@ -321,12 +322,12 @@ See the minted package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.99         \end{minted}
-                         
+l.99                     \end{minted}
+                                     
 Cannot find Pygments style default
 
 runsystem(pygmentize -l 'python' -f latex -P commandprefix=PYG -F tokenmerge -P
- stripnl='False' -o _minted-informe_2/44C0361C76493312E83EBE160A9C7F30ACC5EF0D4
+ stripnl='False' -o _minted-informe_2/7283B4DA7E8FCFC15A3B3841B1BC0EB4ACC5EF0D4
 4CCE5C17F13E7B38624AA39.pygtex informe_2.pyg)...disabled (restricted).
 
 
@@ -340,8 +341,8 @@ See the minted package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.99         \end{minted}
-                         
+l.99                     \end{minted}
+                                     
 This could be caused by using -output-directory or -aux-directory 
 without setting minted's outputdir, or by using a build tool that 
 changes paths in ways minted cannot detect, 
@@ -378,11 +379,11 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 \openout3 = `informe_2.pyg'.
 
 runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
- stripnl='False' -o _minted-informe_2/A0BE660AC153BDBAC1596C6B499120B9A31BAEEB4
+ stripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EA31BAEEB4
 6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
 
 
-./informe_2.tex:243: Package minted Error: Missing Pygments output; \inputminte
+./informe_2.tex:192: Package minted Error: Missing Pygments output; \inputminte
 d was
 probably given a file that does not exist--otherwise, you may need 
 the outputdir package option, or may be using an incompatible build tool,
@@ -392,7 +393,55 @@ See the minted package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.243     \end{minted}
+l.192                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
+tripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EBECF6A2D5BC
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+
+
+./informe_2.tex:195: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.195                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
+ stripnl='False' -o _minted-informe_2/A0BE660AC153BDBAC1596C6B499120B9A31BAEEB4
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+
+
+./informe_2.tex:254: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.254     \end{minted}
                       
 This could be caused by using -output-directory or -aux-directory 
 without setting minted's outputdir, or by using a build tool that 
@@ -406,7 +455,7 @@ tripnl='False' -o _minted-informe_2/005524E8D550E84BF9A99C795F5C0931BECF6A2D5BC
 395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
 
 
-./informe_2.tex:305: Package minted Error: Missing Pygments output; \inputminte
+./informe_2.tex:316: Package minted Error: Missing Pygments output; \inputminte
 d was
 probably given a file that does not exist--otherwise, you may need 
 the outputdir package option, or may be using an incompatible build tool,
@@ -416,20 +465,19 @@ See the minted package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.305     \end{minted}
+l.316     \end{minted}
                       
 This could be caused by using -output-directory or -aux-directory 
 without setting minted's outputdir, or by using a build tool that 
 changes paths in ways minted cannot detect, 
 or using frozencache with a missing file.
 
-
-Overfull \hbox (2.44537pt too wide) in paragraph at lines 321--344
+[2{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
+}]
+Overfull \hbox (2.44537pt too wide) in paragraph at lines 332--355
 [][][] 
  []
 
-[2{/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
-}]
 \openout3 = `informe_2.pyg'.
 
 runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
@@ -437,8 +485,7 @@ runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
 6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
 
 
-
-./informe_2.tex:419: Package minted Error: Missing Pygments output; \inputminte
+./informe_2.tex:430: Package minted Error: Missing Pygments output; \inputminte
 d was
 probably given a file that does not exist--otherwise, you may need 
 the outputdir package option, or may be using an incompatible build tool,
@@ -448,7 +495,7 @@ See the minted package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.419     \end{minted}
+l.430     \end{minted}
                       
 This could be caused by using -output-directory or -aux-directory 
 without setting minted's outputdir, or by using a build tool that 
@@ -462,7 +509,7 @@ tripnl='False' -o _minted-informe_2/EB79DF49F289C65DE70EF5BAF6B8343CBECF6A2D5BC
 395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
 
 
-./informe_2.tex:487: Package minted Error: Missing Pygments output; \inputminte
+./informe_2.tex:498: Package minted Error: Missing Pygments output; \inputminte
 d was
 probably given a file that does not exist--otherwise, you may need 
 the outputdir package option, or may be using an incompatible build tool,
@@ -472,7 +519,7 @@ See the minted package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.487      \end{minted}
+l.498      \end{minted}
                        
 This could be caused by using -output-directory or -aux-directory 
 without setting minted's outputdir, or by using a build tool that 
@@ -480,13 +527,13 @@ changes paths in ways minted cannot detect,
 or using frozencache with a missing file.
 
 
-Overfull \hbox (44.55649pt too wide) in paragraph at lines 490--494
+Overfull \hbox (44.55649pt too wide) in paragraph at lines 501--505
 \OT1/cmr/m/n/10 Approximate so-lu-tion: x = 0.9364045808798893 It-er-a-tions: 5
  Er-ror: 2.2097967899981086e-
  []
 
 
-Overfull \hbox (9.11208pt too wide) in paragraph at lines 496--503
+Overfull \hbox (9.11208pt too wide) in paragraph at lines 507--514
 [][][] 
  []
 
@@ -499,7 +546,7 @@ runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
 
 
 
-./informe_2.tex:575: Package minted Error: Missing Pygments output; \inputminte
+./informe_2.tex:586: Package minted Error: Missing Pygments output; \inputminte
 d was
 probably given a file that does not exist--otherwise, you may need 
 the outputdir package option, or may be using an incompatible build tool,
@@ -509,7 +556,7 @@ See the minted package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.575     \end{minted}
+l.586     \end{minted}
                       
 This could be caused by using -output-directory or -aux-directory 
 without setting minted's outputdir, or by using a build tool that 
@@ -519,11 +566,11 @@ or using frozencache with a missing file.
 \openout3 = `informe_2.pyg'.
 
 runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
-tripnl='False' -o _minted-informe_2/68B329DA9893E34099C7D8AD5CB9C940BECF6A2D5BC
+tripnl='False' -o _minted-informe_2/1941A9AB1E34EE16711445327901FD67BECF6A2D5BC
 395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
 
 
-./informe_2.tex:579: Package minted Error: Missing Pygments output; \inputminte
+./informe_2.tex:639: Package minted Error: Missing Pygments output; \inputminte
 d was
 probably given a file that does not exist--otherwise, you may need 
 the outputdir package option, or may be using an incompatible build tool,
@@ -533,14 +580,304 @@ See the minted package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.579     \end{minted}
+l.639     \end{minted}
                       
 This could be caused by using -output-directory or -aux-directory 
 without setting minted's outputdir, or by using a build tool that 
 changes paths in ways minted cannot detect, 
 or using frozencache with a missing file.
 
-[4] (/Users/mauricioescudero/PrecisionWave/out/informe_2.aux)
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
+ stripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EA31BAEEB4
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+
+
+./informe_2.tex:646: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.646                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
+tripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EBECF6A2D5BC
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+
+
+./informe_2.tex:649: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.649                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
+ stripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EA31BAEEB4
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+
+
+./informe_2.tex:657: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.657                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
+tripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EBECF6A2D5BC
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+
+
+./informe_2.tex:660: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.660                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
+ stripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EA31BAEEB4
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+
+
+./informe_2.tex:668: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.668                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+[4]
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
+tripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EBECF6A2D5BC
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+
+
+
+./informe_2.tex:671: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.671                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
+ stripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EA31BAEEB4
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+
+
+./informe_2.tex:679: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.679                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
+tripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EBECF6A2D5BC
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+
+
+./informe_2.tex:682: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.682                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
+ stripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EA31BAEEB4
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+
+
+./informe_2.tex:690: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.690                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
+tripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EBECF6A2D5BC
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+
+
+./informe_2.tex:693: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.693                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
+ stripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EA31BAEEB4
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+
+
+./informe_2.tex:701: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.701                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+\openout3 = `informe_2.pyg'.
+
+runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
+tripnl='False' -o _minted-informe_2/D41D8CD98F00B204E9800998ECF8427EBECF6A2D5BC
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+
+
+./informe_2.tex:704: Package minted Error: Missing Pygments output; \inputminte
+d was
+probably given a file that does not exist--otherwise, you may need 
+the outputdir package option, or may be using an incompatible build tool,
+or may be using frozencache with a missing file.
+
+See the minted package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.704                 \end{minted}
+                                  
+This could be caused by using -output-directory or -aux-directory 
+without setting minted's outputdir, or by using a build tool that 
+changes paths in ways minted cannot detect, 
+or using frozencache with a missing file.
+
+[5] (/Users/mauricioescudero/PrecisionWave/out/informe_2.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -553,10 +890,10 @@ runsystem(rm informe_2.pyg)...disabled (restricted).
 
  ) 
 Here is how much of TeX's memory you used:
- 5316 strings out of 474116
- 105551 string characters out of 5743682
- 1937187 words of memory out of 5000000
- 27635 multiletter control sequences out of 15000+600000
+ 5329 strings out of 474116
+ 106617 string characters out of 5743682
+ 1938187 words of memory out of 5000000
+ 27646 multiletter control sequences out of 15000+600000
  562659 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  77i,9n,79p,276b,209s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -566,11 +903,11 @@ Here is how much of TeX's memory you used:
 usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></us
 r/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/
 local/texlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on /Users/mauricioescudero/PrecisionWave/out/informe_2.pdf (4 pa
-ges, 84967 bytes).
+Output written on /Users/mauricioescudero/PrecisionWave/out/informe_2.pdf (5 pa
+ges, 88138 bytes).
 PDF statistics:
- 48 PDF objects out of 1000 (max. 8388607)
- 29 compressed objects within 1 object stream
+ 51 PDF objects out of 1000 (max. 8388607)
+ 31 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
