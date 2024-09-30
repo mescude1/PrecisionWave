@@ -1,9 +1,8 @@
 import math
-
-import numpy as np
 import pandas as pd
 
-def incremental_search(f, x0, h, Nmax):
+
+def incremental_search(function, x0, h, nmax):
     """
     This program finds an interval where f(x) has a sign change using the incremental search method.
     Inputs:
@@ -21,12 +20,13 @@ def incremental_search(f, x0, h, Nmax):
     # Initialization
 
     xant = x0
-    fant = f(xant)
+    fant = function(xant)
     xact = xant + h
-    fact = f(xact)
+    fact = function(xact)
     result_array = []
     # Loop
-    for i in range(1, Nmax+1):
+    i = 0
+    for i in range(1, nmax+1):
         if fant * fact < 0:
             result = {
                 'i': i,
@@ -50,11 +50,9 @@ def incremental_search(f, x0, h, Nmax):
 
     # Result delivery
 
-    a = xant
-    b = xact
-    iter = i
     result_data_frame = pd.DataFrame(result_array)
-    return a, b, iter, result_data_frame
+    return xant, xact, i, result_data_frame
+
 
 # Ejemplo de uso:
 if __name__ == "__main__":
@@ -62,13 +60,8 @@ if __name__ == "__main__":
     def f(x):
         return math.log((math.sin(x)**2) + 1 ) - 1/2  # change this to any function desired
 
-    # Initial parameters
-    x0 = -3  # Starting point
-    h = 0.5  # Step
-    Nmax = 100  # Maximum number of iterations
-
     # function invocation
 
-    a, b, i, result_data_frame = incremental_search(f, x0, h, Nmax)
+    a, b, i, data_frame = incremental_search(f, -3, 0.5, 100)
     print(f"Interval: [{a}, {b}], Iterations: {i}")
-    print(f"Result data frame:\n{result_data_frame}")
+    print(f"Result data frame:\n{data_frame}")
