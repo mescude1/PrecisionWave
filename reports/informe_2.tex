@@ -43,60 +43,60 @@ October 1st 2024
 
                 \paragraph{Python}
 
-    \begin{minted}{python}
-        def incremental_search(f, x0, h, Nmax):
-            """
-            This program finds an interval where f(x) has a sign change using the incremental search method.
-            Inputs:
-            f: continuous function
-            x0: initial point
-            h: step
-            Nmax: maximum number of iterations
-
-            Outputs:
-            a: left endpoint of the interval
-            b: right endpoint of the interval
-            iter: number of iterations
-            """
-
-            # Initialization
-
-            xant = x0
-            fant = f(xant)
-            xact = xant + h
-            fact = f(xact)
-            result_array = []
-            # Loop
-            for i in range(1, Nmax+1):
-                if fant * fact < 0:
-                    result = {
-                        'i': i,
-                        'x_i': xact,
-                        'f_xi': fact,
-                        'e': abs(xact - xant)
-                    }
-                    result_array.append(result)
-                    break
-                result = {
-                    'i': i,
-                    'x_i': xact,
-                    'f_xi': fact,
-                    'e': abs(xact - xant)
-                }
-                result_array.append(result)
-                xant = xact
-                fant = fact
-                xact = xant + h
-                fact = f(xact)
-
-            # Result delivery
-
-            a = xant
-            b = xact
-            iter = i
-            result_data_frame = pd.DataFrame(result_array)
-            return a, b, iter, result_data_frame
-        \end{minted}
+                \begin{minted}{python}
+                    def incremental_search(f, x0, h, Nmax):
+                        """
+                        This program finds an interval where f(x) has a sign change using the incremental search method.
+                        Inputs:
+                        f: continuous function
+                        x0: initial point
+                        h: step
+                        Nmax: maximum number of iterations
+            
+                        Outputs:
+                        a: left endpoint of the interval
+                        b: right endpoint of the interval
+                        iter: number of iterations
+                        """
+            
+                        # Initialization
+            
+                        xant = x0
+                        fant = f(xant)
+                        xact = xant + h
+                        fact = f(xact)
+                        result_array = []
+                        # Loop
+                        for i in range(1, Nmax+1):
+                            if fant * fact < 0:
+                                result = {
+                                    'i': i,
+                                    'x_i': xact,
+                                    'f_xi': fact,
+                                    'e': abs(xact - xant)
+                                }
+                                result_array.append(result)
+                                break
+                            result = {
+                                'i': i,
+                                'x_i': xact,
+                                'f_xi': fact,
+                                'e': abs(xact - xant)
+                            }
+                            result_array.append(result)
+                            xant = xact
+                            fant = fact
+                            xact = xant + h
+                            fact = f(xact)
+            
+                        # Result delivery
+            
+                        a = xant
+                        b = xact
+                        iter = i
+                        result_data_frame = pd.DataFrame(result_array)
+                        return a, b, iter, result_data_frame
+                    \end{minted}
 
     \paragraph{Rust}\label{paragraph:rust}
 
@@ -166,7 +166,7 @@ October 1st 2024
 
     \subsubsection{Method Tests}\label{subsec:method-tests}
 
-The test parameters are as follows:
+    The test parameters are as follows:
         - \textflorin = math.log((math.sin(x)**2) + 1 ) - 1/2
         - x0 = -3
         - step = 0.5
@@ -183,6 +183,17 @@ The test parameters are as follows:
         2 & -2.0 & 0.102578  & 0.5
         \end{tabular}\label{tab:table}
         \end{table}
+
+    \subsection{Incremental Search}
+        \subsubsection{Pseudo-code}
+        \subsubsection{Method Implementation}
+            \paragraph{Python}
+                \begin{minted}{Python}
+                \end{minted}
+            \paragraph{Rust}
+                \begin{minted}{Rust}
+                \end{minted}
+        \subsubsection{Method Test}
 
     \subsection{Bisection}\label{subsec:bisection}
 
@@ -343,12 +354,12 @@ i  & x\_i               & f\_x\_i                 & e                   \\
 \end{tabular}\label{tab:table2}
     \end{table}
 
-\subsection{False Rule}\label{subsec:false_rule}
+    \subsection{False Rule}\label{subsec:false_rule}
 
-The false position method (also known as the regula falsi method) is a root-finding technique used in numerical analysis.
-It is similar to the bisection method in that it iteratively narrows down an interval where a root of a function exists.
-However, instead of using the midpoint of the interval as in the bisection method, the false position method uses a
-more refined estimate by linearly interpolating the function between the endpoints.
+    The false position method (also known as the regula falsi method) is a root-finding technique used in numerical analysis.
+    It is similar to the bisection method in that it iteratively narrows down an interval where a root of a function exists.
+    However, instead of using the midpoint of the interval as in the bisection method, the false position method uses a
+    more refined estimate by linearly interpolating the function between the endpoints.
 
 \subsubsection{Pseudo-code}
 
@@ -501,17 +512,17 @@ more refined estimate by linearly interpolating the function between the endpoin
         4 & 0.9364045808798893 & 1.894040480010517e-13  & 2.2097967899981086e-10
         \end{tabular}\label{tab:table3}
         \end{table}
-\subsection{Fixed Point}\label{subsec:fixed_point}
 
-The fixed-point method is an iterative numerical technique used to solve equations of the form x=g(x)x = g(x)x=g(x).
-In this method, the goal is to find a value xxx such that g(x)=xg(x) = xg(x)=x, which is known as a fixed
-point of the function g(x)g(x)g(x).
+    \subsection{Fixed Point}\label{subsec:fixed_point}
+
+    The fixed-point method is an iterative numerical technique used to solve equations of the form x=g(x)x = g(x)x=g(x).
+    In this method, the goal is to find a value xxx such that g(x)=xg(x) = xg(x)=x, which is known as a fixed
+    point of the function g(x)g(x)g(x).
 
     \subsubsection{Pseudo-code}
 
     \subsubsection{Method Implementation}
     \paragraph{Python}
-
     \begin{minted}{Python}
         def fixed_point_interval(g, a, b, x0, tolerance=1e-7, max_iterations=100):
             """
@@ -575,6 +586,122 @@ point of the function g(x)g(x)g(x).
     \end{minted}
     \paragraph{Rust}
     \begin{minted}{Rust}
+        use std::f64;
 
+        fn fixed_point_method<F>(g: F, x0: f64, tol: f64, max_iter: usize) -> (f64, usize, bool, Vec<(usize, f64, f64, f64)>)
+        where
+            F: Fn(f64) -> f64,
+        {
+            let mut result_array = Vec::new();
+            let mut x = x0;
+        
+            for i in 0..max_iter {
+                let x_new = g(x);
+                let error = (x_new - x).abs();
+        
+                result_array.push((i + 1, x_new, g(x_new), error));
+        
+                if error < tol {
+                    return (x_new, i + 1, true, result_array); // Converged
+                }
+        
+                x = x_new; // Update for the next iteration
+            }
+        
+            // Did not converge within max_iter
+            (x, max_iter, false, result_array)
+        }
+        
+        fn print_results(result_array: &Vec<(usize, f64, f64, f64)>) {
+            println!("{:<10} {:<15} {:<15} {:<15}", "Iter", "x", "g(x)", "Error");
+        
+            for (i, x, g_x, error) in result_array {
+                println!("{:<10} {:<15.8} {:<15.8} {:<15.8}", i, x, g_x, error);
+            }
+        }
+        
+        fn main() {
+            // Example usage:
+            let g = |x: f64| x.cos(); // Example function g(x) = cos(x)
+            let x0 = 0.5; // Initial guess
+            let tol = 1e-7; // Tolerance for convergence
+            let max_iter = 1000; // Maximum number of iterations
+        
+            let (x, iterations, converged, result_array) = fixed_point_method(g, x0, tol, max_iter);
+        
+            println!("Fixed point: {}", x);
+            println!("Iterations: {}", iterations);
+            println!("Converged: {}", converged);
+        
+            // Print results in table-like format
+            print_results(&result_array);
+        }
     \end{minted}
+
+    \subsection{Newton}
+        \subsubsection{Pseudo-code}
+        \subsubsection{Method Implementation}
+            \paragraph{Python}
+                \begin{minted}{Python}
+                \end{minted}
+            \paragraph{Rust}
+                \begin{minted}{Rust}
+                \end{minted}
+        \subsubsection{Method Test}
+
+    \subsection{Seccant}
+        \subsubsection{Pseudo-code}
+        \subsubsection{Method Implementation}
+            \paragraph{Python}
+                \begin{minted}{Python}
+                \end{minted}
+            \paragraph{Rust}
+                \begin{minted}{Rust}
+                \end{minted}
+        \subsubsection{Method Test}
+
+    \subsection{Multiple Roots}
+        \subsubsection{Pseudo-code}
+        \subsubsection{Method Implementation}
+            \paragraph{Python}
+                \begin{minted}{Python}
+                \end{minted}
+            \paragraph{Rust}
+                \begin{minted}{Rust}
+                \end{minted}
+        \subsubsection{Method Test}
+
+    \subsection{Gaussian Elimination No Pivot}
+        \subsubsection{Pseudo-code}
+        \subsubsection{Method Implementation}
+            \paragraph{Python}
+                \begin{minted}{Python}
+                \end{minted}
+            \paragraph{Rust}
+                \begin{minted}{Rust}
+                \end{minted}
+        \subsubsection{Method Test}
+
+    \subsection{Gaussian Elimination Partial Pivot}
+        \subsubsection{Pseudo-code}
+        \subsubsection{Method Implementation}
+            \paragraph{Python}
+                \begin{minted}{Python}
+                \end{minted}
+            \paragraph{Rust}
+                \begin{minted}{Rust}
+                \end{minted}
+        \subsubsection{Method Test}
+
+    \subsection{Gaussian Elimination}
+        \subsubsection{Pseudo-code}
+        \subsubsection{Method Implementation}
+            \paragraph{Python}
+                \begin{minted}{Python}
+                \end{minted}
+            \paragraph{Rust}
+                \begin{minted}{Rust}
+                \end{minted}
+        \subsubsection{Method Test}
+
 \end{document}
