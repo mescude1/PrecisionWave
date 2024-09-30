@@ -1,98 +1,75 @@
-import math
-
-from numpy._core._multiarray_umath import sqrt, sin
-from pandas import DataFrame
-from sympy import diff, sympify
-from sympy.core.evalf import evalf
+import pandas as pd
 
 
-def diff_mask(f):
-    sympy_f = sympify(f)
-    return diff(sympy_f)
-
-
-def fixed_point_interval(g, a, b, x0, tolerance=1e-7, max_iterations=100):
+def fixed_point_method(g, x0, tol=1e-7, max_iter=1000):
     """
-    Fixed-point iteration method to solve x = g(x) on the interval [a, b].
+    Fixed-Point Iteration Method to find a solution to x = g(x).
 
     Parameters:
     g : function
-        The function g(x) that defines the equation x = g(x).
-    a, b : float
-        The interval [a, b] in which the fixed point must lie.
+        The function to apply in the fixed-point iteration (x = g(x)).
     x0 : float
-        Initial guess for the solution (must be within [a, b]).
-    tolerance : float, optional
-        The stopping criterion based on the change between iterations.
-    max_iterations : int, optional
-        The maximum number of iterations to perform.
+        Initial guess for the fixed-point.
+    tol : float, optional
+        Tolerance for convergence. Default is 1e-7.
+    max_iter : int, optional
+        Maximum number of iterations. Default is 1000.
 
     Returns:
     x : float
-        The fixed-point solution (if found).
+        The approximate fixed point.
     iterations : int
         The number of iterations performed.
     converged : bool
-        Whether the algorithm converged or not.
+        Whether the method converged.
+    result_array : list of dict
+        A list containing the iteration details.
     """
-    # Check if the initial guess is within the interval
-    if not (a <= x0 <= b):
-        raise ValueError("Initial guess x0 must be within the interval [a, b].")
     result_array = []
     x = x0
-    for i in range(max_iterations):
-        x_next = g(x)
 
-        # Ensure that x_next stays within the interval [a, b]
-        if x_next < a:
-            x_next = a
-        elif x_next > b:
-            x_next = b
+    for i in range(max_iter):
+        x_new = g(x)
+        error = abs(x_new - x)
 
-        # Check if the difference between consecutive iterations is within the tolerance
-        if abs(x_next - x) < tolerance:
-            result = {
-                'i': i,
-                'x_i': x,
-                'f_xi': x_next,
-                'e': abs(x_next - x)
-            }
-            result_array.append(result)
-            print(DataFrame(result_array))
-            return x_next, i + 1, True  # Converged
         result = {
-            'i': i,
-            'x_i': x,
-            'f_xi': x_next,
-            'e': abs(x_next - x)
+            'i': i + 1,
+            'x': x_new,
+            'g_x': g(x_new),
+            'error': error
         }
         result_array.append(result)
-        x = x_next
 
-    return x, max_iterations, False  # Did not converge within max_iterations
+        if error < tol:
+            return x_new, i + 1, True, result_array  # Converged
 
+        x = x_new  # Update for the next iteration
 
-def g_x_1(x):
-    """
-        Dada función g(x) = e−(x2+x+1) en [−1, 2]
-            a) (60%) Demuestre si se cumple o no que g(x) ∈ [−1,2] ∀x ∈ [−1,2] (Detalle el procedimiento.)
-            b) (20%) Halle un valor aproximado para la k del teorema de punto fijo.
-            c) (20%) ¿Se cumple el teorema de punto fijo? ¿Por qué?
-    """
-    return math.exp(-(x**2 + x + 1))
+    return x, max_iter, False, pd.DataFrame(result_array)  # Did not converge within max_iter
 
 
-def f_x_quiz(x):
-    return x**3 - sqrt(x**2*(x+2)) - sin(x)**4 + 1
+# Example usage:
+if __name__ == "__main__":
+    import math
 
 
+    # Define the function g(x) for which we are solving x = g(x)
+    def g(x):
+        return math.cos(x)  # Example: g(x) = cos(x)
 
-def g_x_parcial(x):
-    return math.log(x**2 - x + 1 + 45/200)
 
+    # Initial guess
+    x0 = 0.5
 
-solution, iterations, converged = fixed_point_interval(g=g_x_parcial, x0=0.5, a=-100, b=100)
+    # Call the fixed-point method
+    solution, iterations, converged, results = fixed_point_method(g, x0)
 
-print(f"Solution: {solution}")
-print(f"Iterations: {iterations}")
-print(f"Converged: {converged}")
+    # Display the results
+    if converged:
+        print(f"Converged to solution: {solution} in {iterations} iterations.")
+    else:
+        print(f"Did not converge within {iterations} iterations.")
+
+    # Print iteration details
+    for res in results:
+        print(f"Iteration {res['i']}: x = {res['x']}, g(x) = {res['g_x']}, error = {res['error']}")
