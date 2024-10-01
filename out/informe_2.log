@@ -1,6 +1,6 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  30 SEP 2024 17:27
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.9.29)  1 OCT 2024 15:58
 entering extended mode
- restricted \write18 enabled.
+ \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
 **informe_2.tex
@@ -113,7 +113,7 @@ Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
 )
 (/usr/local/texlive/2024/texmf-dist/tex/latex/tools/shellesc.sty
 Package: shellesc 2023/07/08 v1.0d unified shell escape interface for LaTeX
-Package shellesc Info: Restricted shell escape enabled on input line 77.
+Package shellesc Info: Unrestricted shell escape enabled on input line 75.
 )
 (/usr/local/texlive/2024/texmf-dist/tex/latex/ifplatform/ifplatform.sty
 Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
@@ -141,11 +141,14 @@ Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
 (/usr/local/texlive/2024/texmf-dist/tex/generic/iftex/ifluatex.sty
 Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 )
+runsystem(uname -s > "informe_2.w18")...executed.
 
-Package ifplatform Warning: 
-    shell escape is disabled, so I can only detect \ifwindows.
 
-) (/usr/local/texlive/2024/texmf-dist/tex/generic/xstring/xstring.sty
+(./informe_2.w18)
+runsystem(rm -- "informe_2.w18")...executed.
+
+)
+(/usr/local/texlive/2024/texmf-dist/tex/generic/xstring/xstring.sty
 (/usr/local/texlive/2024/texmf-dist/tex/generic/xstring/xstring.tex
 \xs_counta=\count290
 \xs_countb=\count291
@@ -176,21 +179,8 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \@float@every@listing=\toks21
 \c@listing=\count295
 )
-runsystem(mkdir -p _minted-informe_2)...disabled (restricted).
+runsystem(mkdir -p _minted-informe_2)...executed.
 
-
-
-./informe_2.tex:3: Package minted Error: You must invoke LaTeX with the -shell-
-escape flag.
-
-See the minted package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.3 \usepackage
-               {textcomp}
-Pass the -shell-escape flag to LaTeX. Refer to the minted.sty documentation for
- more information.
 
 (/usr/local/texlive/2024/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
@@ -217,8 +207,7 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1371.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1372.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1373.
 )
-runsystem(command -v pygmentize && touch informe_2.aex)...disabled (restricted)
-.
+runsystem(command -v pygmentize && touch informe_2.aex)...executed.
 
 
 
@@ -282,39 +271,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 {/usr/local/texlive/2024/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
 \openout3 = `informe_2.pyg'.
 
+
+(./_minted-informe_2/default.pygstyle)
 runsystem(pygmentize -S default -f latex -P commandprefix=PYG > _minted-informe
-_2/default.pygstyle)...disabled (restricted).
+_2/default.pygstyle)...executed.
 
-
-
-./informe_2.tex:99: Package catchfile Error: File `_minted-informe_2/default.py
-gstyle' not found.
-
-See the catchfile package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.99                     \end{minted}
-                                     
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-runsystem(pygmentize -S default -f latex -P commandprefix=PYG > _minted-informe
-_2/default.pygstyle)...disabled (restricted).
-
-
-./informe_2.tex:99: Package catchfile Error: File `_minted-informe_2/default.py
-gstyle' not found.
-
-See the catchfile package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.99                     \end{minted}
-                                     
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
+ (./_minted-informe_2/default.pygstyle)
 
 ./informe_2.tex:99: Package minted Error: Cannot find Pygments style default.
 
@@ -328,7 +290,7 @@ Cannot find Pygments style default
 
 runsystem(pygmentize -l 'python' -f latex -P commandprefix=PYG -F tokenmerge -P
  stripnl='False' -o _minted-informe_2/7283B4DA7E8FCFC15A3B3841B1BC0EB4ACC5EF0D4
-4CCE5C17F13E7B38624AA39.pygtex informe_2.pyg)...disabled (restricted).
+4CCE5C17F13E7B38624AA39.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:99: Package minted Error: Missing Pygments output; \inputminted
@@ -352,7 +314,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
 tripnl='False' -o _minted-informe_2/94119154A321004C9AD96F1EAA1817DBBECF6A2D5BC
-395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:165: Package minted Error: Missing Pygments output; \inputminte
@@ -380,7 +342,7 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
  stripnl='False' -o _minted-informe_2/DDB26936B61C2010D4763032212BB98DA31BAEEB4
-6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:243: Package minted Error: Missing Pygments output; \inputminte
@@ -404,7 +366,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
 tripnl='False' -o _minted-informe_2/85ABD58289D0BC35BD311B5A4DA96B67BECF6A2D5BC
-395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:305: Package minted Error: Missing Pygments output; \inputminte
@@ -435,7 +397,7 @@ Overfull \hbox (2.44537pt too wide) in paragraph at lines 321--344
 
 runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
  stripnl='False' -o _minted-informe_2/47F3C5A6E42F54E0D2FFDE92021D12CBA31BAEEB4
-6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...executed.
 
 
 
@@ -460,7 +422,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
 tripnl='False' -o _minted-informe_2/3D98F431CB97FDE70DA8D6993280B4CDBECF6A2D5BC
-395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:486: Package minted Error: Missing Pygments output; \inputminte
@@ -496,7 +458,7 @@ Overfull \hbox (9.11208pt too wide) in paragraph at lines 495--502
 
 runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
  stripnl='False' -o _minted-informe_2/1F8A84A17C3494905D97086D39E7DADDA31BAEEB4
-6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...executed.
 
 
 
@@ -521,7 +483,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
 tripnl='False' -o _minted-informe_2/1941A9AB1E34EE16711445327901FD67BECF6A2D5BC
-395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:627: Package minted Error: Missing Pygments output; \inputminte
@@ -545,7 +507,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
  stripnl='False' -o _minted-informe_2/B3EFB5085DE7C755EEEEEA89B5C3296EA31BAEEB4
-6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:681: Package minted Error: Missing Pygments output; \inputminte
@@ -569,7 +531,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
 tripnl='False' -o _minted-informe_2/E9CB805F9C365C8F549343B884C21DFCBECF6A2D5BC
-395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:746: Package minted Error: Missing Pygments output; \inputminte
@@ -593,7 +555,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
  stripnl='False' -o _minted-informe_2/CF59DF3FEED44F96C6E74713E82F7913A31BAEEB4
-6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:810: Package minted Error: Missing Pygments output; \inputminte
@@ -617,7 +579,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
 tripnl='False' -o _minted-informe_2/5584711AB47B0DF1149DDB177CF9FBBBBECF6A2D5BC
-395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:873: Package minted Error: Missing Pygments output; \inputminte
@@ -641,7 +603,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
  stripnl='False' -o _minted-informe_2/1B0A277C7778B0F1B2C7BAA01829EDF6A31BAEEB4
-6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:945: Package minted Error: Missing Pygments output; \inputminte
@@ -666,7 +628,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
 tripnl='False' -o _minted-informe_2/FF158E09C2859370589EDED057062E35BECF6A2D5BC
-395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...executed.
 
 
 
@@ -691,7 +653,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
  stripnl='False' -o _minted-informe_2/803319373A341B1C767E460D34D75E46A31BAEEB4
-6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:1084: Package minted Error: Missing Pygments output; \inputmint
@@ -715,7 +677,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
 tripnl='False' -o _minted-informe_2/552880B99DE743D45027BC73A122537FBECF6A2D5BC
-395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:1133: Package minted Error: Missing Pygments output; \inputmint
@@ -739,7 +701,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
  stripnl='False' -o _minted-informe_2/0F44339D0ECF639CC1AF00124E20016DA31BAEEB4
-6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:1182: Package minted Error: Missing Pygments output; \inputmint
@@ -763,7 +725,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
 tripnl='False' -o _minted-informe_2/BBEA77D4AC257901B6C1230863E67C3DBECF6A2D5BC
-395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:1245: Package minted Error: Missing Pygments output; \inputmint
@@ -787,7 +749,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Python' -f latex -P commandprefix=PYG -F tokenmerge -P
  stripnl='False' -o _minted-informe_2/50C84F6C67FE4FF12B66DA57F7F76942A31BAEEB4
-6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...disabled (restricted).
+6A73A3B8CA127CFBB4FB87B.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:1291: Package minted Error: Missing Pygments output; \inputmint
@@ -811,7 +773,7 @@ or using frozencache with a missing file.
 
 runsystem(pygmentize -l 'Rust' -f latex -P commandprefix=PYG -F tokenmerge -P s
 tripnl='False' -o _minted-informe_2/97E1BC086DF3A58F6060B6B987292FA2BECF6A2D5BC
-395E1A200D9042CDBB846.pygtex informe_2.pyg)...disabled (restricted).
+395E1A200D9042CDBB846.pygtex informe_2.pyg)...executed.
 
 
 ./informe_2.tex:1351: Package minted Error: Missing Pygments output; \inputmint
@@ -836,14 +798,14 @@ or using frozencache with a missing file.
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
-runsystem(rm informe_2.pyg)...disabled (restricted).
+runsystem(rm informe_2.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 5355 strings out of 474116
- 108987 string characters out of 5743682
+ 5369 strings out of 474116
+ 109304 string characters out of 5743682
  1937187 words of memory out of 5000000
- 27672 multiletter control sequences out of 15000+600000
+ 27676 multiletter control sequences out of 15000+600000
  562659 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  77i,9n,79p,276b,209s stack positions out of 10000i,1000n,20000p,200000b,200000s

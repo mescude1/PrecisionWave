@@ -23,12 +23,12 @@ Edwar Samir Posada Murillo
 
 \section{Current Report Delivery Date}
 October 1st 2024
-    
+
 \section[]{Numerical Methods}
-    The following numerical methods will be presented in this document in the following manner, first a pseudocode 
-    version of the method algorith will be presented, after the code for the implementation of the method in both 
+    The following numerical methods will be presented in this document in the following manner, first a pseudocode
+    version of the method algorith will be presented, after the code for the implementation of the method in both
     languages selected will be presented, finally proof for the execution and results of the methods will be provided.
-    
+
     \subsection{Incremental Search}
 
     Incremental Search Method is a numerical method used to find the roots of a function
@@ -44,58 +44,59 @@ October 1st 2024
                 \paragraph{Python}
 
                 \begin{minted}{python}
-                    def incremental_search(f, x0, h, Nmax):
-                        """
-                        This program finds an interval where f(x) has a sign change using the incremental search method.
-                        Inputs:
-                        f: continuous function
-                        x0: initial point
-                        h: step
-                        Nmax: maximum number of iterations
-            
-                        Outputs:
-                        a: left endpoint of the interval
-                        b: right endpoint of the interval
-                        iter: number of iterations
-                        """
-            
-                        # Initialization
-            
-                        xant = x0
-                        fant = f(xant)
-                        xact = xant + h
-                        fact = f(xact)
-                        result_array = []
-                        # Loop
-                        for i in range(1, Nmax+1):
-                            if fant * fact < 0:
-                                result = {
-                                    'i': i,
-                                    'x_i': xact,
-                                    'f_xi': fact,
-                                    'e': abs(xact - xant)
-                                }
-                                result_array.append(result)
-                                break
-                            result = {
-                                'i': i,
-                                'x_i': xact,
-                                'f_xi': fact,
-                                'e': abs(xact - xant)
-                            }
-                            result_array.append(result)
-                            xant = xact
-                            fant = fact
-                            xact = xant + h
-                            fact = f(xact)
-            
-                        # Result delivery
-            
-                        a = xant
-                        b = xact
-                        iter = i
-                        result_data_frame = pd.DataFrame(result_array)
-                        return a, b, iter, result_data_frame
+    def incremental_search(f, x0, h, Nmax):
+        """
+        This program finds an interval where f(x) has a sign change
+        using the incremental search method.
+        Inputs:
+        f: continuous function
+        x0: initial point
+        h: step
+        Nmax: maximum number of iterations
+
+        Outputs:
+        a: left endpoint of the interval
+        b: right endpoint of the interval
+        iter: number of iterations
+        """
+
+        # Initialization
+
+        xant = x0
+        fant = f(xant)
+        xact = xant + h
+        fact = f(xact)
+        result_array = []
+        # Loop
+        for i in range(1, Nmax+1):
+            if fant * fact < 0:
+                result = {
+                    'i': i,
+                    'x_i': xact,
+                    'f_xi': fact,
+                    'e': abs(xact - xant)
+                }
+                result_array.append(result)
+                break
+            result = {
+                'i': i,
+                'x_i': xact,
+                'f_xi': fact,
+                'e': abs(xact - xant)
+            }
+            result_array.append(result)
+            xant = xact
+            fant = fact
+            xact = xant + h
+            fact = f(xact)
+
+        # Result delivery
+
+        a = xant
+        b = xact
+        iter = i
+        result_data_frame = pd.DataFrame(result_array)
+        return a, b, iter, result_data_frame
                     \end{minted}
 
     \paragraph{Rust}\label{paragraph:rust}
@@ -196,112 +197,112 @@ October 1st 2024
     \paragraph{Python}
 
     \begin{minted}{Python}
-        def bisection_method(f, a, b, tolerance=1e-7, max_iterations=100):
-            """
-            Bisection method to find the root of f(x) in the interval [a, b].
+    def bisection_method(f, a, b, tolerance=1e-7, max_iterations=100):
+        """
+        Bisection method to find the root of f(x) in the interval [a, b].
 
-            Parameters:
-            f : function
-                The function for which we are trying to find a root.
-            a, b : float
-                The interval [a, b] in which the root is located.
-            tolerance : float, optional
-                The stopping criterion for the algorithm.
-            max_iterations : int, optional
-                The maximum number of iterations to perform.
+        Parameters:
+        f : function
+            The function for which we are trying to find a root.
+        a, b : float
+            The interval [a, b] in which the root is located.
+        tolerance : float, optional
+            The stopping criterion for the algorithm.
+        max_iterations : int, optional
+            The maximum number of iterations to perform.
 
-            Returns:
-            c : float
-                The approximate root.
-            iterations : int
-                The number of iterations performed.
-            converged : bool
-                Whether the algorithm converged or not.
-            """
-            if f(a) * f(b) >= 0:
-                raise ValueError("f(a) and f(b) must have opposite signs.")
-            c = (a + b) / 2  # Midpoint initial
-            result_array = []
-            for i in range(max_iterations):
-                c = (a + b) / 2  # Midpoint
-                if abs(b - a) < tolerance or abs(f(c)) < tolerance:
-                    df_result = pd.DataFrame(data=result_array)
-                    print(df_result)
-                    return c, i + 1, True, df_result  # Converged
+        Returns:
+        c : float
+            The approximate root.
+        iterations : int
+            The number of iterations performed.
+        converged : bool
+            Whether the algorithm converged or not.
+        """
+        if f(a) * f(b) >= 0:
+            raise ValueError("f(a) and f(b) must have opposite signs.")
+        c = (a + b) / 2  # Midpoint initial
+        result_array = []
+        for i in range(max_iterations):
+            c = (a + b) / 2  # Midpoint
+            if abs(b - a) < tolerance or abs(f(c)) < tolerance:
+                df_result = pd.DataFrame(data=result_array)
+                print(df_result)
+                return c, i + 1, True, df_result  # Converged
 
-                # Narrow the interval based on the sign of f(c)
-                if f(a) * f(c) < 0:
-                    b = c  # The root is in [a, c]
-                else:
-                    a = c  # The root is in [c, b]
+            # Narrow the interval based on the sign of f(c)
+            if f(a) * f(c) < 0:
+                b = c  # The root is in [a, c]
+            else:
+                a = c  # The root is in [c, b]
 
-                result = {'i': i, 'x_i': c, 'f_x_i': f(c), 'e': abs(b - a)}
-                result_array.append(result)
+            result = {'i': i, 'x_i': c, 'f_x_i': f(c), 'e': abs(b - a)}
+            result_array.append(result)
 
-            return c, max_iterations, False  # Did not converge within max_iterations
+        return c, max_iterations, False  # Did not converge within max_iterations
 
     \end{minted}
 
     \paragraph{Rust}
     \begin{minted}{Rust}
-        #[derive(Debug)]
-        struct BisectionResult {
-            iteration: usize,
-            x_i: f64,
-            f_x_i: f64,
-            error: f64,
+    #[derive(Debug)]
+    struct BisectionResult {
+        iteration: usize,
+        x_i: f64,
+        f_x_i: f64,
+        error: f64,
+    }
+
+    // Bisection method function in Rust
+    fn bisection_method<F>(
+        f: F,
+        mut a: f64,
+        mut b: f64,
+        tolerance: f64,
+        max_iterations: usize,
+    ) -> (f64, usize, bool, Vec<BisectionResult>)
+    where
+        F: Fn(f64) -> f64,
+    {
+        // Check if f(a) and f(b) have opposite signs
+        if f(a) * f(b) >= 0.0 {
+            panic!("f(a) and f(b) must have opposite signs.");
         }
 
-        // Bisection method function in Rust
-        fn bisection_method<F>(
-            f: F,
-            mut a: f64,
-            mut b: f64,
-            tolerance: f64,
-            max_iterations: usize,
-        ) -> (f64, usize, bool, Vec<BisectionResult>)
-        where
-            F: Fn(f64) -> f64,
-        {
-            // Check if f(a) and f(b) have opposite signs
-            if f(a) * f(b) >= 0.0 {
-                panic!("f(a) and f(b) must have opposite signs.");
+        // Create a Vec to store the results for each iteration
+        let mut result_array: Vec<BisectionResult> = Vec::new();
+
+        let mut c = (a + b) / 2.0; // Midpoint initialization
+
+        // Bisection loop
+        for i in 0..max_iterations {
+            c = (a + b) / 2.0; // Midpoint
+
+            // Check if the solution has converged
+            if (b - a).abs() < tolerance || f(c).abs() < tolerance {
+                return (c, i + 1, true, result_array); // Converged
             }
 
-            // Create a Vec to store the results for each iteration
-            let mut result_array: Vec<BisectionResult> = Vec::new();
-
-            let mut c = (a + b) / 2.0; // Midpoint initialization
-
-            // Bisection loop
-            for i in 0..max_iterations {
-                c = (a + b) / 2.0; // Midpoint
-
-                // Check if the solution has converged
-                if (b - a).abs() < tolerance || f(c).abs() < tolerance {
-                    return (c, i + 1, true, result_array); // Converged
-                }
-
-                // Narrow the interval based on the sign of f(c)
-                if f(a) * f(c) < 0.0 {
-                    b = c; // The root is in [a, c]
-                } else {
-                    a = c; // The root is in [c, b]
-                }
-
-                // Store the result of the current iteration
-                let result = BisectionResult {
-                    iteration: i + 1,
-                    x_i: c,
-                    f_x_i: f(c),
-                    error: (b - a).abs(),
-                };
-                result_array.push(result);
+            // Narrow the interval based on the sign of f(c)
+            if f(a) * f(c) < 0.0 {
+                b = c; // The root is in [a, c]
+            } else {
+                a = c; // The root is in [c, b]
             }
 
-            // If the loop finishes without converging, return the last midpoint and results
-            (c, max_iterations, false, result_array) // Did not converge within max_iterations
+            // Store the result of the current iteration
+            let result = BisectionResult {
+                iteration: i + 1,
+                x_i: c,
+                f_x_i: f(c),
+                error: (b - a).abs(),
+            };
+            result_array.push(result);
         }
+
+        // If the loop finishes without converging, return the last midpoint and results
+        (c, max_iterations, false, result_array) // Did not converge within max_iterations
+    }
     \end{minted}
 
     \subsubsection{Method Test}\label{subsec:method-test}
@@ -343,6 +344,8 @@ October 1st 2024
         \end{tabular}\label{tab:table2}
         \end{table}
 
+\break
+
     \subsection{False Rule}\label{subsec:false_rule}
 
         The false position method (also known as the regula falsi method) is a root-finding technique used in numerical analysis.
@@ -355,66 +358,66 @@ October 1st 2024
         \subsubsection{Method Implementation}
         \paragraph{Python}
         \begin{minted}{Python}
-            import math
-            import pandas as pd
+    import math
+    import pandas as pd
 
 
-            def false_rule(f, a, b, tol, Nmax):
-                """
-                This program finds the solution to the equation f(x) = 0 en el interval [a, b] using the method of the false rule
+    def false_rule(f, a, b, tol, Nmax):
+        """
+        This program finds the solution to the equation f(x) = 0 en el interval [a, b] using the method of the false rule
 
-                Inputs:
-                f: continious function
-                a: left endpoint of the initial interval
-                b: right endpoint of the initial interval
-                tol: tolerance
-                Nmax: maximum number of iterations
+        Inputs:
+        f: continious function
+        a: left endpoint of the initial interval
+        b: right endpoint of the initial interval
+        tol: tolerance
+        Nmax: maximum number of iterations
 
-                Outputs:
-                x: aproximate solution
-                iter: number of iterations
-                err: estimated error
-                """
-                # Initialization
-                fa = f(a)
-                fb = f(b)
-                pm = (fb * a - fa * b) / (fb - fa)
-                fpm = f(pm)
-                E = 1000  # Initial large error
-                cont = 1  # Iteration counted
+        Outputs:
+        x: aproximate solution
+        iter: number of iterations
+        err: estimated error
+        """
+        # Initialization
+        fa = f(a)
+        fb = f(b)
+        pm = (fb * a - fa * b) / (fb - fa)
+        fpm = f(pm)
+        E = 1000  # Initial large error
+        cont = 1  # Iteration counted
 
-                # loop of the false rule method
-                result_array = []
-                while E > tol and cont < Nmax:
-                    if fa * fpm < 0:
-                        b = pm
-                        fb = fpm
-                    else:
-                        a = pm
-                        fa = fpm
+        # loop of the false rule method
+        result_array = []
+        while E > tol and cont < Nmax:
+            if fa * fpm < 0:
+                b = pm
+                fb = fpm
+            else:
+                a = pm
+                fa = fpm
 
 
-                    # Updating previous point
-                    p0 = pm
-                    pm = (fb * a - fa * b) / (fb - fa)
-                    fpm = f(pm)
-                    E = abs(pm - p0)
+            # Updating previous point
+            p0 = pm
+            pm = (fb * a - fa * b) / (fb - fa)
+            fpm = f(pm)
+            E = abs(pm - p0)
 
-                    result = {
-                        'i': cont,
-                        'x_i': pm,
-                        'f_xi': fpm,
-                        'e': abs(pm - p0)
-                    }
-                    result_array.append(result)
+            result = {
+                'i': cont,
+                'x_i': pm,
+                'f_xi': fpm,
+                'e': abs(pm - p0)
+            }
+            result_array.append(result)
 
-                    cont += 1
+            cont += 1
 
-                # Results
-                x = pm
-                iter = cont
-                err = E
-                return x, iter, err, result_array
+        # Results
+        x = pm
+        iter = cont
+        err = E
+        return x, iter, err, result_array
         \end{minted}
 
     \paragraph{Rust}
@@ -487,9 +490,11 @@ October 1st 2024
     \subsubsection{Method Tests}
 
         Approximate solution:
-            x = 0.9364045808798893
-            Iterations: 5
-            Error: 2.2097967899981086e-10
+            \begin{itemize}
+                \item x = 0.9364045808798893
+                \item Iterations = 5
+                \item Error = 2.2097967899981086e-10
+            \end{itemize}
 
         \begin{table}[ht]
         \begin{tabular}{llll}
@@ -512,65 +517,55 @@ October 1st 2024
     \subsubsection{Method Implementation}
     \paragraph{Python}
     \begin{minted}{Python}
-        def fixed_point_interval(g, a, b, x0, tolerance=1e-7, max_iterations=100):
-            """
-            Fixed-point iteration method to solve x = g(x) on the interval [a, b].
+    import pandas as pd
 
-            Parameters:
-            g : function
-                The function g(x) that defines the equation x = g(x).
-            a, b : float
-                The interval [a, b] in which the fixed point must lie.
-            x0 : float
-                Initial guess for the solution (must be within [a, b]).
-            tolerance : float, optional
-                The stopping criterion based on the change between iterations.
-            max_iterations : int, optional
-                The maximum number of iterations to perform.
 
-            Returns:
-            x : float
-                The fixed-point solution (if found).
-            iterations : int
-                The number of iterations performed.
-            converged : bool
-                Whether the algorithm converged or not.
-            """
-            # Check if the initial guess is within the interval
-            if not (a <= x0 <= b):
-                raise ValueError("Initial guess x0 must be within the interval [a, b].")
-            result_array = []
-            x = x0
-            for i in range(max_iterations):
-                x_next = g(x)
+    def fixed_point_method(g, x0, tol=1e-7, max_iter=1000):
+        """
+        Fixed-Point Iteration Method to find a solution to x = g(x).
 
-                # Ensure that x_next stays within the interval [a, b]
-                if x_next < a:
-                    x_next = a
-                elif x_next > b:
-                    x_next = b
+        Parameters:
+        g : function
+            The function to apply in the fixed-point iteration (x = g(x)).
+        x0 : float
+            Initial guess for the fixed-point.
+        tol : float, optional
+            Tolerance for convergence. Default is 1e-7.
+        max_iter : int, optional
+            Maximum number of iterations. Default is 1000.
 
-                # Check if the difference between consecutive iterations is within the tolerance
-                if abs(x_next - x) < tolerance:
-                    result = {
-                        'i': i,
-                        'x_i': x,
-                        'f_xi': x_next,
-                        'e': abs(x_next - x)
-                    }
-                    result_array.append(result)
-                    print(DataFrame(result_array))
-                    return x_next, i + 1, True  # Converged
-                result = {
-                    'i': i,
-                    'x_i': x,
-                    'f_xi': x_next,
-                    'e': abs(x_next - x)
-                }
-                result_array.append(result)
-                x = x_next
+        Returns:
+        x : float
+            The approximate fixed point.
+        iterations : int
+            The number of iterations performed.
+        converged : bool
+            Whether the method converged.
+        result_array : list of dict
+            A list containing the iteration details.
+        """
+        result_array = []
+        x = x0
 
-            return x, max_iterations, False  # Did not converge within max_iterations
+        for i in range(max_iter):
+            x_new = g(x)
+            error = abs(x_new - x)
+
+            result = {
+                'i': i + 1,
+                'x': x_new,
+                'g_x': g(x_new),
+                'error': error
+            }
+            result_array.append(result)
+
+            if error < tol:
+                return x_new, i + 1, True, result_array  # Converged
+
+            x = x_new  # Update for the next iteration
+
+        return x, max_iter, False, pd.DataFrame(result_array)  # Did not converge within max_iter
+
     \end{minted}
     \paragraph{Rust}
     \begin{minted}{Rust}
@@ -582,45 +577,45 @@ October 1st 2024
         {
             let mut result_array = Vec::new();
             let mut x = x0;
-        
+
             for i in 0..max_iter {
                 let x_new = g(x);
                 let error = (x_new - x).abs();
-        
+
                 result_array.push((i + 1, x_new, g(x_new), error));
-        
+
                 if error < tol {
                     return (x_new, i + 1, true, result_array); // Converged
                 }
-        
+
                 x = x_new; // Update for the next iteration
             }
-        
+
             // Did not converge within max_iter
             (x, max_iter, false, result_array)
         }
-        
+
         fn print_results(result_array: &Vec<(usize, f64, f64, f64)>) {
             println!("{:<10} {:<15} {:<15} {:<15}", "Iter", "x", "g(x)", "Error");
-        
+
             for (i, x, g_x, error) in result_array {
                 println!("{:<10} {:<15.8} {:<15.8} {:<15.8}", i, x, g_x, error);
             }
         }
-        
+
         fn main() {
             // Example usage:
             let g = |x: f64| x.cos(); // Example function g(x) = cos(x)
             let x0 = 0.5; // Initial guess
             let tol = 1e-7; // Tolerance for convergence
             let max_iter = 1000; // Maximum number of iterations
-        
+
             let (x, iterations, converged, result_array) = fixed_point_method(g, x0, tol, max_iter);
-        
+
             println!("Fixed point: {}", x);
             println!("Iterations: {}", iterations);
             println!("Converged: {}", converged);
-        
+
             // Print results in table-like format
             print_results(&result_array);
         }
@@ -631,118 +626,119 @@ October 1st 2024
         \subsubsection{Method Implementation}
             \paragraph{Python}
                 \begin{minted}{Python}
-                    def newton_raphson(f, df, x0, tol=1e-7, max_iter=30):
-                        """
-                        Solves f(x) = 0 using the Newton-Raphson method.
+    def newton_raphson(f, df, x0, tol=1e-7, max_iter=30):
+        """
+        Solves f(x) = 0 using the Newton-Raphson method.
 
-                        Parameters:
-                        - f: The function whose root we want to find.
-                        - df: The derivative of the function f.
-                        - x0: Initial guess for the root.
-                        - tol: The tolerance for convergence (default is 1e-6).
-                        - max_iter: Maximum number of iterations (default is 100).
+        Parameters:
+        - f: The function whose root we want to find.
+        - df: The derivative of the function f.
+        - x0: Initial guess for the root.
+        - tol: The tolerance for convergence (default is 1e-6).
+        - max_iter: Maximum number of iterations (default is 100).
 
-                        Returns:
-                        - The estimated root and the number of iterations taken.
-                        """
-                        xn = x0
-                        result_array = []
-                        for n in range(0, max_iter):
-                            fxn = f(xn)
-                            dfxn = df(xn)
+        Returns:
+        - The estimated root and the number of iterations taken.
+        """
+        xn = x0
+        result_array = []
+        for n in range(0, max_iter):
+            fxn = f(xn)
+            dfxn = df(xn)
 
-                            if abs(xn - (xn - fxn / dfxn)) < tol:
-                                result = {
-                                    'i:': n,
-                                    'xi:': xn,
-                                    'f_xi:': fxn,
-                                    'E': abs(xn - (xn - fxn / dfxn))
-                                }
-                                result_array.append(result)
-                                print(f"Found solution after {n} iterations.")
-                                print(pd.DataFrame(result_array))
-                                return xn
+            if abs(xn - (xn - fxn / dfxn)) < tol:
+                result = {
+                    'i:': n,
+                    'xi:': xn,
+                    'f_xi:': fxn,
+                    'E': abs(xn - (xn - fxn / dfxn))
+                }
+                result_array.append(result)
+                print(f"Found solution after {n} iterations.")
+                print(pd.DataFrame(result_array))
+                return xn
 
-                            if dfxn == 0:
-                                print("Zero derivative. No solution found.")
-                                return None
+            if dfxn == 0:
+                print("Zero derivative. No solution found.")
+                return None
 
-                            result = {
-                                'i:': n,
-                                'xi:': xn,
-                                'f_xi:': fxn,
-                                'E': abs(xn - (xn - fxn / dfxn))
-                            }
-                            result_array.append(result)
-                            # Update the next approximation using Newton-Raphson formula
-                            xn = xn - fxn / dfxn
-                        print("Exceeded maximum iterations. No solution found.")
-                        return None
+            result = {
+                'i:': n,
+                'xi:': xn,
+                'f_xi:': fxn,
+                'E': abs(xn - (xn - fxn / dfxn))
+            }
+            result_array.append(result)
+            # Update the next approximation using Newton-Raphson formula
+            xn = xn - fxn / dfxn
+        print("Exceeded maximum iterations. No solution found.")
+        return None
                 \end{minted}
             \paragraph{Rust}
                 \begin{minted}{Rust}
-                    use std::f64::EPSILON;
+    use std::f64::EPSILON;
 
-                    fn newton_raphson<F, DF>(f: F, df: DF, x0: f64, tol: f64, max_iter: usize) -> Option<(f64, Vec<(usize, f64, f64, f64)>)>
-                    where
-                        F: Fn(f64) -> f64,
-                        DF: Fn(f64) -> f64,
-                    {
-                        let mut xn = x0;
-                        let mut result_array = Vec::new();
+    fn newton_raphson<F, DF>(f: F, df: DF, x0: f64, tol: f64, max_iter: usize)
+    -> Option<(f64, Vec<(usize, f64, f64, f64)>)>
+    where
+        F: Fn(f64) -> f64,
+        DF: Fn(f64) -> f64,
+    {
+        let mut xn = x0;
+        let mut result_array = Vec::new();
 
-                        for n in 0..max_iter {
-                            let fxn = f(xn);
-                            let dfxn = df(xn);
+        for n in 0..max_iter {
+            let fxn = f(xn);
+            let dfxn = df(xn);
 
-                            // Avoid division by zero
-                            if dfxn.abs() < EPSILON {
-                                println!("Zero derivative encountered. No solution found.");
-                                return None;
-                            }
+            // Avoid division by zero
+            if dfxn.abs() < EPSILON {
+                println!("Zero derivative encountered. No solution found.");
+                return None;
+            }
 
-                            // Calculate the error
-                            let error = (xn - (xn - fxn / dfxn)).abs();
+            // Calculate the error
+            let error = (xn - (xn - fxn / dfxn)).abs();
 
-                            // Append iteration details to result_array
-                            result_array.push((n, xn, fxn, error));
+            // Append iteration details to result_array
+            result_array.push((n, xn, fxn, error));
 
-                            // Check if the solution has converged
-                            if error < tol {
-                                println!("Found solution after {} iterations.", n);
-                                return Some((xn, result_array));
-                            }
+            // Check if the solution has converged
+            if error < tol {
+                println!("Found solution after {} iterations.", n);
+                return Some((xn, result_array));
+            }
 
-                            // Update xn using Newton-Raphson formula
-                            xn = xn - fxn / dfxn;
-                        }
+            // Update xn using Newton-Raphson formula
+            xn = xn - fxn / dfxn;
+        }
 
-                        println!("Exceeded maximum iterations. No solution found.");
-                        None
-                    }
+        println!("Exceeded maximum iterations. No solution found.");
+        None
+    }
 
-                    fn main() {
-                        // Example function f(x) = x^2 - 2 (finding square root of 2)
-                        let f = |x: f64| x * x - 2.0;
-                        let df = |x: f64| 2.0 * x;
+    fn main() {
+        // Example function f(x) = x^2 - 2 (finding square root of 2)
+        let f = |x: f64| x * x - 2.0;
+        let df = |x: f64| 2.0 * x;
 
-                        let x0 = 1.0;
-                        let tol = 1e-7;
-                        let max_iter = 30;
+        let x0 = 1.0;
+        let tol = 1e-7;
+        let max_iter = 30;
 
-                        match newton_raphson(f, df, x0, tol, max_iter) {
-                            Some((root, result_array)) => {
-                                println!("Root: {}", root);
-                                println!("Iterations:");
-                                println!("| Iter |   x   | f(x)  | Error  |");
-                                println!("--------------------------------");
-                                for (i, xi, f_xi, e) in result_array {
-                                    println!("| {:4} | {:5.4} | {:5.4} | {:7.4} |", i, xi, f_xi, e);
-                                }
-                            }
-                            None => println!("No solution found."),
-                        }
-                    }
+        match newton_raphson(f, df, x0, tol, max_iter) {
+            Some((root, result_array)) => {
+                println!("Root: {}", root);
+                println!("Iterations:");
+                println!("| Iter |   x   | f(x)  | Error  |");
+                println!("--------------------------------");
+                for (i, xi, f_xi, e) in result_array {
+                    println!("| {:4} | {:5.4} | {:5.4} | {:7.4} |", i, xi, f_xi, e);
+                }
+            }
+            None => println!("No solution found."),
+        }
+    }
                 \end{minted}
         \subsubsection{Method Test}
 
@@ -751,125 +747,124 @@ October 1st 2024
         \subsubsection{Method Implementation}
             \paragraph{Python}
                 \begin{minted}{Python}
-                    def secant_method(f, x0, x1, tol=1e-7, max_iter=100):
-                        """
-                        Secant method to find the root of a function f.
+    def secant_method(f, x0, x1, tol=1e-7, max_iter=100):
+        """
+        Secant method to find the root of a function f.
 
-                        Parameters:
-                        f : function
-                            The function for which we are trying to find a root.
-                        x0 : float
-                            Initial guess 1.
-                        x1 : float
-                            Initial guess 2.
-                        tol : float, optional
-                            Tolerance for stopping the iteration. Default is 1e-6.
-                        max_iter : int, optional
-                            Maximum number of iterations. Default is 100.
+        Parameters:
+        f : function
+            The function for which we are trying to find a root.
+        x0 : float
+            Initial guess 1.
+        x1 : float
+            Initial guess 2.
+        tol : float, optional
+            Tolerance for stopping the iteration. Default is 1e-6.
+        max_iter : int, optional
+            Maximum number of iterations. Default is 100.
 
-                        Returns:
-                        float
-                            The root of the function f.
-                        """
-                        result_array = []
+        Returns:
+        float
+            The root of the function f.
+        """
+        result_array = []
 
-                        for i in range(max_iter):
-                            # Calculate the value of f at the two initial guesses
-                            f_x0 = f(x0)
-                            f_x1 = f(x1)
+        for i in range(max_iter):
+            # Calculate the value of f at the two initial guesses
+            f_x0 = f(x0)
+            f_x1 = f(x1)
 
-                            # Avoid division by zero
-                            if f_x1 == f_x0:
-                                raise ValueError("Division by zero encountered in the secant method.")
+            # Avoid division by zero
+            if f_x1 == f_x0:
+                raise ValueError("Division by zero encountered in the secant method.")
 
-                            # Secant method formula
-                            x2 = x1 - f_x1 * (x1 - x0) / (f_x1 - f_x0)
+            # Secant method formula
+            x2 = x1 - f_x1 * (x1 - x0) / (f_x1 - f_x0)
 
-                            # Check for convergence
-                            if abs(x2 - x1) < tol:
-                                result = {'i': i,
-                                          'x_i': x1,
-                                          'f_xi': x2,
-                                          'e': abs(x2 - x1)}
-                                result_array.append(result)
-                                print(DataFrame(result_array))
-                                print(f"Converged after {i + 1} iterations.")
-                                return x2
+            # Check for convergence
+            if abs(x2 - x1) < tol:
+                result = {'i': i,
+                          'x_i': x1,
+                          'f_xi': x2,
+                          'e': abs(x2 - x1)}
+                result_array.append(result)
+                print(DataFrame(result_array))
+                print(f"Converged after {i + 1} iterations.")
+                return x2
 
-                            # add results to list
-                            result = {'i': i,
-                                      'x_i': x1,
-                                      'f_xi': x2,
-                                      'e': abs(x2 - x1)}
-                            result_array.append(result)
+            # add results to list
+            result = {'i': i,
+                      'x_i': x1,
+                      'f_xi': x2,
+                      'e': abs(x2 - x1)}
+            result_array.append(result)
 
-                            # Update guesses
-                            x0, x1 = x1, x2
+            # Update guesses
+            x0, x1 = x1, x2
 
-                        raise ValueError("Secant method did not converge within the maximum number of iterations.")
+        raise ValueError("Secant method did not converge within the maximum number of iterations.")
                 \end{minted}
             \paragraph{Rust}
                 \begin{minted}{Rust}
-                    fn secant_method<F>(f: F, x0: f64, x1: f64, tol: f64, max_iter: usize) -> Result<(f64, Vec<(usize, f64, f64, f64)>), String>
-                        where
-                            F: Fn(f64) -> f64,
-                        {
-                            let mut x0 = x0;
-                            let mut x1 = x1;
-                            let mut result_array = Vec::new();
+    fn secant_method<F>(f: F, x0: f64, x1: f64, tol: f64, max_iter: usize) -> Result<(f64, Vec<(usize, f64, f64, f64)>), String>
+        where
+            F: Fn(f64) -> f64,
+        {
+            let mut x0 = x0;
+            let mut x1 = x1;
+            let mut result_array = Vec::new();
 
-                            for i in 0..max_iter {
-                                let f_x0 = f(x0);
-                                let f_x1 = f(x1);
+            for i in 0..max_iter {
+                let f_x0 = f(x0);
+                let f_x1 = f(x1);
 
-                                // Avoid division by zero
-                                if f_x1 == f_x0 {
-                                    return Err(String::from("Division by zero encountered in the secant method."));
-                                }
+                // Avoid division by zero
+                if f_x1 == f_x0 {
+                    return Err(String::from("Division by zero encountered in the secant method."));
+                }
 
-                                // Secant method formula
-                                let x2 = x1 - f_x1 * (x1 - x0) / (f_x1 - f_x0);
+                // Secant method formula
+                let x2 = x1 - f_x1 * (x1 - x0) / (f_x1 - f_x0);
 
-                                // Check for convergence
-                                let error = (x2 - x1).abs();
-                                result_array.push((i, x1, x2, error));
+                // Check for convergence
+                let error = (x2 - x1).abs();
+                result_array.push((i, x1, x2, error));
 
-                                if error < tol {
-                                    println!("Converged after {} iterations.", i + 1);
-                                    return Ok((x2, result_array));
-                                }
+                if error < tol {
+                    println!("Converged after {} iterations.", i + 1);
+                    return Ok((x2, result_array));
+                }
 
-                                // Update guesses for the next iteration
-                                x0 = x1;
-                                x1 = x2;
-                            }
+                // Update guesses for the next iteration
+                x0 = x1;
+                x1 = x2;
+            }
 
-                            Err(String::from("Secant method did not converge within the maximum number of iterations."))
-                        }
+            Err(String::from("Secant method did not converge within the maximum number of iterations."))
+        }
 
-                        fn main() {
-                            // Example function f(x) = x^2 - 2 (finding square root of 2)
-                            let f = |x: f64| x * x - 2.0;
+        fn main() {
+            // Example function f(x) = x^2 - 2 (finding square root of 2)
+            let f = |x: f64| x * x - 2.0;
 
-                            let x0 = 1.0;
-                            let x1 = 2.0;
-                            let tol = 1e-7;
-                            let max_iter = 100;
+            let x0 = 1.0;
+            let x1 = 2.0;
+            let tol = 1e-7;
+            let max_iter = 100;
 
-                            match secant_method(f, x0, x1, tol, max_iter) {
-                                Ok((root, result_array)) => {
-                                    println!("Root: {}", root);
-                                    println!("Iterations:");
-                                    println!("| Iter |   x_i   | f(x_i) |  Error  |");
-                                    println!("------------------------------------");
-                                    for (i, xi, f_xi, e) in result_array {
-                                        println!("| {:4} | {:7.4} | {:7.4} | {:7.4} |", i, xi, f_xi, e);
-                                    }
-                                }
-                                Err(err) => println!("{}", err),
-                            }
-                        }
-
+            match secant_method(f, x0, x1, tol, max_iter) {
+                Ok((root, result_array)) => {
+                    println!("Root: {}", root);
+                    println!("Iterations:");
+                    println!("| Iter |   x_i   | f(x_i) |  Error  |");
+                    println!("------------------------------------");
+                    for (i, xi, f_xi, e) in result_array {
+                        println!("| {:4} | {:7.4} | {:7.4} | {:7.4} |", i, xi, f_xi, e);
+                    }
+                }
+                Err(err) => println!("{}", err),
+            }
+        }
                 \end{minted}
         \subsubsection{Method Test}
 
@@ -878,165 +873,165 @@ October 1st 2024
         \subsubsection{Method Implementation}
             \paragraph{Python}
                 \begin{minted}{Python}
-                    def multiple_root_method(f, df, ddf, x0, tol=1e-7, max_iter=100):
-                        """
-                        Multiple Root Method to find the root of a function f where the root has multiplicity.
+    def multiple_root_method(f, df, ddf, x0, tol=1e-7, max_iter=100):
+        """
+        Multiple Root Method to find the root of a function f where the root has multiplicity.
 
-                        Parameters:
-                        f : function
-                            The function whose root we want to find.
-                        df : function
-                            The derivative of the function f.
-                        ddf : function
-                            The second derivative of the function f.
-                        x0 : float
-                            Initial guess for the root.
-                        tol : float, optional
-                            Tolerance for stopping the iteration. Default is 1e-7.
-                        max_iter : int, optional
-                            Maximum number of iterations. Default is 100.
+        Parameters:
+        f : function
+            The function whose root we want to find.
+        df : function
+            The derivative of the function f.
+        ddf : function
+            The second derivative of the function f.
+        x0 : float
+            Initial guess for the root.
+        tol : float, optional
+            Tolerance for stopping the iteration. Default is 1e-7.
+        max_iter : int, optional
+            Maximum number of iterations. Default is 100.
 
-                        Returns:
-                        float
-                            The root of the function f.
-                        int
-                            The number of iterations performed.
-                        pd.DataFrame
-                            DataFrame with iteration details.
-                        """
-                        result_array = []
+        Returns:
+        float
+            The root of the function f.
+        int
+            The number of iterations performed.
+        pd.DataFrame
+            DataFrame with iteration details.
+        """
+        result_array = []
 
-                        for i in range(max_iter):
-                            f_x0 = f(x0)
-                            df_x0 = df(x0)
-                            ddf_x0 = ddf(x0)
+        for i in range(max_iter):
+            f_x0 = f(x0)
+            df_x0 = df(x0)
+            ddf_x0 = ddf(x0)
 
-                            if df_x0**2 - f_x0 * ddf_x0 == 0:
-                                raise ValueError("Division by zero encountered in the multiple root method.")
+            if df_x0**2 - f_x0 * ddf_x0 == 0:
+                raise ValueError("Division by zero encountered in the multiple root method.")
 
-                            # Multiple Root Method formula
-                            x1 = x0 - (f_x0 * df_x0) / (df_x0**2 - f_x0 * ddf_x0)
+            # Multiple Root Method formula
+            x1 = x0 - (f_x0 * df_x0) / (df_x0**2 - f_x0 * ddf_x0)
 
-                            # Check for convergence
-                            error = abs(x1 - x0)
+            # Check for convergence
+            error = abs(x1 - x0)
 
-                            # Store iteration details in result_array
-                            result = {
-                                'i': i,
-                                'x_i': x0,
-                                'f(x_i)': f_x0,
-                                'df(x_i)': df_x0,
-                                'ddf(x_i)': ddf_x0,
-                                'x_(i+1)': x1,
-                                'Error': error
-                            }
-                            result_array.append(result)
+            # Store iteration details in result_array
+            result = {
+                'i': i,
+                'x_i': x0,
+                'f(x_i)': f_x0,
+                'df(x_i)': df_x0,
+                'ddf(x_i)': ddf_x0,
+                'x_(i+1)': x1,
+                'Error': error
+            }
+            result_array.append(result)
 
-                            if error < tol:
-                                df_result = pd.DataFrame(result_array)
-                                print(df_result)
-                                print(f"Converged after {i + 1} iterations.")
-                                return x1, i + 1, df_result
+            if error < tol:
+                df_result = pd.DataFrame(result_array)
+                print(df_result)
+                print(f"Converged after {i + 1} iterations.")
+                return x1, i + 1, df_result
 
-                            # Update x0 for next iteration
-                            x0 = x1
+            # Update x0 for next iteration
+            x0 = x1
 
-                        raise ValueError("Multiple root method did not converge within the maximum number of iterations.")
+        raise ValueError("Multiple root method did not converge within the maximum number of iterations.")
                 \end{minted}
             \paragraph{Rust}
                 \begin{minted}{Rust}
-                    use std::vec::Vec;
+    use std::vec::Vec;
 
-                    #[derive(Debug)]
-                    struct IterationResult {
-                        i: usize,
-                        x_i: f64,
-                        f_xi: f64,
-                        df_xi: f64,
-                        ddf_xi: f64,
-                        x_next: f64,
-                        error: f64,
-                    }
+    #[derive(Debug)]
+    struct IterationResult {
+        i: usize,
+        x_i: f64,
+        f_xi: f64,
+        df_xi: f64,
+        ddf_xi: f64,
+        x_next: f64,
+        error: f64,
+    }
 
-                    fn multiple_root_method(
-                        f: &dyn Fn(f64) -> f64,
-                        df: &dyn Fn(f64) -> f64,
-                        ddf: &dyn Fn(f64) -> f64,
-                        x0: f64,
-                        tol: f64,
-                        max_iter: usize,
-                    ) -> Result<(f64, usize, Vec<IterationResult>), &'static str> {
-                        let mut x0 = x0;
-                        let mut result_array: Vec<IterationResult> = Vec::new();
+    fn multiple_root_method(
+        f: &dyn Fn(f64) -> f64,
+        df: &dyn Fn(f64) -> f64,
+        ddf: &dyn Fn(f64) -> f64,
+        x0: f64,
+        tol: f64,
+        max_iter: usize,
+    ) -> Result<(f64, usize, Vec<IterationResult>), &'static str> {
+        let mut x0 = x0;
+        let mut result_array: Vec<IterationResult> = Vec::new();
 
-                        for i in 0..max_iter {
-                            let f_x0 = f(x0);
-                            let df_x0 = df(x0);
-                            let ddf_x0 = ddf(x0);
+        for i in 0..max_iter {
+            let f_x0 = f(x0);
+            let df_x0 = df(x0);
+            let ddf_x0 = ddf(x0);
 
-                            if df_x0.powi(2) - f_x0 * ddf_x0 == 0.0 {
-                                return Err("Division by zero encountered in the multiple root method.");
-                            }
+            if df_x0.powi(2) - f_x0 * ddf_x0 == 0.0 {
+                return Err("Division by zero encountered in the multiple root method.");
+            }
 
-                            // Multiple Root Method formula
-                            let x1 = x0 - (f_x0 * df_x0) / (df_x0.powi(2) - f_x0 * ddf_x0);
+            // Multiple Root Method formula
+            let x1 = x0 - (f_x0 * df_x0) / (df_x0.powi(2) - f_x0 * ddf_x0);
 
-                            // Check for convergence
-                            let error = (x1 - x0).abs();
+            // Check for convergence
+            let error = (x1 - x0).abs();
 
-                            // Store iteration details in result_array
-                            let result = IterationResult {
-                                i,
-                                x_i: x0,
-                                f_xi: f_x0,
-                                df_xi: df_x0,
-                                ddf_xi: ddf_x0,
-                                x_next: x1,
-                                error,
-                            };
-                            result_array.push(result);
+            // Store iteration details in result_array
+            let result = IterationResult {
+                i,
+                x_i: x0,
+                f_xi: f_x0,
+                df_xi: df_x0,
+                ddf_xi: ddf_x0,
+                x_next: x1,
+                error,
+            };
+            result_array.push(result);
 
-                            if error < tol {
-                                println!("Converged after {} iterations.", i + 1);
-                                return Ok((x1, i + 1, result_array));
-                            }
+            if error < tol {
+                println!("Converged after {} iterations.", i + 1);
+                return Ok((x1, i + 1, result_array));
+            }
 
-                            // Update x0 for next iteration
-                            x0 = x1;
-                        }
+            // Update x0 for next iteration
+            x0 = x1;
+        }
 
-                        Err("Multiple root method did not converge within the maximum number of iterations.")
-                    }
+        Err("Multiple root method did not converge within the maximum number of iterations.")
+    }
 
-                    fn main() {
-                        // Example function: f(x) = x^3 - 3x^2 + 3x - 1 (has a root with multiplicity at x = 1)
-                        let f = |x: f64| x.powi(3) - 3.0 * x.powi(2) + 3.0 * x - 1.0;
-                        let df = |x: f64| 3.0 * x.powi(2) - 6.0 * x + 3.0; // First derivative of f(x)
-                        let ddf = |x: f64| 6.0 * x - 6.0;                 // Second derivative of f(x)
+    fn main() {
+        // Example function: f(x) = x^3 - 3x^2 + 3x - 1
+        // (has a root with multiplicity at x = 1)
+        let f = |x: f64| x.powi(3) - 3.0 * x.powi(2) + 3.0 * x - 1.0;
+        let df = |x: f64| 3.0 * x.powi(2) - 6.0 * x + 3.0; // First derivative of f(x)
+        let ddf = |x: f64| 6.0 * x - 6.0;                 // Second derivative of f(x)
 
-                        let x0 = 0.5; // Initial guess
-                        let tol = 1e-7;
-                        let max_iter = 100;
+        let x0 = 0.5; // Initial guess
+        let tol = 1e-7;
+        let max_iter = 100;
 
-                        match multiple_root_method(&f, &df, &ddf, x0, tol, max_iter) {
-                            Ok((root, iterations, result_array)) => {
-                                println!("Root found: {}", root);
-                                println!("Number of iterations: {}", iterations);
+        match multiple_root_method(&f, &df, &ddf, x0, tol, max_iter) {
+            Ok((root, iterations, result_array)) => {
+                println!("Root found: {}", root);
+                println!("Number of iterations: {}", iterations);
 
-                                // Print result_array like a DataFrame
-                                println!("{: <4} {: <10} {: <10} {: <10} {: <10} {: <10} {: <10}",
-                                         "i", "x_i", "f(x_i)", "df(x_i)", "ddf(x_i)", "x_(i+1)", "Error");
-                                for result in result_array {
-                                    println!("{: <4} {: <10.6} {: <10.6} {: <10.6} {: <10.6} {: <10.6} {: <10.6}",
-                                             result.i, result.x_i, result.f_xi, result.df_xi, result.ddf_xi, result.x_next, result.error);
-                                }
-                            }
-                            Err(e) => {
-                                println!("{}", e);
-                            }
-                        }
-                    }
-
+                // Print result_array like a DataFrame
+                println!("{: <4} {: <10} {: <10} {: <10} {: <10} {: <10} {: <10}",
+                         "i", "x_i", "f(x_i)", "df(x_i)", "ddf(x_i)", "x_(i+1)", "Error");
+                for result in result_array {
+                    println!("{: <4} {: <10.6} {: <10.6} {: <10.6} {: <10.6} {: <10.6} {: <10.6}",
+                             result.i, result.x_i, result.f_xi, result.df_xi, result.ddf_xi, result.x_next, result.error);
+                }
+            }
+            Err(e) => {
+                println!("{}", e);
+            }
+        }
+    }
                 \end{minted}
         \subsubsection{Method Test}
 
@@ -1045,90 +1040,90 @@ October 1st 2024
         \subsubsection{Method Implementation}
             \paragraph{Python}
                 \begin{minted}{Python}
-                    def gaussian_elimination_no_pivoting(A, b):
-                        """
-                        Solves the system of linear equations Ax = b using Gaussian Elimination without Pivoting.
+    def gaussian_elimination_no_pivoting(A, b):
+        """
+        Solves the system of linear equations Ax = b using Gaussian Elimination without Pivoting.
 
-                        Parameters:
-                        A (list of lists or np.ndarray): Coefficient matrix.
-                        b (list or np.ndarray): Right-hand side vector.
+        Parameters:
+        A (list of lists or np.ndarray): Coefficient matrix.
+        b (list or np.ndarray): Right-hand side vector.
 
-                        Returns:
-                        np.ndarray: Solution vector x.
-                        """
-                        # Convert A and b into numpy arrays
-                        A = np.array(A, float)
-                        b = np.array(b, float)
-                        n = len(b)
+        Returns:
+        np.ndarray: Solution vector x.
+        """
+        # Convert A and b into numpy arrays
+        A = np.array(A, float)
+        b = np.array(b, float)
+        n = len(b)
 
-                        # Augment A with b to form the augmented matrix
-                        augmented_matrix = np.hstack([A, b.reshape(-1, 1)])
+        # Augment A with b to form the augmented matrix
+        augmented_matrix = np.hstack([A, b.reshape(-1, 1)])
 
-                        # Forward elimination (without pivoting)
-                        for i in range(n):
-                            # Check if the diagonal element is zero, which would lead to division by zero
-                            if augmented_matrix[i, i] == 0:
-                                raise ValueError(f"Zero pivot encountered at row {i}. No pivoting applied.")
+        # Forward elimination (without pivoting)
+        for i in range(n):
+            # Check if the diagonal element is zero, which would lead to division by zero
+            if augmented_matrix[i, i] == 0:
+                raise ValueError(f"Zero pivot encountered at row {i}. No pivoting applied.")
 
-                            # Eliminate entries below the pivot
-                            for j in range(i + 1, n):
-                                factor = augmented_matrix[j, i] / augmented_matrix[i, i]
-                                augmented_matrix[j, i:] -= factor * augmented_matrix[i, i:]
+            # Eliminate entries below the pivot
+            for j in range(i + 1, n):
+                factor = augmented_matrix[j, i] / augmented_matrix[i, i]
+                augmented_matrix[j, i:] -= factor * augmented_matrix[i, i:]
 
-                        # Back substitution to solve for x
-                        x = np.zeros(n)
-                        for i in range(n - 1, -1, -1):
-                            x[i] = (augmented_matrix[i, -1] - np.dot(augmented_matrix[i, i + 1:], x[i + 1:])) / augmented_matrix[i, i]
+        # Back substitution to solve for x
+        x = np.zeros(n)
+        for i in range(n - 1, -1, -1):
+            x[i] = (augmented_matrix[i, -1] - np.dot(augmented_matrix[i, i + 1:], x[i + 1:])) / augmented_matrix[i, i]
 
-                        return x
+        return x
                 \end{minted}
             \paragraph{Rust}
                 \begin{minted}{Rust}
-                    fn gaussian_elimination_no_pivoting(a: &mut Vec<Vec<f64>>, b: &mut Vec<f64>) -> Vec<f64> {
-                        let n = b.len();
+    fn gaussian_elimination_no_pivoting(a: &mut Vec<Vec<f64>>, b: &mut Vec<f64>) -> Vec<f64> {
+        let n = b.len();
 
-                        // Forward elimination (without pivoting)
-                        for i in 0..n {
-                            // Check if the diagonal element is zero, which would lead to division by zero
-                            if a[i][i] == 0.0 {
-                                panic!("Zero pivot encountered at row {}. No pivoting applied.", i);
-                            }
+        // Forward elimination (without pivoting)
+        for i in 0..n {
+            // Check if the diagonal element is zero, which would lead to division by zero
+            if a[i][i] == 0.0 {
+                panic!("Zero pivot encountered at row {}. No pivoting applied.", i);
+            }
 
-                            // Eliminate entries below the pivot
-                            for j in i + 1..n {
-                                let factor = a[j][i] / a[i][i];
-                                for k in i..n {
-                                    a[j][k] -= factor * a[i][k];
-                                }
-                                b[j] -= factor * b[i];
-                            }
-                        }
+            // Eliminate entries below the pivot
+            for j in i + 1..n {
+                let factor = a[j][i] / a[i][i];
+                for k in i..n {
+                    a[j][k] -= factor * a[i][k];
+                }
+                b[j] -= factor * b[i];
+            }
+        }
 
-                        // Back substitution to solve for x
-                        let mut x = vec![0.0; n];
-                        for i in (0..n).rev() {
-                            x[i] = b[i];
-                            for j in i + 1..n {
-                                x[i] -= a[i][j] * x[j];
-                            }
-                            x[i] /= a[i][i];
-                        }
+        // Back substitution to solve for x
+        let mut x = vec![0.0; n];
+        for i in (0..n).rev() {
+            x[i] = b[i];
+            for j in i + 1..n {
+                x[i] -= a[i][j] * x[j];
+            }
+            x[i] /= a[i][i];
+        }
 
-                        x
-                    }
+        x
+    }
 
-                    fn main() {
-                        // Example usage:
-                        let mut a = vec![
-                            vec![2.0, 1.0, -1.0],
-                            vec![-3.0, -1.0, 2.0],
-                            vec![-2.0, 1.0, 2.0],
-                        ];
-                        let mut b = vec![8.0, -11.0, -3.0];
+    fn main() {
+        // Example usage:
+        let mut a = vec![
+            vec![2.0, 1.0, -1.0],
+            vec![-3.0, -1.0, 2.0],
+            vec![-2.0, 1.0, 2.0],
+        ];
+        let mut b = vec![8.0, -11.0, -3.0];
 
-                        let solution = gaussian_elimination_no_pivoting(&mut a, &mut b);
-                        println!("Solution: {:?}", solution);
-                    }
+        let solution = gaussian_elimination_no_pivoting(&mut a, &mut b);
+        println!("Solution: {:?}", solution);
+    }
 
                 \end{minted}
         \subsubsection{Method Test}
@@ -1138,110 +1133,110 @@ October 1st 2024
         \subsubsection{Method Implementation}
             \paragraph{Python}
                 \begin{minted}{Python}
-                    def gaussian_elimination_with_partial_pivoting(A, b):
-                        """
-                        Solves the system of linear equations Ax = b using Gaussian Elimination with Partial Pivoting.
+    def gaussian_elimination_with_partial_pivoting(A, b):
+        """
+        Solves the system of linear equations Ax = b using Gaussian Elimination with Partial Pivoting.
 
-                        Parameters:
-                        A (list of lists or np.ndarray): Coefficient matrix.
-                        b (list or np.ndarray): Right-hand side vector.
+        Parameters:
+        A (list of lists or np.ndarray): Coefficient matrix.
+        b (list or np.ndarray): Right-hand side vector.
 
-                        Returns:
-                        np.ndarray: Solution vector x.
-                        """
-                        # Convert A and b to numpy arrays
-                        A = np.array(A, float)
-                        b = np.array(b, float)
-                        n = len(b)
+        Returns:
+        np.ndarray: Solution vector x.
+        """
+        # Convert A and b to numpy arrays
+        A = np.array(A, float)
+        b = np.array(b, float)
+        n = len(b)
 
-                        # Augment A with b to form the augmented matrix
-                        augmented_matrix = np.hstack([A, b.reshape(-1, 1)])
+        # Augment A with b to form the augmented matrix
+        augmented_matrix = np.hstack([A, b.reshape(-1, 1)])
 
-                        # Perform Gaussian elimination with partial pivoting
-                        for i in range(n):
-                            # Partial Pivoting: Find the row with the largest value in the current column
-                            max_row = np.argmax(abs(augmented_matrix[i:, i])) + i
-                            if augmented_matrix[max_row, i] == 0:
-                                raise ValueError("Matrix is singular or nearly singular")
+        # Perform Gaussian elimination with partial pivoting
+        for i in range(n):
+            # Partial Pivoting: Find the row with the largest value in the current column
+            max_row = np.argmax(abs(augmented_matrix[i:, i])) + i
+            if augmented_matrix[max_row, i] == 0:
+                raise ValueError("Matrix is singular or nearly singular")
 
-                            # Swap the current row with the row having the largest pivot element
-                            if max_row != i:
-                                augmented_matrix[[i, max_row]] = augmented_matrix[[max_row, i]]
+            # Swap the current row with the row having the largest pivot element
+            if max_row != i:
+                augmented_matrix[[i, max_row]] = augmented_matrix[[max_row, i]]
 
-                            # Eliminate values below the pivot
-                            for j in range(i + 1, n):
-                                factor = augmented_matrix[j, i] / augmented_matrix[i, i]
-                                augmented_matrix[j, i:] -= factor * augmented_matrix[i, i:]
+            # Eliminate values below the pivot
+            for j in range(i + 1, n):
+                factor = augmented_matrix[j, i] / augmented_matrix[i, i]
+                augmented_matrix[j, i:] -= factor * augmented_matrix[i, i:]
 
-                        # Back substitution to solve for x
-                        x = np.zeros(n)
-                        for i in range(n - 1, -1, -1):
-                            x[i] = (augmented_matrix[i, -1] - np.dot(augmented_matrix[i, i + 1:n], x[i + 1:])) / augmented_matrix[i, i]
+        # Back substitution to solve for x
+        x = np.zeros(n)
+        for i in range(n - 1, -1, -1):
+            x[i] = (augmented_matrix[i, -1] - np.dot(augmented_matrix[i, i + 1:n],
+            x[i + 1:])) / augmented_matrix[i, i]
 
-                        return x
+        return x
                 \end{minted}
             \paragraph{Rust}
                 \begin{minted}{Rust}
-                    fn gaussian_elimination_with_partial_pivoting(a: &mut Vec<Vec<f64>>, b: &mut Vec<f64>) -> Vec<f64> {
-                        let n = b.len();
+    fn gaussian_elimination_with_partial_pivoting(a: &mut Vec<Vec<f64>>, b: &mut Vec<f64>) -> Vec<f64> {
+        let n = b.len();
 
-                        // Perform Gaussian elimination with partial pivoting
-                        for i in 0..n {
-                            // Partial Pivoting: Find the row with the largest value in the current column
-                            let mut max_row = i;
-                            for k in i + 1..n {
-                                if a[k][i].abs() > a[max_row][i].abs() {
-                                    max_row = k;
-                                }
-                            }
+        // Perform Gaussian elimination with partial pivoting
+        for i in 0..n {
+            // Partial Pivoting: Find the row with the largest value in the current column
+            let mut max_row = i;
+            for k in i + 1..n {
+                if a[k][i].abs() > a[max_row][i].abs() {
+                    max_row = k;
+                }
+            }
 
-                            // Check if the matrix is singular or nearly singular
-                            if a[max_row][i].abs() == 0.0 {
-                                panic!("Matrix is singular or nearly singular");
-                            }
+            // Check if the matrix is singular or nearly singular
+            if a[max_row][i].abs() == 0.0 {
+                panic!("Matrix is singular or nearly singular");
+            }
 
-                            // Swap the current row with the row having the largest pivot element
-                            if max_row != i {
-                                a.swap(i, max_row);
-                                b.swap(i, max_row);
-                            }
+            // Swap the current row with the row having the largest pivot element
+            if max_row != i {
+                a.swap(i, max_row);
+                b.swap(i, max_row);
+            }
 
-                            // Eliminate values below the pivot
-                            for j in i + 1..n {
-                                let factor = a[j][i] / a[i][i];
-                                for k in i..n {
-                                    a[j][k] -= factor * a[i][k];
-                                }
-                                b[j] -= factor * b[i];
-                            }
-                        }
+            // Eliminate values below the pivot
+            for j in i + 1..n {
+                let factor = a[j][i] / a[i][i];
+                for k in i..n {
+                    a[j][k] -= factor * a[i][k];
+                }
+                b[j] -= factor * b[i];
+            }
+        }
 
-                        // Back substitution to solve for x
-                        let mut x = vec![0.0; n];
-                        for i in (0..n).rev() {
-                            x[i] = b[i];
-                            for j in i + 1..n {
-                                x[i] -= a[i][j] * x[j];
-                            }
-                            x[i] /= a[i][i];
-                        }
+        // Back substitution to solve for x
+        let mut x = vec![0.0; n];
+        for i in (0..n).rev() {
+            x[i] = b[i];
+            for j in i + 1..n {
+                x[i] -= a[i][j] * x[j];
+            }
+            x[i] /= a[i][i];
+        }
 
-                        x
-                    }
+        x
+    }
 
-                    fn main() {
-                        // Example usage:
-                        let mut a = vec![
-                            vec![2.0, 1.0, -1.0],
-                            vec![-3.0, -1.0, 2.0],
-                            vec![-2.0, 1.0, 2.0],
-                        ];
-                        let mut b = vec![8.0, -11.0, -3.0];
+    fn main() {
+        // Example usage:
+        let mut a = vec![
+            vec![2.0, 1.0, -1.0],
+            vec![-3.0, -1.0, 2.0],
+            vec![-2.0, 1.0, 2.0],
+        ];
+        let mut b = vec![8.0, -11.0, -3.0];
 
-                        let solution = gaussian_elimination_with_partial_pivoting(&mut a, &mut b);
-                        println!("Solution: {:?}", solution);
-                    }
-
+        let solution = gaussian_elimination_with_partial_pivoting(&mut a, &mut b);
+        println!("Solution: {:?}", solution);
+    }
                 \end{minted}
         \subsubsection{Method Test}
 
@@ -1250,104 +1245,103 @@ October 1st 2024
         \subsubsection{Method Implementation}
             \paragraph{Python}
                 \begin{minted}{Python}
-                    def gaussian_elimination(A, b):
-                        """
-                        Solves the system of linear equations Ax = b using Gaussian Elimination.
+    def gaussian_elimination(A, b):
+        """
+        Solves the system of linear equations Ax = b using Gaussian Elimination.
 
-                        Parameters:
-                        A (list of list or np.ndarray): Coefficient matrix.
-                        b (list or np.ndarray): Right-hand side vector.
+        Parameters:
+        A (list of list or np.ndarray): Coefficient matrix.
+        b (list or np.ndarray): Right-hand side vector.
 
-                        Returns:
-                        np.ndarray: Solution vector x.
-                        """
-                        # Convert A and b into augmented matrix
-                        A = np.array(A, float)
-                        b = np.array(b, float)
-                        n = len(b)
+        Returns:
+        np.ndarray: Solution vector x.
+        """
+        # Convert A and b into augmented matrix
+        A = np.array(A, float)
+        b = np.array(b, float)
+        n = len(b)
 
-                        # Augment A with b
-                        augmented_matrix = np.hstack([A, b.reshape(-1, 1)])
+        # Augment A with b
+        augmented_matrix = np.hstack([A, b.reshape(-1, 1)])
 
-                        # Forward Elimination: Transform to upper triangular form
-                        for i in range(n):
-                            # Partial Pivoting: Swap rows if needed
-                            max_row = np.argmax(abs(augmented_matrix[i:, i])) + i
-                            if augmented_matrix[max_row, i] == 0:
-                                raise ValueError("Matrix is singular or nearly singular")
-                            augmented_matrix[[i, max_row]] = augmented_matrix[[max_row, i]]
+        # Forward Elimination: Transform to upper triangular form
+        for i in range(n):
+            # Partial Pivoting: Swap rows if needed
+            max_row = np.argmax(abs(augmented_matrix[i:, i])) + i
+            if augmented_matrix[max_row, i] == 0:
+                raise ValueError("Matrix is singular or nearly singular")
+            augmented_matrix[[i, max_row]] = augmented_matrix[[max_row, i]]
 
-                            # Eliminate the below rows
-                            for j in range(i + 1, n):
-                                factor = augmented_matrix[j, i] / augmented_matrix[i, i]
-                                augmented_matrix[j, i:] -= factor * augmented_matrix[i, i:]
+            # Eliminate the below rows
+            for j in range(i + 1, n):
+                factor = augmented_matrix[j, i] / augmented_matrix[i, i]
+                augmented_matrix[j, i:] -= factor * augmented_matrix[i, i:]
 
-                        # Back Substitution: Solve the upper triangular system
-                        x = np.zeros(n)
-                        for i in range(n - 1, -1, -1):
-                            x[i] = (augmented_matrix[i, -1] - np.dot(augmented_matrix[i, i + 1:n], x[i + 1:])) / augmented_matrix[i, i]
+        # Back Substitution: Solve the upper triangular system
+        x = np.zeros(n)
+        for i in range(n - 1, -1, -1):
+            x[i] = (augmented_matrix[i, -1] - np.dot(augmented_matrix[i, i + 1:n], x[i + 1:])) / augmented_matrix[i, i]
 
-                        return x
+        return x
                 \end{minted}
             \paragraph{Rust}
                 \begin{minted}{Rust}
-                    fn gaussian_elimination(a: &mut Vec<Vec<f64>>, b: &mut Vec<f64>) -> Vec<f64> {
-                        let n = b.len();
+    fn gaussian_elimination(a: &mut Vec<Vec<f64>>, b: &mut Vec<f64>) -> Vec<f64> {
+        let n = b.len();
 
-                        // Forward Elimination: Transform to upper triangular form
-                        for i in 0..n {
-                            // Partial Pivoting: Swap rows if needed
-                            let mut max_row = i;
-                            for k in i + 1..n {
-                                if a[k][i].abs() > a[max_row][i].abs() {
-                                    max_row = k;
-                                }
-                            }
+        // Forward Elimination: Transform to upper triangular form
+        for i in 0..n {
+            // Partial Pivoting: Swap rows if needed
+            let mut max_row = i;
+            for k in i + 1..n {
+                if a[k][i].abs() > a[max_row][i].abs() {
+                    max_row = k;
+                }
+            }
 
-                            if a[max_row][i].abs() == 0.0 {
-                                panic!("Matrix is singular or nearly singular");
-                            }
+            if a[max_row][i].abs() == 0.0 {
+                panic!("Matrix is singular or nearly singular");
+            }
 
-                            // Swap rows in both A and b
-                            a.swap(i, max_row);
-                            b.swap(i, max_row);
+            // Swap rows in both A and b
+            a.swap(i, max_row);
+            b.swap(i, max_row);
 
-                            // Eliminate the below rows
-                            for j in i + 1..n {
-                                let factor = a[j][i] / a[i][i];
-                                for k in i..n {
-                                    a[j][k] -= factor * a[i][k];
-                                }
-                                b[j] -= factor * b[i];
-                            }
-                        }
+            // Eliminate the below rows
+            for j in i + 1..n {
+                let factor = a[j][i] / a[i][i];
+                for k in i..n {
+                    a[j][k] -= factor * a[i][k];
+                }
+                b[j] -= factor * b[i];
+            }
+        }
 
-                        // Back Substitution: Solve the upper triangular system
-                        let mut x = vec![0.0; n];
-                        for i in (0..n).rev() {
-                            x[i] = b[i];
-                            for j in i + 1..n {
-                                x[i] -= a[i][j] * x[j];
-                            }
-                            x[i] /= a[i][i];
-                        }
+        // Back Substitution: Solve the upper triangular system
+        let mut x = vec![0.0; n];
+        for i in (0..n).rev() {
+            x[i] = b[i];
+            for j in i + 1..n {
+                x[i] -= a[i][j] * x[j];
+            }
+            x[i] /= a[i][i];
+        }
 
-                        x
-                    }
+        x
+    }
 
-                    fn main() {
-                        // Example usage:
-                        let mut a = vec![
-                            vec![2.0, 1.0, -1.0],
-                            vec![-3.0, -1.0, 2.0],
-                            vec![-2.0, 1.0, 2.0],
-                        ];
-                        let mut b = vec![8.0, -11.0, -3.0];
+    fn main() {
+        // Example usage:
+        let mut a = vec![
+            vec![2.0, 1.0, -1.0],
+            vec![-3.0, -1.0, 2.0],
+            vec![-2.0, 1.0, 2.0],
+        ];
+        let mut b = vec![8.0, -11.0, -3.0];
 
-                        let solution = gaussian_elimination(&mut a, &mut b);
-                        println!("Solution: {:?}", solution);
-                    }
-
+        let solution = gaussian_elimination(&mut a, &mut b);
+        println!("Solution: {:?}", solution);
+    }
                 \end{minted}
         \subsubsection{Method Test}
 
