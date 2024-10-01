@@ -1,0 +1,50 @@
+FUNCIÓN MetodoRaizMultiple(f, df, ddf, x0, tol=1e-7, max_iter=100):
+
+    ENTRADA:
+    - f: función de la cual se busca la raíz.
+    - df: derivada de la función f.
+    - ddf: segunda derivada de la función f.
+    - x0: aproximación inicial de la raíz.
+    - tol: tolerancia para la convergencia (opcional, valor por defecto 1e-7).
+    - max_iter: número máximo de iteraciones permitidas (opcional, valor por defecto 100).
+
+    SALIDA:
+    - x: raíz aproximada de la función f.
+    - iteraciones: número de iteraciones realizadas.
+    - data_frame: tabla con los detalles de cada iteración (opcional).
+
+    INICIO:
+    
+    1. Crear una lista vacía para almacenar los resultados de cada iteración (result_array).
+    
+    2. PARA i desde 0 hasta max_iter HACER:
+    
+        a. Evaluar f(x0), f'(x0) y f''(x0):
+           - f_x0 = f(x0)
+           - df_x0 = df(x0)
+           - ddf_x0 = ddf(x0)
+        
+        b. Verificar si el denominador es cero:
+           - Si [df_x0^2 - f_x0 * ddf_x0] es igual a 0, lanzar un error ("División por cero en el método de raíz múltiple").
+        
+        c. Calcular el nuevo valor de x utilizando la fórmula del método de raíz múltiple:
+           - x1 = x0 - (f_x0 * df_x0) / (df_x0^2 - f_x0 * ddf_x0)
+        
+        d. Calcular el error como la diferencia absoluta:
+           - error = abs(x1 - x0)
+        
+        e. Almacenar los resultados de la iteración actual en la lista:
+           - Guardar (i, x0, f_x0, df_x0, ddf_x0, x1, error) en result_array.
+        
+        f. Verificar si el error es menor que la tolerancia (tol):
+           - Si error < tol:
+              - Crear un DataFrame con los resultados de result_array.
+              - Imprimir el DataFrame.
+              - Retornar x1, número de iteraciones (i + 1), y el DataFrame.
+        
+        g. Actualizar x0 para la siguiente iteración:
+           - x0 = x1
+    
+    3. Si se alcanzó el número máximo de iteraciones sin converger, lanzar un error ("El método de raíz múltiple no convergió en el número máximo de iteraciones").
+
+FIN FUNCIÓN

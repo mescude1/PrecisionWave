@@ -1,0 +1,42 @@
+FUNCIÓN NewtonRaphson(f, df, x0, tol=1e-7, max_iter=30):
+
+    ENTRADA:
+    - f: función cuyo cero (raíz) se desea encontrar.
+    - df: derivada de la función f.
+    - x0: estimación inicial de la raíz.
+    - tol: tolerancia para la convergencia (valor predeterminado es 1e-7).
+    - max_iter: número máximo de iteraciones permitidas (valor predeterminado es 30).
+
+    SALIDA:
+    - x: raíz aproximada de la función f.
+    - n: número de iteraciones realizadas.
+    - result_array: tabla con los detalles de cada iteración.
+
+    INICIO:
+    1. Inicializar xn = x0 (estimación inicial).
+    2. Crear una lista vacía result_array para almacenar los detalles de las iteraciones.
+
+    3. Para n desde 0 hasta max_iter - 1 HACER:
+
+        a. Calcular fxn = f(xn) y dfxn = df(xn) (la función y su derivada evaluadas en xn).
+
+        b. Si |xn - (xn - fxn / dfxn)| < tol:
+           - Guardar en result_array los detalles de la iteración actual (n, xi, f(xi), error).
+           - Imprimir el DataFrame con los resultados de las iteraciones.
+           - Retornar xn como la raíz aproximada.
+           - Terminar la función.
+
+        c. Si dfxn == 0 (la derivada es cero):
+           - Imprimir "Derivada cero. No se encontró solución."
+           - Retornar None (indica que no se encontró solución).
+        
+        d. Guardar en result_array los detalles de la iteración actual (n, xi, f(xi), error).
+        
+        e. Actualizar xn utilizando la fórmula del método de Newton-Raphson:
+           - xn = xn - fxn / dfxn.
+    
+    4. Si se excede el número máximo de iteraciones:
+       - Imprimir "Se excedió el número máximo de iteraciones. No se encontró solución."
+       - Retornar None.
+
+FIN FUNCIÓN

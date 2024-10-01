@@ -1,0 +1,59 @@
+FUNCIÓN ReglaFalsa(f, a, b, tol, Nmax):
+    
+    ENTRADA:
+    - f: función continua de la cual se busca la raíz.
+    - a: punto extremo izquierdo del intervalo inicial.
+    - b: punto extremo derecho del intervalo inicial.
+    - tol: tolerancia que define el criterio de parada (cuando el error es suficientemente pequeño).
+    - Nmax: número máximo de iteraciones permitidas.
+
+    SALIDA:
+    - x: solución aproximada.
+    - iter: número de iteraciones realizadas.
+    - err: error estimado.
+    - result_array: lista de resultados con los valores de cada iteración (punto, valor de f(x) y error).
+
+    INICIO:
+    1. Calcular f(a) y f(b)  // fa = f(a), fb = f(b)
+    
+    2. Calcular el primer punto medio usando la regla falsa:
+       pm = (fb * a - fa * b) / (fb - fa)  // pm es el primer punto de prueba
+    
+    3. Evaluar la función en el punto medio:
+       fpm = f(pm)
+    
+    4. Inicializar un valor grande de error (E = 1000) para comenzar el ciclo.
+    
+    5. Inicializar un contador de iteraciones (cont = 1).
+    
+    6. Crear una lista vacía para almacenar los resultados de cada iteración (result_array).
+    
+    7. Mientras el error (E) sea mayor que la tolerancia (tol) Y el número de iteraciones sea menor que Nmax:
+        a. Si f(a) * f(pm) < 0:
+            - La raíz está en el intervalo [a, pm], entonces actualizar b = pm y fb = fpm.
+        b. Si no:
+            - La raíz está en el intervalo [pm, b], entonces actualizar a = pm y fa = fpm.
+        
+        c. Guardar el valor anterior de pm (p0 = pm).
+        
+        d. Calcular un nuevo punto medio usando la regla falsa:
+           pm = (fb * a - fa * b) / (fb - fa)
+        
+        e. Evaluar la función en el nuevo punto medio:
+           fpm = f(pm)
+        
+        f. Calcular el error como la diferencia entre el nuevo y el anterior punto medio:
+           E = abs(pm - p0)
+        
+        g. Guardar los resultados de la iteración actual (número de iteración, valor del punto, valor de f(pm) y error) en result_array.
+        
+        h. Incrementar el contador de iteraciones (cont += 1).
+    
+    8. Cuando el ciclo termine (cuando se alcance la tolerancia o el número máximo de iteraciones):
+        - La solución aproximada es x = pm.
+        - El número de iteraciones es iter = cont.
+        - El error estimado es err = E.
+    
+    9. Devolver la solución aproximada, el número de iteraciones, el error y el conjunto de resultados de las iteraciones.
+
+FIN FUNCIÓN

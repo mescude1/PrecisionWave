@@ -1,0 +1,46 @@
+FUNCIÓN BusquedaIncremental(f, x0, h, Nmax):
+
+    ENTRADA:
+    - f: función continua para la cual se busca un cambio de signo.
+    - x0: punto inicial.
+    - h: tamaño del paso (incremento en cada iteración).
+    - Nmax: número máximo de iteraciones.
+
+    SALIDA:
+    - a: extremo izquierdo del intervalo donde ocurre un cambio de signo.
+    - b: extremo derecho del intervalo donde ocurre un cambio de signo.
+    - iter: número de iteraciones realizadas.
+    - data_frame: tabla de resultados con detalles de cada iteración.
+
+    INICIO:
+    1. Inicializar:
+       - xant (x anterior) = x0.
+       - fant = f(xant).
+       - xact (x actual) = xant + h.
+       - fact = f(xact).
+       - Crear una lista vacía para almacenar los resultados.
+
+    2. Bucle FOR desde i = 1 hasta Nmax:
+    
+       a. Si fant * fact < 0, esto indica un cambio de signo en el intervalo [xant, xact]:
+          - Guardar el resultado de la iteración (i, xact, fact, error).
+          - Romper el bucle (salir).
+          
+       b. Guardar los resultados actuales en la lista:
+          - Almacenar los valores de la iteración: índice i, x actual, f(x actual), y error (diferencia entre x actual y x anterior).
+          
+       c. Actualizar los valores para la siguiente iteración:
+          - xant = xact.
+          - fant = fact.
+          - xact = xant + h.
+          - fact = f(xact).
+
+    3. Crear un DataFrame con los resultados almacenados.
+
+    4. Retornar:
+       - xant como extremo izquierdo del intervalo.
+       - xact como extremo derecho del intervalo.
+       - i como número de iteraciones realizadas.
+       - el DataFrame con los resultados.
+
+FIN FUNCIÓN

@@ -1,0 +1,42 @@
+FUNCIÓN MétodoDeBisección(f, a, b, tolerancia=1e-7, max_iteraciones=100):
+    
+    ENTRADA:
+    - f: función a evaluar
+    - a, b: intervalo [a, b] en el cual se busca la raíz
+    - tolerancia: criterio de parada (opcional)
+    - max_iteraciones: número máximo de iteraciones (opcional)
+    
+    SALIDA:
+    - c: valor aproximado de la raíz
+    - iteraciones: número de iteraciones realizadas
+    - convergió: indicador de si el algoritmo convergió o no
+    - df_result: tabla de resultados de las iteraciones
+    
+    SI f(a) * f(b) >= 0 ENTONCES:
+        Lanzar un error ("f(a) y f(b) deben tener signos opuestos")
+    
+    c = (a + b) / 2  // Inicializar el punto medio
+    lista_resultados = []  // Inicializar lista para guardar resultados de cada iteración
+    
+    PARA i DESDE 0 HASTA max_iteraciones HACER:
+        c = (a + b) / 2  // Calcular el punto medio de [a, b]
+        
+        SI (b - a) < tolerancia O abs(f(c)) < tolerancia ENTONCES:
+            Crear un DataFrame con lista_resultados  // Convertir la lista a tabla
+            IMPRIMIR el DataFrame  // Mostrar tabla con resultados de iteraciones
+            DEVOLVER (c, i + 1, True, DataFrame)  // Algoritmo ha convergido
+        
+        // Determinar en qué mitad del intervalo se encuentra la raíz
+        SI f(a) * f(c) < 0 ENTONCES:
+            b = c  // La raíz está en el intervalo [a, c]
+        SI NO:
+            a = c  // La raíz está en el intervalo [c, b]
+        
+        // Guardar los resultados de la iteración actual
+        resultado = { 'iteración': i, 'x_i': c, 'f(x_i)': f(c), 'error': abs(b - a) }
+        lista_resultados.AGREGAR(resultado)
+    
+    // Si se alcanzó el número máximo de iteraciones sin converger
+    DEVOLVER (c, max_iteraciones, False, lista_resultados)
+
+FIN FUNCIÓN
