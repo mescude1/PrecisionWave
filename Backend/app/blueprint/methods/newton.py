@@ -6,11 +6,11 @@ from sympy import diff, Function
 import pandas as pd
 
 def f(x):
-    return x**3 - math.sin(x)**5 - ln(x ** 3 + 0.9)
+    return math.log(math.sin(x)**2 + 1) - 1/2
 
 
 def df(x):
-    return 3*x**2 - 3*x**2/(x**3 + 0.9) - 5*math.sin(x)**4*math.cos(x)
+    return 2*(math.sin(x)**2 + 1)**-1 * math.sin(x) * math.cos(x)
 
 
 def newton_raphson(f, df, x0, tol=1e-7, max_iter=30):

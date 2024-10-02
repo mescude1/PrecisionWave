@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage{minted}
 \usepackage{textcomp}
+\usepackage{graphicx} % For shifting tables
 
 \title{EAFIT University - Department of Information and Computer Sciences}
 \author{Mauricio Escudero Restrepo \\
@@ -12,7 +13,7 @@
 
 \maketitle
 
-\section{Objetivo}
+\section{Objective}
 Review the progress of the final project and the work methodologies of the workgroups
 
 \section{Course}
@@ -25,8 +26,8 @@ Edwar Samir Posada Murillo
 October 1st 2024
 
 \section[]{Numerical Methods}
-    The following numerical methods will be presented in this document in the following manner, first a pseudocode
-    version of the method algorith will be presented, after the code for the implementation of the method in both
+    The following numerical methods will be presented in this document in the following manner, first a pseudo-code
+    version of the method algorithm will be presented, after the code for the implementation of the method in both
     languages selected will be presented, finally proof for the execution and results of the methods will be provided.
 
     \subsection{Incremental Search}
@@ -39,11 +40,11 @@ October 1st 2024
 
         \subsubsection{Pseudo-code}
 
-            \subsubsection{Method Implementation}
+        \subsubsection{Method Implementation}
 
-                \paragraph{Python}
+            \paragraph{Python}
 
-                \begin{minted}{python}
+            \begin{minted}{python}
     def incremental_search(f, x0, h, Nmax):
         """
         This program finds an interval where f(x) has a sign change
@@ -167,14 +168,16 @@ October 1st 2024
 
     \subsubsection{Method Tests}\label{subsec:method-tests}
 
-    The test parameters are as follows:
-        - \textflorin = math.log((math.sin(x)**2) + 1 ) - 1/2
-        - x0 = -3
-        - step = 0.5
-        - Tol = 1x10-7
-        - N = 100
+    \paragraph{The test parameters are as follows:}
+        \begin{itemize}
+            \item {\textflorin = math.log((math.sin(x)**2) + 1 ) - 1/2}
+            \item {x0 = -3}
+            \item {step = 0.5}
+            \item {Tol = 1x10-7}
+            \item {N = 100}
+        \end{itemize}
 
-    Result:
+    \paragraph{Result:}
         Interval: [-2.5, -2.0], Iterations: 2
 
         \begin{table}[ht]
@@ -307,11 +310,13 @@ October 1st 2024
 
     \subsubsection{Method Test}\label{subsec:method-test}
         The test parameters are as follows:
-            - \textflorin = math.log((math.sin(x)**2) + 1 ) - 1/2
-            - a = 0
-            - b = 1
-            - Tol = 1x10-7
-            - N = 100
+        \begin{itemize}
+            \item {\textflorin = math.log((math.sin(x)**2) + 1 ) - 1/2}
+            \item {a = 0}
+            \item {b = 1}
+            \item {Tol = 1x10-7}
+            \item {N = 100}
+        \end{itemize}
 
         Result:
             - Root: 0.9364047050476074
@@ -620,6 +625,51 @@ October 1st 2024
             print_results(&result_array);
         }
     \end{minted}
+    \subsubsection{Method Test}
+
+    Approximate solution:
+    \begin{itemize}
+        \item {Root found: -0.37444505296105535}
+        \item {Iterations: 30}
+        \item {Error: 7.726074024994034e-08 }
+    \end{itemize}
+    \hspace*{-3cm} % Moves the table 2 cm into the left margin
+    \makebox[\textwidth][l]{ % [l] aligns to the left
+\begin{tabular}{|c|c|c|c|c|}
+Iteration & x\_i                 & f(x\_i)                 & g(x\_i)              & Error                  \\
+1         & -0.2931087267313766  & -0.12671281687488073    & -0.41982154360625734 & 0.2068912732686234     \\
+2         & -0.41982154360625734 & 0.07351702442859243     & -0.3463045191776649  & 0.12671281687488073    \\
+3         & -0.3463045191776649  & -0.044653937364644736   & -0.39095845654230965 & 0.07351702442859243    \\
+4         & -0.39095845654230965 & 0.026553421648170428    & -0.3644050348941392  & 0.044653937364644736   \\
+5         & -0.3644050348941392  & -0.016021268273817058   & -0.3804263031679563  & 0.026553421648170428   \\
+6         & -0.3804263031679563  & 0.009589507887747428    & -0.37083679528020885 & 0.016021268273817058   \\
+7         & -0.37083679528020885 & -0.005768850083372357   & -0.3766056453635812  & 0.009589507887747428   \\
+8         & -0.3766056453635812  & 0.003460227756392209    & -0.373145417607189   & 0.005768850083372357   \\
+9         & -0.373145417607189   & -0.002079223579867173   & -0.3752246411870562  & 0.003460227756392209   \\
+10        & -0.3752246411870562  & 0.00124805513874654     & -0.37397658604830963 & 0.002079223579867173   \\
+11        & -0.37397658604830963 & -0.0007496296601224861  & -0.3747262157084321  & 0.00124805513874654    \\
+12        & -0.3747262157084321  & 0.00045008239797816874  & -0.37427613331045395 & 0.0007496296601224861  \\
+13        & -0.37427613331045395 & -0.00027029514763832196 & -0.3745464284580923  & 0.00045008239797816874 \\
+14        & -0.3745464284580923  & 0.0001623020232475736   & -0.3743841264348447  & 0.00027029514763832196 \\
+15        & -0.3743841264348447  & -9.746439711039168e-05  & -0.3744815908319551  & 0.0001623020232475736  \\
+16        & -0.3744815908319551  & 5.8525648058027624e-05  & -0.37442306518389706 & 9.746439711039168e-05  \\
+17        & -0.37442306518389706 & -3.514467880877392e-05  & -0.37445820986270584 & 5.8525648058027624e-05 \\
+18        & -0.37445820986270584 & 2.110401325022826e-05   & -0.3744371058494556  & 3.514467880877392e-05  \\
+19        & -0.3744371058494556  & -1.2672877957420337e-05 & -0.37444977872741303 & 2.110401325022826e-05  \\
+20        & -0.37444977872741303 & 7.609964212673681e-06   & -0.37444216876320036 & 1.2672877957420337e-05 \\
+21        & -0.37444216876320036 & -4.5697420043566694e-06 & -0.3744467385052047  & 7.609964212673681e-06  \\
+22        & -0.3744467385052047  & 2.744098679452467e-06   & -0.37444399440652526 & 4.5697420043566694e-06 \\
+23        & -0.37444399440652526 & -1.647814738270359e-06  & -0.37444564222126353 & 2.744098679452467e-06  \\
+24        & -0.37444564222126353 & 9.895019896788426e-07   & -0.37444465271927385 & 1.647814738270359e-06  \\
+25        & -0.37444465271927385 & -5.941897863737111e-07  & -0.3744452469090602  & 9.895019896788426e-07  \\
+26        & -0.3744452469090602  & 3.568071592630062e-07   & -0.37444489010190096 & 5.941897863737111e-07  \\
+27        & -0.37444489010190096 & -2.1426045238026603e-07 & -0.37444510436235334 & 3.568071592630062e-07  \\
+28        & -0.37444510436235334 & 1.28662038245686e-07    & -0.3744449757003151  & 2.1426045238026603e-07 \\
+29        & -0.3744449757003151  & -7.726074024994034e-08  & -0.37444505296105535 & 1.28662038245686e-07   \\
+30        & -0.37444505296105535 & 4.63945839523916e-08    & -0.3744450065664714  & 7.726074024994034e-08
+\end{tabular}
+}
+
 
     \subsection{Newton}
         \subsubsection{Pseudo-code}
@@ -741,7 +791,18 @@ October 1st 2024
     }
                 \end{minted}
         \subsubsection{Method Test}
-
+            The root is: 0.9364045808526077
+            Found solution after 4 iterations.
+            \begin{table}[]
+            \begin{tabular}{llll}
+            i: & xi:                & f\_xi:                  & E                      \\
+            0  & 1.2                & 0.12524132043913228     & 0.3464852988384717     \\
+            1  & 0.8535147011615283 & -0.05025900826059804    & 0.07953835548275334    \\
+            2  & 0.9330530566442816 & -0.0019446986420873502  & 0.003344827656164062   \\
+            3  & 0.9363978843004457 & -3.877863362977685e-06  & 6.696552162011038e-06  \\
+            4  & 0.9364045808526077 & -1.5608903058961232e-11 & 2.6954660725664326e-11
+            \end{tabular}
+            \end{table}
     \subsection{Seccant}
         \subsubsection{Pseudo-code}
         \subsubsection{Method Implementation}

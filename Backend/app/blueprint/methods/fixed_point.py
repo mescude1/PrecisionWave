@@ -1,15 +1,19 @@
+import math
+
 import pandas as pd
+import numpy as np
 
-
-def fixed_point_method(g, x0, tol=1e-7, max_iter=1000):
+def fixed_point_method(f, g, x0, tol=1e-7, max_iter=1000):
     """
-    Fixed-Point Iteration Method to find a solution to x = g(x).
+    Fixed-Point Iteration Method to solve f(x) = 0 using x = g(x).
 
     Parameters:
+    f : function
+        The original function f(x) for which we are trying to find the root.
     g : function
-        The function to apply in the fixed-point iteration (x = g(x)).
+        The transformation function g(x) used for the fixed-point iteration (x = g(x)).
     x0 : float
-        Initial guess for the fixed-point.
+        Initial guess for the root.
     tol : float, optional
         Tolerance for convergence. Default is 1e-7.
     max_iter : int, optional
@@ -17,59 +21,61 @@ def fixed_point_method(g, x0, tol=1e-7, max_iter=1000):
 
     Returns:
     x : float
-        The approximate fixed point.
+        The approximate root of f(x) = 0.
     iterations : int
         The number of iterations performed.
     converged : bool
-        Whether the method converged.
-    result_array : list of dict
-        A list containing the iteration details.
+        Whether the method converged to a solution.
+    result_df : pd.DataFrame
+        A DataFrame containing details of each iteration.
     """
     result_array = []
     x = x0
 
     for i in range(max_iter):
         x_new = g(x)
+        f_x_new = f(x_new)
         error = abs(x_new - x)
 
         result = {
-            'i': i + 1,
-            'x': x_new,
-            'g_x': g(x_new),
-            'error': error
+            'Iteration': i + 1,
+            'x_i': x_new,
+            'f(x_i)': f_x_new,
+            'g(x_i)': g(x_new),
+            'Error': error
         }
         result_array.append(result)
 
-        if error < tol:
-            return x_new, i + 1, True, result_array  # Converged
+        # Check for convergence based on tolerance
+        if error < tol and abs(f_x_new) < tol:
+            result_df = pd.DataFrame(result_array)
+            return x_new, i + 1, True, result_df
 
-        x = x_new  # Update for the next iteration
+        # Update for the next iteration
+        x = x_new
 
-    return x, max_iter, False, pd.DataFrame(result_array)  # Did not converge within max_iter
+    # If no convergence after max_iter
+    result_df = pd.DataFrame(result_array)
+    return x, max_iter, False, result_df
 
-
-# Example usage:
-if __name__ == "__main__":
-    import math
-
-
-    # Define the function g(x) for which we are solving x = g(x)
-    def g(x):
-        return math.cos(x)  # Example: g(x) = cos(x)
+# Example Usage
 
 
-    # Initial guess
-    x0 = 0.5
+def f(x):
+    return math.log(math.sin(x)**2 + 1) - 1/2 - x
 
-    # Call the fixed-point method
-    solution, iterations, converged, results = fixed_point_method(g, x0)
+def g(x):
+    return math.log(math.sin(x)**2 + 1) - 1/2
 
-    # Display the results
-    if converged:
-        print(f"Converged to solution: {solution} in {iterations} iterations.")
-    else:
-        print(f"Did not converge within {iterations} iterations.")
+# Initial guess
+x0 = -0.5
 
-    # Print iteration details
-    for res in results:
-        print(f"Iteration {res['i']}: x = {res['x']}, g(x) = {res['g_x']}, error = {res['error']}")
+# Call the fixed-point method
+root, iterations, converged, result_df = fixed_point_method(f, g, x0)
+
+# Output the results
+print("Root found:", root)
+print("Iterations:", iterations)
+print("Converged:", converged)
+print("Results of each iteration:")
+print(result_df)
