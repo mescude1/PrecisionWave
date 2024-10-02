@@ -423,8 +423,9 @@ END FUNCTION
             - Iterations: 21
             - Converged: True
 
-        \begin{table}[ht]
-        \begin{tabular}{llll}
+       \vspace*{1cm} % Moves the table 2 cm into the left margin
+    \makebox[\textwidth][l]{ % [l] aligns to the left
+        \begin{tabular}{|c|c|c|c|}
         i  & x\_i               & f\_x\_i                 & e                   \\
         0  & 0.5                & -0.2931087267313766     & 0.5                 \\
         1  & 0.75               & -0.11839639385347844    & 0.25                \\
@@ -446,8 +447,8 @@ END FUNCTION
         17 & 0.9364051818847656 & 3.4802931392352576e-07  & 3.814697265625e-06  \\
         18 & 0.9364032745361328 & -7.564765268641693e-07  & 1.9073486328125e-06 \\
         19 & 0.9364042282104492 & -2.042232898902263e-07  & 9.5367431640625e-07
-        \end{tabular}\label{tab:table2}
-        \end{table}
+        \end{tabular}
+        }
 
 \break
 
@@ -662,15 +663,16 @@ END FUNCTION
                 \item Error = 2.2097967899981086e-10
             \end{itemize}
 
-        \begin{table}[ht]
-        \begin{tabular}{llll}
+        \vspace*{1cm} % Moves the table 1 cm down
+    \makebox[\textwidth][l]{ % [l] aligns to the left
+        \begin{tabular}{|c|c|c|c|c|}
         i & x\_i               & f\_xi                  & e                      \\
         1 & 0.9365060516656253 & 5.875600835791861e-05  & 0.0025656709474095596  \\
         2 & 0.9364047307426415 & 8.67825411532408e-08   & 0.00010132092298376083 \\
         3 & 0.936404581100869  & 1.2815393191090152e-10 & 1.4964177252885236e-07 \\
         4 & 0.9364045808798893 & 1.894040480010517e-13  & 2.2097967899981086e-10
         \end{tabular}\label{tab:table3}
-        \end{table}
+        }
 
     \subsection{Fixed Point}\label{subsec:fixed_point}
 
@@ -837,6 +839,7 @@ END FUNCTION
         \item {Iterations: 30}
         \item {Error: 7.726074024994034e-08 }
     \end{itemize}
+    \vspace*{1cm}
     \hspace*{-3cm} % Moves the table 2 cm into the left margin
     \makebox[\textwidth][l]{ % [l] aligns to the left
 \begin{tabular}{|c|c|c|c|c|}
@@ -1040,10 +1043,14 @@ END FUNCTION
     }
                 \end{minted}
         \subsubsection{Method Test}
-            The root is: 0.9364045808526077
-            Found solution after 4 iterations.
-            \begin{table}[]
-            \begin{tabular}{llll}
+            \begin{itemize}
+                \item The root is: 0.9364045808526077
+                \item Found solution after 4 iterations.
+            \end{itemize}
+
+            \vspace*{1cm} % Moves the table 2 cm into the left margin
+    \makebox[\textwidth][l]{ % [l] aligns to the left
+        \begin{tabular}{|c|c|c|c|}
             i: & xi:                & f\_xi:                  & E                      \\
             0  & 1.2                & 0.12524132043913228     & 0.3464852988384717     \\
             1  & 0.8535147011615283 & -0.05025900826059804    & 0.07953835548275334    \\
@@ -1051,7 +1058,7 @@ END FUNCTION
             3  & 0.9363978843004457 & -3.877863362977685e-06  & 6.696552162011038e-06  \\
             4  & 0.9364045808526077 & -1.5608903058961232e-11 & 2.6954660725664326e-11
             \end{tabular}
-            \end{table}
+            }
     \subsection{Secant}
         \subsubsection{Pseudo-code}
         \begin{lstlisting}
@@ -1210,7 +1217,22 @@ END FUNCTION
         }
                 \end{minted}
         \subsubsection{Method Test}
+            \begin{itemize}
+                \item Converged after 5 iterations.
+                \item The root is: 0.9364045808795616
+            \end{itemize}
 
+            \vspace*{1cm} % Moves the table 2 cm into the left margin
+    \makebox[\textwidth][l]{ % [l] aligns to the left
+        \begin{tabular}{|c|c|c|c|}
+            i & x\_i               & f\_xi              & e                      \\
+            0 & 1.0                & 0.946166222306525  & 0.05383377769347497    \\
+            1 & 0.946166222306525  & 0.9359965807911726 & 0.010169641515352379   \\
+            2 & 0.9359965807911726 & 0.9364070023767038 & 0.00041042158553117325 \\
+            3 & 0.9364070023767038 & 0.9364045814731196 & 2.420903584265943e-06  \\
+            4 & 0.9364045814731196 & 0.9364045808795616 & 5.935579805438351e-10
+            \end{tabular}
+            }
     \subsection{Multiple Roots}
         \subsubsection{Pseudo-code}
 \begin{lstlisting}
@@ -1430,6 +1452,22 @@ END FUNCTION
     }
                 \end{minted}
         \subsubsection{Method Test}
+            \begin{itemize}
+                \item Converged after 5 iterations.
+                \item Root found: -4.218590698935789e-11
+            \end{itemize}
+
+            \hspace*{-5.5cm} % Moves the table 2 cm into the left margin
+    \makebox[\textwidth][l]{ % [l] aligns to the left
+        \begin{tabular}{|c|c|c|c|c|c|c|}
+i & x\_i                    & f(x\_i)               & df(x\_i)                & ddf(x\_i)          & x\_(i+1)                & Error                  \\
+0 & 1.0                     & 0.7182818284590451    & 1.718281828459045       & 2.718281828459045  & -0.23421061355351425    & 1.2342106135535142     \\
+1 & -0.23421061355351425    & 0.025405775475345838  & -0.20880483807816852    & 0.7911951619218315 & -0.00845827991076109    & 0.22575233364275316    \\
+2 & -0.00845827991076109    & 3.567060801401567e-05 & -0.008422609302746964   & 0.991577390697253  & -1.1890183808588653e-05 & 0.008446389726952502   \\
+3 & -1.1890183808588653e-05 & 7.068789997788372e-11 & -1.1890113120638368e-05 & 0.9999881098868794 & -4.218590698935789e-11  & 1.1890141622681664e-05 \\
+4 & -4.218590698935789e-11  & 0.0                   & -4.218592142279931e-11  & 0.9999999999578141 & -4.218590698935789e-11  & 0.0
+\end{tabular}
+}
 
     \subsection{Gaussian Elimination No Pivot}
         \subsubsection{Pseudo-code}

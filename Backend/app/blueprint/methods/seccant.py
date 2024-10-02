@@ -64,11 +64,11 @@ def secant_method(f, x0, x1, tol=1e-7, max_iter=100):
 # Example usage
 
 def f(x):
-    return math.exp(-x+1) - x**2 + 4*x + 7*(math.cos(x-4)**2) - 45/10 - 3.41
+    return math.log(math.sin(x)**2 + 1) - 1/2
 
 
-x0 = 5
-x1 = 50
+x0 = 0.5
+x1 = 1
 
 root = secant_method(f, x0, x1)
 print(f"The root is: {root}")

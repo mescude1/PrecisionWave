@@ -1,3 +1,5 @@
+import math
+
 import pandas as pd
 
 def multiple_root_method(f, df, ddf, x0, tol=1e-7, max_iter=100):
@@ -69,11 +71,11 @@ def multiple_root_method(f, df, ddf, x0, tol=1e-7, max_iter=100):
 # Example usage:
 if __name__ == "__main__":
     # Example function f(x) = x^3 - 3x^2 + 3x - 1 (has a root with multiplicity at x = 1)
-    f = lambda x: x**3 - 3*x**2 + 3*x - 1
-    df = lambda x: 3*x**2 - 6*x + 3  # First derivative of f(x)
-    ddf = lambda x: 6*x - 6          # Second derivative of f(x)
+    f = lambda x: math.exp(x) - x - 1
+    df = lambda x: math.exp(x) - 1  # First derivative of f(x)
+    ddf = lambda x: math.exp(x)          # Second derivative of f(x)
 
-    x0 = 0.5  # Initial guess
+    x0 = 1  # Initial guess
     tol = 1e-7
     max_iter = 100
 
@@ -81,5 +83,6 @@ if __name__ == "__main__":
         root, iterations, df_result = multiple_root_method(f, df, ddf, x0, tol, max_iter)
         print(f"Root found: {root}")
         print(f"Number of iterations: {iterations}")
+        print(df_result)
     except ValueError as e:
         print(e)
