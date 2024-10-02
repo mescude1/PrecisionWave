@@ -2,7 +2,14 @@
 \usepackage{minted}
 \usepackage{textcomp}
 \usepackage{graphicx} % For shifting tables
-\usepackage{algpseudocode}
+\usepackage{listings}
+
+\lstset{
+  basicstyle=\ttfamily,
+  columns=fullflexible,
+  breaklines=true,
+  frame=single
+}
 
 \title{EAFIT University - Department of Information and Computer Sciences}
 \author{Mauricio Escudero Restrepo \\
@@ -40,52 +47,54 @@ October 1st 2024
     The goal is to find an approximation of the root with increasing precision.
 
         \subsubsection{Pseudo-code}
-FUNCIÓN BusquedaIncremental(f, x0, h, Nmax):
+\begin{lstlisting}
+FUNCTION IncrementalSearch(f, x0, h, Nmax):
 
-    ENTRADA:
-    - f: función continua para la cual se busca un cambio de signo.
-    - x0: punto inicial.
-    - h: tamaño del paso (incremento en cada iteración).
-    - Nmax: número máximo de iteraciones.
+    INPUT:
+    - f: continuous function for which a sign change is sought.
+    - x0: initial point.
+    - h: step size (increment in each iteration).
+    - Nmax: maximum number of iterations.
 
-    SALIDA:
-    - a: extremo izquierdo del intervalo donde ocurre un cambio de signo.
-    - b: extremo derecho del intervalo donde ocurre un cambio de signo.
-    - iter: número de iteraciones realizadas.
-    - data_frame: tabla de resultados con detalles de cada iteración.
+    OUTPUT:
+    - a: left endpoint of the interval where a sign change occurs.
+    - b: right endpoint of the interval where a sign change occurs.
+    - iter: number of iterations performed.
+    - data_frame: table of results with details of each iteration.
 
-    INICIO:
-    1. Inicializar:
-       - xant (x anterior) = x0.
-       - fant = f(xant).
-       - xact (x actual) = xant + h.
-       - fact = f(xact).
-       - Crear una lista vacía para almacenar los resultados.
+    BEGIN:
+    1. Initialize:
+       - xprev = x0.
+       - fprev = f(xprev).
+       - xcurr = xprev + h.
+       - fcurr = f(xcurr).
+       - Create an empty list to store the results.
 
-    2. Bucle FOR desde i = 1 hasta Nmax:
+    2. FOR i = 1 to Nmax:
 
-       a. Si fant * fact < 0, esto indica un cambio de signo en el intervalo [xant, xact]:
-          - Guardar el resultado de la iteración (i, xact, fact, error).
-          - Romper el bucle (salir).
+       a. If fprev * fcurr < 0, a sign change occurs in the interval [xprev, xcurr]:
+          - Save the iteration result (i, xcurr, fcurr, error).
+          - Break the loop.
 
-       b. Guardar los resultados actuales en la lista:
-          - Almacenar los valores de la iteración: índice i, x actual, f(x actual), y error (diferencia entre x actual y x anterior).
+       b. Save current iteration values:
+          - Store iteration values: index i, current x, f(current x), and error (difference between current x and previous x).
 
-       c. Actualizar los valores para la siguiente iteración:
-          - xant = xact.
-          - fant = fact.
-          - xact = xant + h.
-          - fact = f(xact).
+       c. Update values for the next iteration:
+          - xprev = xcurr.
+          - fprev = fcurr.
+          - xcurr = xprev + h.
+          - fcurr = f(xcurr).
 
-    3. Crear un DataFrame con los resultados almacenados.
+    3. Create a DataFrame with the stored results.
 
-    4. Retornar:
-       - xant como extremo izquierdo del intervalo.
-       - xact como extremo derecho del intervalo.
-       - i como número de iteraciones realizadas.
-       - el DataFrame con los resultados.
+    4. Return:
+       - xprev as the left endpoint of the interval.
+       - xcurr as the right endpoint of the interval.
+       - i as the number of iterations performed.
+       - the DataFrame with the results.
 
-FIN FUNCIÓN
+END FUNCTION
+\end{lstlisting}
 
         \subsubsection{Method Implementation}
 
@@ -242,48 +251,50 @@ FIN FUNCIÓN
     in which the root lies by repeatedly bisecting it.
 
     \subsubsection{Pseudo-code}
-        FUNCIÓN MétodoDeBisección(f, a, b, tolerancia=1e-7, max_iteraciones=100):
+        \begin{lstlisting}
+FUNCTION BisectionMethod(f, a, b, tolerance=1e-7, max_iterations=100):
 
-            ENTRADA:
-            - f: función a evaluar
-            - a, b: intervalo [a, b] en el cual se busca la raíz
-            - tolerancia: criterio de parada (opcional)
-            - max_iteraciones: número máximo de iteraciones (opcional)
+    INPUT:
+    - f: function to evaluate
+    - a, b: interval [a, b] where the root is sought
+    - tolerance: stopping criterion (optional)
+    - max_iterations: maximum number of iterations (optional)
 
-            SALIDA:
-            - c: valor aproximado de la raíz
-            - iteraciones: número de iteraciones realizadas
-            - convergió: indicador de si el algoritmo convergió o no
-            - df_result: tabla de resultados de las iteraciones
+    OUTPUT:
+    - c: approximate value of the root
+    - iterations: number of iterations performed
+    - converged: indicator of whether the algorithm converged
+    - df_result: table of results from the iterations
 
-            SI f(a) * f(b) >= 0 ENTONCES:
-                Lanzar un error ("f(a) y f(b) deben tener signos opuestos")
+    IF f(a) * f(b) >= 0 THEN:
+        Raise an error ("f(a) and f(b) must have opposite signs")
 
-            c = (a + b) / 2  // Inicializar el punto medio
-            lista_resultados = []  // Inicializar lista para guardar resultados de cada iteración
+    c = (a + b) / 2  // Initialize midpoint
+    results_list = []  // Initialize list to store iteration results
 
-            PARA i DESDE 0 HASTA max_iteraciones HACER:
-                c = (a + b) / 2  // Calcular el punto medio de [a, b]
+    FOR i FROM 0 TO max_iterations DO:
+        c = (a + b) / 2  // Calculate the midpoint of [a, b]
 
-                SI (b - a) < tolerancia O abs(f(c)) < tolerancia ENTONCES:
-                    Crear un DataFrame con lista_resultados  // Convertir la lista a tabla
-                    IMPRIMIR el DataFrame  // Mostrar tabla con resultados de iteraciones
-                    DEVOLVER (c, i + 1, True, DataFrame)  // Algoritmo ha convergido
+        IF (b - a) < tolerance OR abs(f(c)) < tolerance THEN:
+            Create a DataFrame with results_list  // Convert the list to a table
+            PRINT the DataFrame  // Display table with iteration results
+            RETURN (c, i + 1, True, DataFrame)  // Algorithm has converged
 
-                // Determinar en qué mitad del intervalo se encuentra la raíz
-                SI f(a) * f(c) < 0 ENTONCES:
-                    b = c  // La raíz está en el intervalo [a, c]
-                SI NO:
-                    a = c  // La raíz está en el intervalo [c, b]
+        // Determine in which half of the interval the root is located
+        IF f(a) * f(c) < 0 THEN:
+            b = c  // The root is in the interval [a, c]
+        ELSE:
+            a = c  // The root is in the interval [c, b]
 
-                // Guardar los resultados de la iteración actual
-                resultado = { 'iteración': i, 'x_i': c, 'f(x_i)': f(c), 'error': abs(b - a) }
-                lista_resultados.AGREGAR(resultado)
+        // Store the current iteration's results
+        result = { 'iteration': i, 'x_i': c, 'f(x_i)': f(c), 'error': abs(b - a) }
+        results_list.ADD(result)
 
-            // Si se alcanzó el número máximo de iteraciones sin converger
-            DEVOLVER (c, max_iteraciones, False, lista_resultados)
+    // If the maximum number of iterations is reached without convergence
+    RETURN (c, max_iterations, False, results_list)
 
-        FIN FUNCIÓN
+END FUNCTION
+\end{lstlisting}
 
     \subsubsection{Method Implementation}
     \paragraph{Python}
@@ -448,65 +459,67 @@ FIN FUNCIÓN
         more refined estimate by linearly interpolating the function between the endpoints.
 
         \subsubsection{Pseudo-code}
-FUNCIÓN ReglaFalsa(f, a, b, tol, Nmax):
+\begin{lstlisting}
+FUNCTION FalsePosition(f, a, b, tol, Nmax):
 
-    ENTRADA:
-    - f: función continua de la cual se busca la raíz.
-    - a: punto extremo izquierdo del intervalo inicial.
-    - b: punto extremo derecho del intervalo inicial.
-    - tol: tolerancia que define el criterio de parada (cuando el error es suficientemente pequeño).
-    - Nmax: número máximo de iteraciones permitidas.
+    INPUT:
+    - f: continuous function whose root is sought.
+    - a: left endpoint of the initial interval.
+    - b: right endpoint of the initial interval.
+    - tol: tolerance that defines the stopping criterion (when the error is sufficiently small).
+    - Nmax: maximum number of iterations allowed.
 
-    SALIDA:
-    - x: solución aproximada.
-    - iter: número de iteraciones realizadas.
-    - err: error estimado.
-    - result_array: lista de resultados con los valores de cada iteración (punto, valor de f(x) y error).
+    OUTPUT:
+    - x: approximate solution.
+    - iter: number of iterations performed.
+    - err: estimated error.
+    - result_array: list of results with values for each iteration (point, f(x) value, and error).
 
-    INICIO:
-    1. Calcular f(a) y f(b)  // fa = f(a), fb = f(b)
+    BEGIN:
+    1. Compute f(a) and f(b)  // fa = f(a), fb = f(b)
 
-    2. Calcular el primer punto medio usando la regla falsa:
-       pm = (fb * a - fa * b) / (fb - fa)  // pm es el primer punto de prueba
+    2. Compute the first midpoint using the false position formula:
+       pm = (fb * a - fa * b) / (fb - fa)  // pm is the first trial point
 
-    3. Evaluar la función en el punto medio:
+    3. Evaluate the function at the midpoint:
        fpm = f(pm)
 
-    4. Inicializar un valor grande de error (E = 1000) para comenzar el ciclo.
+    4. Initialize a large error value (E = 1000) to start the loop.
 
-    5. Inicializar un contador de iteraciones (cont = 1).
+    5. Initialize an iteration counter (cont = 1).
 
-    6. Crear una lista vacía para almacenar los resultados de cada iteración (result_array).
+    6. Create an empty list to store the results of each iteration (result_array).
 
-    7. Mientras el error (E) sea mayor que la tolerancia (tol) Y el número de iteraciones sea menor que Nmax:
-        a. Si f(a) * f(pm) < 0:
-            - La raíz está en el intervalo [a, pm], entonces actualizar b = pm y fb = fpm.
-        b. Si no:
-            - La raíz está en el intervalo [pm, b], entonces actualizar a = pm y fa = fpm.
+    7. While the error (E) is greater than the tolerance (tol) AND the number of iterations is less than Nmax:
+        a. If f(a) * f(pm) < 0:
+            - The root is in the interval [a, pm], so update b = pm and fb = fpm.
+        b. Else:
+            - The root is in the interval [pm, b], so update a = pm and fa = fpm.
 
-        c. Guardar el valor anterior de pm (p0 = pm).
+        c. Store the previous value of pm (p0 = pm).
 
-        d. Calcular un nuevo punto medio usando la regla falsa:
+        d. Compute a new midpoint using the false position formula:
            pm = (fb * a - fa * b) / (fb - fa)
 
-        e. Evaluar la función en el nuevo punto medio:
+        e. Evaluate the function at the new midpoint:
            fpm = f(pm)
 
-        f. Calcular el error como la diferencia entre el nuevo y el anterior punto medio:
+        f. Compute the error as the difference between the new and previous midpoint:
            E = abs(pm - p0)
 
-        g. Guardar los resultados de la iteración actual (número de iteración, valor del punto, valor de f(pm) y error) en result_array.
+        g. Store the current iteration results (iteration number, point value, f(pm), and error) in result_array.
 
-        h. Incrementar el contador de iteraciones (cont += 1).
+        h. Increment the iteration counter (cont += 1).
 
-    8. Cuando el ciclo termine (cuando se alcance la tolerancia o el número máximo de iteraciones):
-        - La solución aproximada es x = pm.
-        - El número de iteraciones es iter = cont.
-        - El error estimado es err = E.
+    8. When the loop ends (when the tolerance is met or the maximum number of iterations is reached):
+        - The approximate solution is x = pm.
+        - The number of iterations is iter = cont.
+        - The estimated error is err = E.
 
-    9. Devolver la solución aproximada, el número de iteraciones, el error y el conjunto de resultados de las iteraciones.
+    9. Return the approximate solution, the number of iterations, the error, and the set of iteration results.
 
-FIN FUNCIÓN
+END FUNCTION
+\end{lstlisting}
 
         \subsubsection{Method Implementation}
         \paragraph{Python}
@@ -666,47 +679,49 @@ FIN FUNCIÓN
     point of the function g(x)g(x)g(x).
 
     \subsubsection{Pseudo-code}
-    FUNCIÓN MétodoPuntoFijo(g, x0, tol=1e-7, max_iter=1000):
+\begin{lstlisting}
+FUNCTION FixedPointMethod(g, x0, tol=1e-7, max_iter=1000):
 
-    ENTRADA:
-    - g: función para la iteración de punto fijo, se busca que x = g(x).
-    - x0: aproximación inicial o valor inicial para la iteración.
-    - tol: tolerancia para determinar si el método ha convergido (opcional, por defecto 1e-7).
-    - max_iter: número máximo de iteraciones permitidas (opcional, por defecto 1000).
+    INPUT:
+    - g: function for fixed-point iteration, where we seek x = g(x).
+    - x0: initial guess or starting value for the iteration.
+    - tol: tolerance to determine if the method has converged (optional, default is 1e-7).
+    - max_iter: maximum number of iterations allowed (optional, default is 1000).
 
-    SALIDA:
-    - x: solución aproximada al punto fijo.
-    - iteraciones: número de iteraciones realizadas.
-    - convergió: un booleano que indica si el método convergió o no.
-    - result_array: lista que contiene los detalles de cada iteración (valores de x, g(x), y el error).
+    OUTPUT:
+    - x: approximate solution to the fixed point.
+    - iterations: number of iterations performed.
+    - converged: a boolean indicating whether the method converged.
+    - result_array: list containing details of each iteration (values of x, g(x), and error).
 
-    INICIO:
-    1. Crear una lista vacía para almacenar los resultados de cada iteración (result_array).
+    BEGIN:
+    1. Create an empty list to store results of each iteration (result_array).
 
-    2. Inicializar x con el valor inicial x0.
+    2. Initialize x with the initial value x0.
 
-    3. PARA i DESDE 0 HASTA max_iter HACER:
-        a. Calcular el nuevo valor x_nuevo = g(x).
+    3. FOR i FROM 0 TO max_iter DO:
+        a. Compute the new value x_new = g(x).
 
-        b. Calcular el error como error = abs(x_nuevo - x).
+        b. Compute the error as error = abs(x_new - x).
 
-        c. Crear un diccionario con los resultados de la iteración actual:
-           - i: número de iteración.
-           - x: valor de x_nuevo.
-           - g_x: valor de g(x_nuevo).
-           - error: error calculado.
-           Añadir este diccionario a result_array.
+        c. Create a dictionary with the current iteration results:
+           - i: iteration number.
+           - x: value of x_new.
+           - g_x: value of g(x_new).
+           - error: computed error.
+           Add this dictionary to result_array.
 
-        d. SI el error es menor que la tolerancia (error < tol):
-            - El método ha convergido.
-            - Devolver x_nuevo, número de iteraciones (i + 1), True (convergió), y result_array.
+        d. IF the error is less than the tolerance (error < tol):
+            - The method has converged.
+            - Return x_new, number of iterations (i + 1), True (converged), and result_array.
 
-        e. Actualizar el valor de x con x_nuevo.
+        e. Update the value of x with x_new.
 
-    4. SI se alcanza el número máximo de iteraciones sin converger:
-        - Devolver el último valor de x, max_iter, False (no convergió), y result_array.
+    4. IF the maximum number of iterations is reached without convergence:
+        - Return the last value of x, max_iter, False (not converged), and result_array.
 
-FIN FUNCIÓN
+END FUNCTION
+\end{lstlisting}
 
     \subsubsection{Method Implementation}
     \paragraph{Python}
@@ -862,48 +877,50 @@ Iteration & x\_i                 & f(x\_i)                 & g(x\_i)            
 
     \subsection{Newton}
         \subsubsection{Pseudo-code}
-        FUNCIÓN NewtonRaphson(f, df, x0, tol=1e-7, max_iter=30):
+\begin{lstlisting}
+FUNCTION NewtonRaphson(f, df, x0, tol=1e-7, max_iter=30):
 
-    ENTRADA:
-    - f: función cuyo cero (raíz) se desea encontrar.
-    - df: derivada de la función f.
-    - x0: estimación inicial de la raíz.
-    - tol: tolerancia para la convergencia (valor predeterminado es 1e-7).
-    - max_iter: número máximo de iteraciones permitidas (valor predeterminado es 30).
+    INPUT:
+    - f: function whose zero (root) is to be found.
+    - df: derivative of the function f.
+    - x0: initial guess for the root.
+    - tol: tolerance for convergence (default value is 1e-7).
+    - max_iter: maximum number of iterations allowed (default value is 30).
 
-    SALIDA:
-    - x: raíz aproximada de la función f.
-    - n: número de iteraciones realizadas.
-    - result_array: tabla con los detalles de cada iteración.
+    OUTPUT:
+    - x: approximate root of the function f.
+    - n: number of iterations performed.
+    - result_array: table with details of each iteration.
 
-    INICIO:
-    1. Inicializar xn = x0 (estimación inicial).
-    2. Crear una lista vacía result_array para almacenar los detalles de las iteraciones.
+    BEGIN:
+    1. Initialize xn = x0 (initial estimate).
+    2. Create an empty list result_array to store details of the iterations.
 
-    3. Para n desde 0 hasta max_iter - 1 HACER:
+    3. For n from 0 to max_iter - 1 DO:
 
-        a. Calcular fxn = f(xn) y dfxn = df(xn) (la función y su derivada evaluadas en xn).
+        a. Compute fxn = f(xn) and dfxn = df(xn) (the function and its derivative evaluated at xn).
 
-        b. Si |xn - (xn - fxn / dfxn)| < tol:
-           - Guardar en result_array los detalles de la iteración actual (n, xi, f(xi), error).
-           - Imprimir el DataFrame con los resultados de las iteraciones.
-           - Retornar xn como la raíz aproximada.
-           - Terminar la función.
+        b. IF |xn - (xn - fxn / dfxn)| < tol:
+           - Store in result_array the details of the current iteration (n, xi, f(xi), error).
+           - Print the DataFrame with iteration results.
+           - Return xn as the approximate root.
+           - End the function.
 
-        c. Si dfxn == 0 (la derivada es cero):
-           - Imprimir "Derivada cero. No se encontró solución."
-           - Retornar None (indica que no se encontró solución).
+        c. IF dfxn == 0 (the derivative is zero):
+           - Print "Derivative is zero. No solution found."
+           - Return None (indicating no solution found).
 
-        d. Guardar en result_array los detalles de la iteración actual (n, xi, f(xi), error).
+        d. Store in result_array the details of the current iteration (n, xi, f(xi), error).
 
-        e. Actualizar xn utilizando la fórmula del método de Newton-Raphson:
+        e. Update xn using the Newton-Raphson formula:
            - xn = xn - fxn / dfxn.
 
-    4. Si se excede el número máximo de iteraciones:
-       - Imprimir "Se excedió el número máximo de iteraciones. No se encontró solución."
-       - Retornar None.
+    4. IF the maximum number of iterations is exceeded:
+       - Print "Maximum number of iterations exceeded. No solution found."
+       - Return None.
 
-FIN FUNCIÓN
+END FUNCTION
+\end{lstlisting}
 
         \subsubsection{Method Implementation}
             \paragraph{Python}
@@ -1037,34 +1054,38 @@ FIN FUNCIÓN
             \end{table}
     \subsection{Secant}
         \subsubsection{Pseudo-code}
-        Función MétodoSecante(f, x0, x1, tol, max_iter)
-  Entrada:
-    - f: función de la cual queremos encontrar una raíz.
-    - x0: primer valor inicial.
-    - x1: segundo valor inicial.
-    - tol: tolerancia para determinar la convergencia (opcional, valor predeterminado 1e-7).
-    - max_iter: número máximo de iteraciones permitidas (opcional, valor predeterminado 100).
+        \begin{lstlisting}
+FUNCTION SecantMethod(f, x0, x1, tol=1e-7, max_iter=100)
 
-  Salida:
-    - La raíz aproximada de la función f o un mensaje de error si no converge.
+  INPUT:
+    - f: function for which we want to find a root.
+    - x0: first initial value.
+    - x1: second initial value.
+    - tol: tolerance to determine convergence (optional, default value 1e-7).
+    - max_iter: maximum number of iterations allowed (optional, default value 100).
 
-  Inicializar una lista vacía llamada resultados.
+  OUTPUT:
+    - The approximate root of the function f or an error message if it does not converge.
 
-  Para i desde 0 hasta max_iter - 1 hacer:
-    1. Calcular el valor de f(x0) y f(x1).
-    2. Si f(x1) es igual a f(x0), lanzar un error: "División por cero".
-    3. Usar la fórmula del método de la secante para calcular x2:
+  Initialize an empty list called results.
+
+  FOR i FROM 0 TO max_iter - 1 DO:
+    1. Compute f(x0) and f(x1).
+    2. IF f(x1) is equal to f(x0), throw an error: "Division by zero".
+    3. Use the secant method formula to compute x2:
        x2 = x1 - f(x1) * (x1 - x0) / (f(x1) - f(x0)).
-    4. Si |x2 - x1| < tol, hacer lo siguiente:
-        - Agregar a la lista resultados el índice i, el valor x1, el valor f(x2) y el error |x2 - x1|.
-        - Imprimir la lista de resultados.
-        - Imprimir: "Convergió después de i + 1 iteraciones."
-        - Retornar x2 (la raíz).
-    5. Si no ha convergido, agregar el resultado actual a la lista con el índice i, el valor x1, el valor f(x2) y el error |x2 - x1|.
-    6. Actualizar x0 = x1 y x1 = x2 para la siguiente iteración.
+    4. IF |x2 - x1| < tol, DO the following:
+        - Add to the results list the index i, the value x1, the value f(x2), and the error |x2 - x1|.
+        - Print the results list.
+        - Print: "Converged after i + 1 iterations."
+        - Return x2 (the root).
+    5. IF not converged, add the current result to the list with the index i, the value x1, the value f(x2), and the error |x2 - x1|.
+    6. Update x0 = x1 and x1 = x2 for the next iteration.
 
-  Si se alcanza el número máximo de iteraciones, lanzar un error: "El método de la secante no convergió dentro del número máximo de iteraciones."
-Fin Función
+  IF the maximum number of iterations is reached, throw an error: "The secant method did not converge within the maximum number of iterations."
+
+END FUNCTION
+\end{lstlisting}
 
         \subsubsection{Method Implementation}
             \paragraph{Python}
@@ -1192,56 +1213,58 @@ Fin Función
 
     \subsection{Multiple Roots}
         \subsubsection{Pseudo-code}
-        FUNCIÓN MetodoRaizMultiple(f, df, ddf, x0, tol=1e-7, max_iter=100):
+\begin{lstlisting}
+FUNCTION MultipleRootMethod(f, df, ddf, x0, tol=1e-7, max_iter=100):
 
-    ENTRADA:
-    - f: función de la cual se busca la raíz.
-    - df: derivada de la función f.
-    - ddf: segunda derivada de la función f.
-    - x0: aproximación inicial de la raíz.
-    - tol: tolerancia para la convergencia (opcional, valor por defecto 1e-7).
-    - max_iter: número máximo de iteraciones permitidas (opcional, valor por defecto 100).
+    INPUT:
+    - f: function for which the root is sought.
+    - df: derivative of the function f.
+    - ddf: second derivative of the function f.
+    - x0: initial approximation of the root.
+    - tol: tolerance for convergence (optional, default value 1e-7).
+    - max_iter: maximum number of iterations allowed (optional, default value 100).
 
-    SALIDA:
-    - x: raíz aproximada de la función f.
-    - iteraciones: número de iteraciones realizadas.
-    - data_frame: tabla con los detalles de cada iteración (opcional).
+    OUTPUT:
+    - x: approximate root of the function f.
+    - iterations: number of iterations performed.
+    - data_frame: table with details of each iteration (optional).
 
-    INICIO:
+    BEGIN:
 
-    1. Crear una lista vacía para almacenar los resultados de cada iteración (result_array).
+    1. Create an empty list to store results of each iteration (result_array).
 
-    2. PARA i desde 0 hasta max_iter HACER:
+    2. FOR i from 0 to max_iter DO:
 
-        a. Evaluar f(x0), f'(x0) y f''(x0):
+        a. Evaluate f(x0), f'(x0) and f''(x0):
            - f_x0 = f(x0)
            - df_x0 = df(x0)
            - ddf_x0 = ddf(x0)
 
-        b. Verificar si el denominador es cero:
-           - Si [df_x0^2 - f_x0 * ddf_x0] es igual a 0, lanzar un error ("División por cero en el método de raíz múltiple").
+        b. Check if the denominator is zero:
+           - IF [df_x0^2 - f_x0 * ddf_x0] equals 0, throw an error ("Division by zero in multiple root method").
 
-        c. Calcular el nuevo valor de x utilizando la fórmula del método de raíz múltiple:
+        c. Calculate the new value of x using the multiple root method formula:
            - x1 = x0 - (f_x0 * df_x0) / (df_x0^2 - f_x0 * ddf_x0)
 
-        d. Calcular el error como la diferencia absoluta:
+        d. Calculate the error as the absolute difference:
            - error = abs(x1 - x0)
 
-        e. Almacenar los resultados de la iteración actual en la lista:
-           - Guardar (i, x0, f_x0, df_x0, ddf_x0, x1, error) en result_array.
+        e. Store the results of the current iteration in the list:
+           - Save (i, x0, f_x0, df_x0, ddf_x0, x1, error) in result_array.
 
-        f. Verificar si el error es menor que la tolerancia (tol):
-           - Si error < tol:
-              - Crear un DataFrame con los resultados de result_array.
-              - Imprimir el DataFrame.
-              - Retornar x1, número de iteraciones (i + 1), y el DataFrame.
+        f. Check if the error is less than the tolerance (tol):
+           - IF error < tol:
+              - Create a DataFrame with the results from result_array.
+              - Print the DataFrame.
+              - Return x1, number of iterations (i + 1), and the DataFrame.
 
-        g. Actualizar x0 para la siguiente iteración:
+        g. Update x0 for the next iteration:
            - x0 = x1
 
-    3. Si se alcanzó el número máximo de iteraciones sin converger, lanzar un error ("El método de raíz múltiple no convergió en el número máximo de iteraciones").
+    3. IF the maximum number of iterations is reached without converging, throw an error ("The multiple root method did not converge within the maximum number of iterations").
 
-FIN FUNCIÓN
+END FUNCTION
+\end{lstlisting}
 
         \subsubsection{Method Implementation}
             \paragraph{Python}
@@ -1410,40 +1433,42 @@ FIN FUNCIÓN
 
     \subsection{Gaussian Elimination No Pivot}
         \subsubsection{Pseudo-code}
-        FUNCIÓN EliminacionGaussianaSinPivoteo(A, b):
+\begin{lstlisting}
+FUNCTION GaussianEliminationWithoutPivoting(A, b):
 
-    ENTRADA:
-    - A: matriz de coeficientes (nxn).
-    - b: vector del lado derecho (nx1).
+    INPUT:
+    - A: coefficient matrix (nxn).
+    - b: right-hand side vector (nx1).
 
-    SALIDA:
-    - x: vector solución al sistema de ecuaciones Ax = b.
+    OUTPUT:
+    - x: solution vector to the system of equations Ax = b.
 
-    INICIO:
-    1. Convertir A y b en matrices de tipo float, si es necesario.
+    BEGIN:
+    1. Convert A and b to float matrices, if necessary.
 
-    2. Crear la matriz aumentada uniendo A con b:
-       - MatrizAumentada = [A | b]
+    2. Create the augmented matrix by combining A with b:
+       - AugmentedMatrix = [A | b]
 
-    3. Para i desde 0 hasta n-1 HACER:  (n es la longitud de b)
+    3. FOR i from 0 to n-1 DO:  (n is the length of b)
 
-        a. Verificar si el pivote diagonal MatrizAumentada[i, i] es 0. Si lo es, lanzar un error ("Se encontró un pivote cero en la fila i").
+        a. Check if the diagonal pivot AugmentedMatrix[i, i] is 0. If so, throw an error ("Zero pivot found in row i").
 
-        b. **Eliminación hacia adelante**: Para cada fila j desde i+1 hasta n-1:
-            - Calcular el factor de eliminación: factor = MatrizAumentada[j, i] / MatrizAumentada[i, i].
-            - Restar factor * fila i de la fila j para eliminar los elementos por debajo de la diagonal en la columna i.
+        b. **Forward elimination**: For each row j from i+1 to n-1:
+            - Calculate the elimination factor: factor = AugmentedMatrix[j, i] / AugmentedMatrix[i, i].
+            - Subtract factor * row i from row j to eliminate the elements below the diagonal in column i.
 
-    4. **Sustitución hacia atrás**:
+    4. **Back substitution**:
 
-        a. Inicializar el vector solución x de longitud n con ceros.
+        a. Initialize the solution vector x of length n with zeros.
 
-        b. Para i desde n-1 hasta 0 HACER: (recorrer de abajo hacia arriba)
-           - Calcular x[i] usando la fórmula:
-             x[i] = (MatrizAumentada[i, -1] - suma de los productos de los elementos ya resueltos) / MatrizAumentada[i, i]
+        b. FOR i from n-1 to 0 DO: (traverse from bottom to top)
+           - Calculate x[i] using the formula:
+             x[i] = (AugmentedMatrix[i, -1] - sum of the products of the already solved elements) / AugmentedMatrix[i, i]
 
-    5. Retornar el vector solución x.
+    5. Return the solution vector x.
 
-FIN FUNCIÓN
+END FUNCTION
+\end{lstlisting}
 
         \subsubsection{Method Implementation}
             \paragraph{Python}
@@ -1538,45 +1563,47 @@ FIN FUNCIÓN
 
     \subsection{Gaussian Elimination Partial Pivot}
         \subsubsection{Pseudo-code}
-        FUNCIÓN EliminacionGaussianaConPivoteoParcial(A, b):
+\begin{lstlisting}
+FUNCTION GaussianEliminationWithPartialPivoting(A, b):
 
-    ENTRADA:
-    - A: matriz de coeficientes (nxn).
-    - b: vector del lado derecho (nx1).
+    INPUT:
+    - A: coefficient matrix (nxn).
+    - b: right-hand side vector (nx1).
 
-    SALIDA:
-    - x: vector solución al sistema de ecuaciones Ax = b.
+    OUTPUT:
+    - x: solution vector to the system of equations Ax = b.
 
-    INICIO:
-    1. Convertir A y b en matrices de tipo float, si es necesario.
+    BEGIN:
+    1. Convert A and b to float matrices, if necessary.
 
-    2. Crear la matriz aumentada uniendo A con b:
-       - MatrizAumentada = [A | b]
+    2. Create the augmented matrix by combining A with b:
+       - AugmentedMatrix = [A | b]
 
-    3. Para i desde 0 hasta n-1 HACER:  (n es la longitud de b)
+    3. FOR i from 0 to n-1 DO:  (n is the length of b)
 
-        a. **Pivoteo Parcial**: Encontrar la fila con el valor absoluto más grande en la columna i desde la fila i hasta la última.
-           - max_fila = índice de la fila con el valor máximo en la columna i.
-           - Si el valor en MatrizAumentada[max_fila, i] es 0, lanzar un error ("La matriz es singular o casi singular").
+        a. **Partial Pivoting**: Find the row with the largest absolute value in column i from row i to the last.
+           - max_row = index of the row with the maximum value in column i.
+           - If the value in AugmentedMatrix[max_row, i] is 0, throw an error ("The matrix is singular or nearly singular").
 
-        b. Si la fila max_fila no es igual a i:
-           - Intercambiar la fila i con la fila max_fila.
+        b. If the row max_row is not equal to i:
+           - Swap row i with row max_row.
 
-        c. **Eliminación hacia adelante**: Para cada fila j desde i+1 hasta n-1:
-            - Calcular el factor de eliminación: factor = MatrizAumentada[j, i] / MatrizAumentada[i, i].
-            - Restar factor * fila i de la fila j para eliminar los elementos por debajo de la diagonal en la columna i.
+        c. **Forward elimination**: For each row j from i+1 to n-1:
+            - Calculate the elimination factor: factor = AugmentedMatrix[j, i] / AugmentedMatrix[i, i].
+            - Subtract factor * row i from row j to eliminate the elements below the diagonal in column i.
 
-    4. **Sustitución hacia atrás**:
+    4. **Back substitution**:
 
-        a. Inicializar el vector solución x de longitud n con ceros.
+        a. Initialize the solution vector x of length n with zeros.
 
-        b. Para i desde n-1 hasta 0 HACER: (recorrer de abajo hacia arriba)
-           - Calcular x[i] usando la fórmula:
-             x[i] = (MatrizAumentada[i, -1] - suma de los productos de los elementos ya resueltos) / MatrizAumentada[i, i]
+        b. FOR i from n-1 to 0 DO: (traverse from bottom to top)
+           - Calculate x[i] using the formula:
+             x[i] = (AugmentedMatrix[i, -1] - sum of the products of the already solved elements) / AugmentedMatrix[i, i]
 
-    5. Retornar el vector solución x.
+    5. Return the solution vector x.
 
-FIN FUNCIÓN
+END FUNCTION
+\end{lstlisting}
 
         \subsubsection{Method Implementation}
             \paragraph{Python}
@@ -1690,43 +1717,6 @@ FIN FUNCIÓN
 
     \subsection{Gaussian Elimination}
         \subsubsection{Pseudo-code}
-        FUNCIÓN EliminacionGaussiana(A, b):
-
-    ENTRADA:
-    - A: matriz de coeficientes (nxn).
-    - b: vector del lado derecho (nx1).
-
-    SALIDA:
-    - x: vector solución al sistema de ecuaciones Ax = b.
-
-    INICIO:
-    1. Convertir A y b en matrices de tipo float, si es necesario.
-
-    2. Crear la matriz aumentada uniendo A con b:
-       - MatrizAumentada = [A | b]
-
-    3. Para i desde 0 hasta n-1 HACER:  (n es la longitud de b)
-
-        a. **Pivot Parcial**: Encontrar la fila con el valor absoluto mayor en la columna i desde la fila i en adelante.
-           - max_fila = índice de la fila con el valor absoluto más grande en la columna i.
-           - Si el elemento en max_fila, i es 0, lanzar un error (la matriz es singular o casi singular).
-           - Intercambiar la fila i con la fila max_fila.
-
-        b. **Eliminación hacia adelante**: Para cada fila j desde i+1 hasta n-1:
-            - Calcular el factor de eliminación: factor = MatrizAumentada[j, i] / MatrizAumentada[i, i].
-            - Restar factor * fila i de la fila j para eliminar los elementos por debajo de la diagonal en la columna i.
-
-    4. **Sustitución hacia atrás**:
-
-        a. Inicializar el vector solución x de longitud n con ceros.
-
-        b. Para i desde n-1 hasta 0 HACER: (recorrer de abajo hacia arriba)
-           - Calcular x[i] usando la fórmula:
-             x[i] = (MatrizAumentada[i, -1] - suma de los productos de los elementos ya resueltos) / MatrizAumentada[i, i]
-
-    5. Retornar el vector solución x.
-
-FIN FUNCIÓN
 
         \subsubsection{Method Implementation}
             \paragraph{Python}
