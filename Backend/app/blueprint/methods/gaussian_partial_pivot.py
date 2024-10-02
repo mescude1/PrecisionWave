@@ -1,9 +1,10 @@
 import numpy as np
 
 
-def gaussian_elimination_with_partial_pivoting(A, b):
+def gaussian_elimination_with_partial_pivoting_verbose(A, b):
     """
     Solves the system of linear equations Ax = b using Gaussian Elimination with Partial Pivoting.
+    Outputs intermediate augmented matrices at each step.
 
     Parameters:
     A (list of lists or np.ndarray): Coefficient matrix.
@@ -20,6 +21,10 @@ def gaussian_elimination_with_partial_pivoting(A, b):
     # Augment A with b to form the augmented matrix
     augmented_matrix = np.hstack([A, b.reshape(-1, 1)])
 
+    print("Initial augmented matrix:")
+    print(augmented_matrix)
+    print("=" * 50)
+
     # Perform Gaussian elimination with partial pivoting
     for i in range(n):
         # Partial Pivoting: Find the row with the largest value in the current column
@@ -31,25 +36,41 @@ def gaussian_elimination_with_partial_pivoting(A, b):
         if max_row != i:
             augmented_matrix[[i, max_row]] = augmented_matrix[[max_row, i]]
 
+        # Print the augmented matrix after row swapping
+        print(f"Augmented matrix after swapping row {i} with row {max_row}:")
+        print(augmented_matrix)
+        print("=" * 50)
+
         # Eliminate values below the pivot
         for j in range(i + 1, n):
             factor = augmented_matrix[j, i] / augmented_matrix[i, i]
             augmented_matrix[j, i:] -= factor * augmented_matrix[i, i:]
+
+        # Print the augmented matrix after eliminating row j
+        print(f"Augmented matrix after eliminating row {j}:")
+        print(augmented_matrix)
+        print("=" * 50)
 
     # Back substitution to solve for x
     x = np.zeros(n)
     for i in range(n - 1, -1, -1):
         x[i] = (augmented_matrix[i, -1] - np.dot(augmented_matrix[i, i + 1:n], x[i + 1:])) / augmented_matrix[i, i]
 
+    # Print the final solution vector x
+    print("Solution vector x:")
+    print(x)
+    print("=" * 50)
+
     return x
 
 
 # Example usage:
-A = [[2, -1, 1],
-     [3, 3, 9],
-     [3, 3, 5]]
+A = [[2, -1, 0, 3],
+     [1, 0.5, 3, 8],
+     [0, 13, -2, 11],
+     [14, 5, -2, 3]]
 
-b = [8, -6, -4]
+b = [1, 1, 1, 1]
 
-solution = gaussian_elimination_with_partial_pivoting(A, b)
+solution = gaussian_elimination_with_partial_pivoting_verbose(A, b)
 print("Solution:", solution)

@@ -1,50 +1,55 @@
 import numpy as np
 
 
-def gaussian_elimination_no_pivoting(A, b):
-    """
-    Solves the system of linear equations Ax = b using Gaussian Elimination without Pivoting.
+def gaussian_elimination_no_pivot_verbose(A, b):
+    # Ensure A and b are numpy arrays
+    A = np.array(A, dtype=float)
+    b = np.array(b, dtype=float)
 
-    Parameters:
-    A (list of lists or np.ndarray): Coefficient matrix.
-    b (list or np.ndarray): Right-hand side vector.
-
-    Returns:
-    np.ndarray: Solution vector x.
-    """
-    # Convert A and b into numpy arrays
-    A = np.array(A, float)
-    b = np.array(b, float)
     n = len(b)
 
-    # Augment A with b to form the augmented matrix
-    augmented_matrix = np.hstack([A, b.reshape(-1, 1)])
+    # Create an augmented matrix [A|b]
+    augmented_matrix = np.hstack((A, b.reshape(-1, 1)))
 
-    # Forward elimination (without pivoting)
+    print("Initial augmented matrix:")
+    print(augmented_matrix)
+    print("=" * 50)
+
+    # Forward elimination
     for i in range(n):
-        # Check if the diagonal element is zero, which would lead to division by zero
+        # Check for zero pivot element
         if augmented_matrix[i, i] == 0:
-            raise ValueError(f"Zero pivot encountered at row {i}. No pivoting applied.")
+            raise ValueError(f"Zero pivot encountered at row {i}. The matrix may be singular.")
 
-        # Eliminate entries below the pivot
         for j in range(i + 1, n):
             factor = augmented_matrix[j, i] / augmented_matrix[i, i]
-            augmented_matrix[j, i:] -= factor * augmented_matrix[i, i:]
+            augmented_matrix[j] -= factor * augmented_matrix[i]
 
-    # Back substitution to solve for x
+        # Output the augmented matrix after each step
+        print(f"Augmented matrix after eliminating row {i}:")
+        print(augmented_matrix)
+        print("=" * 50)
+
+    # Back substitution
     x = np.zeros(n)
     for i in range(n - 1, -1, -1):
-        x[i] = (augmented_matrix[i, -1] - np.dot(augmented_matrix[i, i + 1:], x[i + 1:])) / augmented_matrix[i, i]
+        sum_ax = np.dot(augmented_matrix[i, :-1], x)
+        x[i] = (augmented_matrix[i, -1] - sum_ax) / augmented_matrix[i, i]
+
+    # Output the final solution vector
+    print("Solution vector x:")
+    print(x)
+    print("=" * 50)
 
     return x
 
 
 # Example usage:
-A = [[2, -1, 1],
-     [3, 3, 9],
-     [3, 3, 5]]
+A = [[2, -1, 0, 3],
+     [1, 0.5, 3, 8],
+     [0, 13, -2, 11],
+     [14, 5, -2, 3]]
 
-b = [8, -6, -4]
+b = [1, 1, 1, 1]
 
-solution = gaussian_elimination_no_pivoting(A, b)
-print("Solution:", solution)
+solution = gaussian_elimination_no_pivot_verbose(A, b)
