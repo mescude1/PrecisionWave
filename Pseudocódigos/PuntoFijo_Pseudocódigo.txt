@@ -1,0 +1,41 @@
+FUNCIÓN MétodoPuntoFijo(g, x0, tol=1e-7, max_iter=1000):
+
+    ENTRADA:
+    - g: función para la iteración de punto fijo, se busca que x = g(x).
+    - x0: aproximación inicial o valor inicial para la iteración.
+    - tol: tolerancia para determinar si el método ha convergido (opcional, por defecto 1e-7).
+    - max_iter: número máximo de iteraciones permitidas (opcional, por defecto 1000).
+    
+    SALIDA:
+    - x: solución aproximada al punto fijo.
+    - iteraciones: número de iteraciones realizadas.
+    - convergió: un booleano que indica si el método convergió o no.
+    - result_array: lista que contiene los detalles de cada iteración (valores de x, g(x), y el error).
+
+    INICIO:
+    1. Crear una lista vacía para almacenar los resultados de cada iteración (result_array).
+    
+    2. Inicializar x con el valor inicial x0.
+    
+    3. PARA i DESDE 0 HASTA max_iter HACER:
+        a. Calcular el nuevo valor x_nuevo = g(x).
+        
+        b. Calcular el error como error = abs(x_nuevo - x).
+        
+        c. Crear un diccionario con los resultados de la iteración actual:
+           - i: número de iteración.
+           - x: valor de x_nuevo.
+           - g_x: valor de g(x_nuevo).
+           - error: error calculado.
+           Añadir este diccionario a result_array.
+        
+        d. SI el error es menor que la tolerancia (error < tol):
+            - El método ha convergido. 
+            - Devolver x_nuevo, número de iteraciones (i + 1), True (convergió), y result_array.
+        
+        e. Actualizar el valor de x con x_nuevo.
+    
+    4. SI se alcanza el número máximo de iteraciones sin converger:
+        - Devolver el último valor de x, max_iter, False (no convergió), y result_array.
+
+FIN FUNCIÓN

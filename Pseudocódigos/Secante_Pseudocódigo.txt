@@ -1,0 +1,28 @@
+Función MétodoSecante(f, x0, x1, tol, max_iter)
+  Entrada:  
+    - f: función de la cual queremos encontrar una raíz.
+    - x0: primer valor inicial.
+    - x1: segundo valor inicial.
+    - tol: tolerancia para determinar la convergencia (opcional, valor predeterminado 1e-7).
+    - max_iter: número máximo de iteraciones permitidas (opcional, valor predeterminado 100).
+  
+  Salida:  
+    - La raíz aproximada de la función f o un mensaje de error si no converge.
+
+  Inicializar una lista vacía llamada resultados.
+   
+  Para i desde 0 hasta max_iter - 1 hacer:
+    1. Calcular el valor de f(x0) y f(x1).
+    2. Si f(x1) es igual a f(x0), lanzar un error: "División por cero".
+    3. Usar la fórmula del método de la secante para calcular x2:
+       x2 = x1 - f(x1) * (x1 - x0) / (f(x1) - f(x0)).
+    4. Si |x2 - x1| < tol, hacer lo siguiente:
+        - Agregar a la lista resultados el índice i, el valor x1, el valor f(x2) y el error |x2 - x1|.
+        - Imprimir la lista de resultados.
+        - Imprimir: "Convergió después de i + 1 iteraciones."
+        - Retornar x2 (la raíz).
+    5. Si no ha convergido, agregar el resultado actual a la lista con el índice i, el valor x1, el valor f(x2) y el error |x2 - x1|.
+    6. Actualizar x0 = x1 y x1 = x2 para la siguiente iteración.
+
+  Si se alcanza el número máximo de iteraciones, lanzar un error: "El método de la secante no convergió dentro del número máximo de iteraciones."
+Fin Función

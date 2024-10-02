@@ -1,0 +1,39 @@
+FUNCIÓN EliminacionGaussianaConPivoteoParcial(A, b):
+
+    ENTRADA:
+    - A: matriz de coeficientes (nxn).
+    - b: vector del lado derecho (nx1).
+
+    SALIDA:
+    - x: vector solución al sistema de ecuaciones Ax = b.
+
+    INICIO:
+    1. Convertir A y b en matrices de tipo float, si es necesario.
+
+    2. Crear la matriz aumentada uniendo A con b:
+       - MatrizAumentada = [A | b]
+
+    3. Para i desde 0 hasta n-1 HACER:  (n es la longitud de b)
+    
+        a. **Pivoteo Parcial**: Encontrar la fila con el valor absoluto más grande en la columna i desde la fila i hasta la última.
+           - max_fila = índice de la fila con el valor máximo en la columna i.
+           - Si el valor en MatrizAumentada[max_fila, i] es 0, lanzar un error ("La matriz es singular o casi singular").
+
+        b. Si la fila max_fila no es igual a i:
+           - Intercambiar la fila i con la fila max_fila.
+        
+        c. **Eliminación hacia adelante**: Para cada fila j desde i+1 hasta n-1:
+            - Calcular el factor de eliminación: factor = MatrizAumentada[j, i] / MatrizAumentada[i, i].
+            - Restar factor * fila i de la fila j para eliminar los elementos por debajo de la diagonal en la columna i.
+
+    4. **Sustitución hacia atrás**:
+    
+        a. Inicializar el vector solución x de longitud n con ceros.
+        
+        b. Para i desde n-1 hasta 0 HACER: (recorrer de abajo hacia arriba)
+           - Calcular x[i] usando la fórmula:
+             x[i] = (MatrizAumentada[i, -1] - suma de los productos de los elementos ya resueltos) / MatrizAumentada[i, i]
+    
+    5. Retornar el vector solución x.
+
+FIN FUNCIÓN
