@@ -45,11 +45,15 @@ def gaussian_elimination_no_pivot_verbose(A, b):
 
 
 # Example usage:
-A = [[2, -1, 0, 3],
+Ab = [[2, -1, 0, 3],
      [1, 0.5, 3, 8],
      [0, 13, -2, 11],
      [14, 5, -2, 3]]
 
-b = [1, 1, 1, 1]
+bb = [1, 1, 1, 1]
+
+b = [1, 1, 1]
+
+A = [[1,1,4],[1,1,2],[1,3,1]]
 
 solution = gaussian_elimination_no_pivot_verbose(A, b)
