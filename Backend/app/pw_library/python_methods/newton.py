@@ -1,16 +1,5 @@
 import math
-
-import numpy as np
-from mpmath import ln
-from sympy import diff, Function
 import pandas as pd
-
-def f(x):
-    return math.log(math.sin(x)**2 + 1) - 1/2
-
-
-def df(x):
-    return 2*(math.sin(x)**2 + 1)**-1 * math.sin(x) * math.cos(x)
 
 
 def newton_raphson(f, df, x0, tol=1e-7, max_iter=30):
@@ -60,10 +49,3 @@ def newton_raphson(f, df, x0, tol=1e-7, max_iter=30):
         xn = xn - fxn / dfxn
     print("Exceeded maximum iterations. No solution found.")
     return None
-
-
-# Find the root
-root = newton_raphson(f, df, x0=1.2)
-
-if root is not None:
-    print(f"The root is: {root}")

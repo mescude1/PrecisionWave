@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def gaussian_elimination_verbose(A, b):
+def gaussian_elimination_verbose(matrix, vector):
     """
     Solves the system of linear equations Ax = b using Gaussian Elimination.
     Outputs intermediate augmented matrices at each step.
@@ -14,12 +14,12 @@ def gaussian_elimination_verbose(A, b):
     np.ndarray: Solution vector x.
     """
     # Convert A and b into augmented matrix
-    A = np.array(A, float)
-    b = np.array(b, float)
-    n = len(b)
+    matrix = np.array(matrix, float)
+    vector = np.array(vector, float)
+    n = len(vector)
 
     # Augment A with b
-    augmented_matrix = np.hstack([A, b.reshape(-1, 1)])
+    augmented_matrix = np.hstack([matrix, vector.reshape(-1, 1)])
 
     print("Initial augmented matrix:")
     print(augmented_matrix)
@@ -61,17 +61,3 @@ def gaussian_elimination_verbose(A, b):
     print("=" * 50)
 
     return x
-
-
-# Example usage:
-Ab = [[2, -1, 0, 3],
-     [1, 0.5, 3, 8],
-     [0, 13, -2, 11],
-     [14, 5, -2, 3]]
-
-b = [1, 1, 1]
-
-A = [[1,1,4],[1,0,2],[1,3,1]]
-
-solution = gaussian_elimination_verbose(A, b)
-print("Solution:", solution)

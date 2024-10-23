@@ -1,4 +1,4 @@
-from numpy._core._multiarray_umath import sqrt, sin
+
 import pandas as pd
 
 
@@ -24,6 +24,7 @@ def bisection_method(f, a, b, tolerance=1e-7, max_iterations=100):
     converged : bool
         Whether the algorithm converged or not.
     """
+
     if f(a) * f(b) >= 0:
         raise ValueError("f(a) and f(b) must have opposite signs.")
     c = (a + b) / 2  # Midpoint initial
@@ -45,30 +46,3 @@ def bisection_method(f, a, b, tolerance=1e-7, max_iterations=100):
         result_array.append(result)
 
     return c, max_iterations, False  # Did not converge within max_iterations
-
-
-# Example usage
-import math
-
-# Define a function f(x)
-f = lambda x: x ** 3 - x - 2
-
-
-def f_x_quiz(x):
-    return x**3 - sqrt(x**2*(x+2)) - sin(x)**4 + 1
-
-
-def f_x_parcial(x):
-    return x**2 - x + 1 - math.exp(x) + 45/200
-
-def f_x(x):
-    return math.log((math.sin(x)**2) + 1 ) - 1/2
-
-
-# Apply the bisection method
-root, iterations, converged, df_result= bisection_method(f_x, -0, 1)
-
-print(f"Root: {root}")
-print(f"Iterations: {iterations}")
-print(f"Converged: {converged}")
-print(f"series:{df_result}")

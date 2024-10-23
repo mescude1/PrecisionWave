@@ -17,6 +17,10 @@ import os
 from flask import Flask
 from flask_jwt_extended import JWTManager
 
+from .blueprint import (
+    bisection, false_rule, fixed_point, gaussian_elimination, incremental, multiple_roots, newton, secant
+)
+
 
 def create_app(test_config: dict = {}) -> Flask:
     """This function is responsible to create a Flask instance according
@@ -87,7 +91,7 @@ def init_database(app) -> None:
 
 
 def init_blueprints(app: Flask) -> None:
-    """Registes the blueprint to the application.
+    """Register the blueprint to the application.
 
     Parameters:
         app (flask.app.Flask): The application instance Flask that'll be running
@@ -102,10 +106,19 @@ def init_blueprints(app: Flask) -> None:
     app.register_blueprint(index.bp)
     app.register_blueprint(auth.bp)
     app.register_blueprint(account.bp)
+    app.register_blueprint(bisection.bp)
+    app.register_blueprint(false_rule.bp)
+    app.register_blueprint(fixed_point.bp)
+    app.register_blueprint(gaussian_elimination.bp)
+    app.register_blueprint(incremental.bp)
+    app.register_blueprint(multiple_roots.bp)
+    app.register_blueprint(newton.bp)
+    app.register_blueprint(secant.bp)
+
 
 
 def init_commands(app):
-    from app.commands import register_commands
+    from .commands import register_commands
     register_commands(app)
 
 

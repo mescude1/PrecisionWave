@@ -52,16 +52,3 @@ def incremental_search(function, x0, h, nmax):
 
     result_data_frame = pd.DataFrame(result_array)
     return xant, xact, i, result_data_frame
-
-
-# Ejemplo de uso:
-if __name__ == "__main__":
-    # Define a continuous function f(x)
-    def f(x):
-        return math.log((math.sin(x)**2) + 1 ) - 1/2  # change this to any function desired
-
-    # function invocation
-
-    a, b, i, data_frame = incremental_search(f, -3, 0.5, 100)
-    print(f"Interval: [{a}, {b}], Iterations: {i}")
-    print(f"Result data frame:\n{data_frame}")

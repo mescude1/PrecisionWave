@@ -9,7 +9,8 @@ from datetime import datetime
 
 from sqlalchemy import inspect
 from sqlalchemy import Column, Integer, String, Boolean, DateTime
-from app.database import Base
+
+from ..database import Base
 
 
 class Model:
@@ -34,7 +35,7 @@ class User(Base, Model):
     """ User's model class.
 
     Column:
-        id (interger, primary key)
+        id (integer, primary key)
         username (string, unique)
         password (string)
 
@@ -48,6 +49,8 @@ class User(Base, Model):
     id = Column(Integer, primary_key=True)
     username = Column(String(), unique=True)
     password = Column(String())
+
+    __table_args__ = {'extend_existing': True}
 
     def __init__(self, username: str = None, password: str = None) -> None:
         """ The constructor for User class.
@@ -105,6 +108,8 @@ class Token(Base, Model):
     user_identity = Column(String(50), nullable=False)
     revoked = Column(Boolean, nullable=False)
     expires = Column(DateTime, nullable=False)
+
+    __table_args__ = {'extend_existing': True}
 
     def __init__(self, jti: str = None, token_type: str = None,
                  user_identity: str = None, revoked: bool = False,

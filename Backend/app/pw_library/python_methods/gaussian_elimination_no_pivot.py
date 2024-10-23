@@ -1,15 +1,15 @@
 import numpy as np
 
 
-def gaussian_elimination_no_pivot_verbose(A, b):
+def gaussian_elimination_no_pivot_verbose(matrix, vector):
     # Ensure A and b are numpy arrays
-    A = np.array(A, dtype=float)
-    b = np.array(b, dtype=float)
+    matrix = np.array(matrix, dtype=float)
+    vector = np.array(vector, dtype=float)
 
-    n = len(b)
+    n = len(vector)
 
     # Create an augmented matrix [A|b]
-    augmented_matrix = np.hstack((A, b.reshape(-1, 1)))
+    augmented_matrix = np.hstack((matrix, vector.reshape(-1, 1)))
 
     print("Initial augmented matrix:")
     print(augmented_matrix)
@@ -42,18 +42,3 @@ def gaussian_elimination_no_pivot_verbose(A, b):
     print("=" * 50)
 
     return x
-
-
-# Example usage:
-Ab = [[2, -1, 0, 3],
-     [1, 0.5, 3, 8],
-     [0, 13, -2, 11],
-     [14, 5, -2, 3]]
-
-bb = [1, 1, 1, 1]
-
-b = [1, 1, 1]
-
-A = [[1,1,4],[1,1,2],[1,3,1]]
-
-solution = gaussian_elimination_no_pivot_verbose(A, b)

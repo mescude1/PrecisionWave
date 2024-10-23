@@ -57,25 +57,3 @@ def fixed_point_method(f, g, x0, tol=1e-7, max_iter=1000):
     # If no convergence after max_iter
     result_df = pd.DataFrame(result_array)
     return x, max_iter, False, result_df
-
-# Example Usage
-
-
-def f(x):
-    return math.log(math.sin(x)**2 + 1) - 1/2 - x
-
-def g(x):
-    return math.log(math.sin(x)**2 + 1) - 1/2
-
-# Initial guess
-x0 = -0.5
-
-# Call the fixed-point method
-root, iterations, converged, result_df = fixed_point_method(f, g, x0)
-
-# Output the results
-print("Root found:", root)
-print("Iterations:", iterations)
-print("Converged:", converged)
-print("Results of each iteration:")
-print(result_df)

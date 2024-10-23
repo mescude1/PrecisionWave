@@ -58,20 +58,3 @@ def false_rule(f, a, b, tol, Nmax):
     iter = cont
     err = E
     return x, iter, err, result_array
-
-if __name__ == "__main__":
-    # Define a continuous function f(x)
-    def f(x):
-        return math.log((math.sin(x)**2) + 1 ) - 1/2  # define your f function here
-    
-    # Initial parameters
-    a = 0
-    b = 1
-    tol = 1e-7
-    Nmax = 100
-
-    # function invocation
-    x, iter, err, result_array = false_rule(f, a, b, tol, Nmax)
-    print(f"Aproximate solution: x = {x}, Iterations: {iter}, Error: {err}")
-    result_dataframe = pd.DataFrame(result_array)
-    print(f"Result data frame:\n{result_dataframe}")

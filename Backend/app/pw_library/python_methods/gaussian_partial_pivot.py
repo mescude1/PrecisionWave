@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def gaussian_elimination_with_partial_pivoting_verbose(A, b):
+def gaussian_elimination_with_partial_pivoting_verbose(matrix, vector):
     """
     Solves the system of linear equations Ax = b using Gaussian Elimination with Partial Pivoting.
     Outputs intermediate augmented matrices at each step.
@@ -14,12 +14,12 @@ def gaussian_elimination_with_partial_pivoting_verbose(A, b):
     np.ndarray: Solution vector x.
     """
     # Convert A and b to numpy arrays
-    A = np.array(A, float)
-    b = np.array(b, float)
-    n = len(b)
+    matrix = np.array(matrix, float)
+    vector = np.array(vector, float)
+    n = len(vector)
 
     # Augment A with b to form the augmented matrix
-    augmented_matrix = np.hstack([A, b.reshape(-1, 1)])
+    augmented_matrix = np.hstack([matrix, vector.reshape(-1, 1)])
 
     print("Initial augmented matrix:")
     print(augmented_matrix)
@@ -62,15 +62,3 @@ def gaussian_elimination_with_partial_pivoting_verbose(A, b):
     print("=" * 50)
 
     return x
-
-
-# Example usage:
-A = [[2, -1, 0, 3],
-     [1, 0.5, 3, 8],
-     [0, 13, -2, 11],
-     [14, 5, -2, 3]]
-
-b = [1, 1, 1, 1]
-
-solution = gaussian_elimination_with_partial_pivoting_verbose(A, b)
-print("Solution:", solution)

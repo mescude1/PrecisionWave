@@ -6,7 +6,7 @@ group, views related to the index endpoint of HTTP REST API.
 from flask import Blueprint
 
 
-bp = Blueprint('false_rule', __name__, url_prefix='methods')
+bp = Blueprint('false_rule', __name__, url_prefix='/methods')
 
 
 @bp.route('/false-rule', methods=['GET'])

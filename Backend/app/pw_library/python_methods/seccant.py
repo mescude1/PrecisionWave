@@ -59,16 +59,3 @@ def secant_method(f, x0, x1, tol=1e-7, max_iter=100):
         x0, x1 = x1, x2
 
     raise ValueError("Secant method did not converge within the maximum number of iterations.")
-
-
-# Example usage
-
-def f(x):
-    return math.log(math.sin(x)**2 + 1) - 1/2
-
-
-x0 = 0.5
-x1 = 1
-
-root = secant_method(f, x0, x1)
-print(f"The root is: {root}")

@@ -6,7 +6,7 @@ group, views related to the index endpoint of HTTP REST API.
 from flask import Blueprint
 
 
-bp = Blueprint('secant', __name__, url_prefix='methods')
+bp = Blueprint('secant', __name__, url_prefix='/methods')
 
 
 @bp.route('/secant', methods=['GET'])

@@ -14,5 +14,5 @@ def init(jwt):
         Parameters:    
             decrypted_token (dict): a jwt token decrypted into a dictionary.
         """
-        from app.model import TokenRepository
+        from __init__.model import TokenRepository
         return TokenRepository().is_token_revoked(decoded_token)
