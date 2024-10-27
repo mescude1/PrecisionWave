@@ -21,16 +21,16 @@ ln = log
 def is_valid_string(s) -> bool:
     return bool(re.fullmatch(pattern, s))
 
-def string_function_evaluator(function_string, x) -> str:
+def string_function_evaluator(function_string, x) -> [float, ValueError]:
     if is_valid_string(function_string):
-        return eval(function_string)
+        try:
+            return eval(function_string)
+        except ValueError as error:
+            return error
     else:
-        return "this is not a valid function"
+        print("invalid string formula")
+        return 0
 
 def string_function_differentiator(function_string:str) -> str:
     if is_valid_string(function_string):
         return diff(function_string)
-
-test_formula = 'sin(x)**2'
-
-print(string_function_evaluator(test_formula, 2))

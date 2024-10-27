@@ -1,6 +1,8 @@
 
 import pandas as pd
 
+from Backend.app.helpers.function_parser import string_function_evaluator
+
 
 def bisection_method(f, a, b, tolerance=1e-7, max_iterations=100):
     """
@@ -24,25 +26,26 @@ def bisection_method(f, a, b, tolerance=1e-7, max_iterations=100):
     converged : bool
         Whether the algorithm converged or not.
     """
-
-    if f(a) * f(b) >= 0:
+    f_a = string_function_evaluator(f, a)
+    f_b = string_function_evaluator(f, b)
+    if (f_a * f_b) >= 0:
         raise ValueError("f(a) and f(b) must have opposite signs.")
     c = (a + b) / 2  # Midpoint initial
     result_array = []
     for i in range(max_iterations):
         c = (a + b) / 2  # Midpoint
-        if abs(b - a) < tolerance or abs(f(c)) < tolerance:
+        f_c = string_function_evaluator(f, c)
+        if abs(b - a) < tolerance or abs(f_c) < tolerance:
             df_result = pd.DataFrame(data=result_array)
-            print(df_result)
             return c, i + 1, True, df_result  # Converged
 
         # Narrow the interval based on the sign of f(c)
-        if f(a) * f(c) < 0:
+        if f_a * f_c < 0:
             b = c  # The root is in [a, c]
         else:
             a = c  # The root is in [c, b]
 
-        result = {'i': i, 'x_i': c, 'f_x_i': f(c), 'e': abs(b - a)}
+        result = {'i': i, 'x_i': c, 'f_x_i': f_c, 'e': abs(b - a)}
         result_array.append(result)
 
     return c, max_iterations, False  # Did not converge within max_iterations

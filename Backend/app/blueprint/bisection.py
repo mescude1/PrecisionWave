@@ -53,11 +53,18 @@ def bisection_post() -> Response:
     if not request.is_json:
         abort(400)
 
-    f = request.json.get('function')
+    f = request.json.get('f')
     a = request.json.get('a')
     b = request.json.get('b')
 
-    result = bisection_method(f, a, b)
+    root, iterations, converged, df_result = bisection_method(f, a, b)
 
-    return result
+    result = {
+        'root': root,
+        'iterations': iterations,
+        'converged': converged,
+        'df_result': df_result.to_json()
+    }
+
+    return make_response(jsonify({'status': 'success','data': result}), 200)
 
