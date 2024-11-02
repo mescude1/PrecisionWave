@@ -1,10 +1,4 @@
-""" This module contains the 'index' Blueprint which organize and
-group, views related to the index endpoint of HTTP REST API.
-"""
-
-
 from flask import Blueprint, Response, make_response, jsonify, request, abort
-
 from Backend.app.pw_library.python_methods.false_rule import false_rule
 
 bp = Blueprint('false_rule', __name__, url_prefix='/methods')
@@ -12,13 +6,6 @@ bp = Blueprint('false_rule', __name__, url_prefix='/methods')
 
 @bp.route('/false-rule', methods=['GET'])
 def false_rule_get() -> Response:
-    """This function is responsible to deal with requests
-    coming from index URL. It return a simple text indicating
-    the server is running.
-
-    Returns:
-        str: a text message
-    """
 
     return make_response(jsonify({
         'status': 'success',

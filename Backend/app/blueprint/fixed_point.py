@@ -1,10 +1,4 @@
-""" This module contains the 'index' Blueprint which organize and
-group, views related to the index endpoint of HTTP REST API.
-"""
-from http.client import responses
-
 from flask import Blueprint, make_response, jsonify, request, abort
-
 from Backend.app.pw_library.python_methods.fixed_point import fixed_point_method
 
 bp = Blueprint('fixed_point', __name__, url_prefix='/methods')
@@ -12,13 +6,7 @@ bp = Blueprint('fixed_point', __name__, url_prefix='/methods')
 
 @bp.route('/fixed-point', methods=['GET'])
 def fixed_point_get() -> str:
-    """This function is responsible to deal with requests
-    coming from index URL. It return a simple text indicating
-    the server is running.
 
-    Returns:
-        str: a text message
-    """
     response = make_response(jsonify({
         'message': 'Fixed point method.',
         'description': '''The fixed-point method is an iterative numerical technique used to solve equa- tions of the 

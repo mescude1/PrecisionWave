@@ -1,7 +1,3 @@
-""" This module contains the 'index' Blueprint which organize and
-group, views related to the index endpoint of HTTP REST API.
-"""
-
 from flask import (
     abort, Blueprint, request, Response, make_response, jsonify
 )
@@ -13,14 +9,6 @@ bp = Blueprint('bisection', __name__, url_prefix='/methods')
 
 @bp.route('/bisection', methods=['GET'])
 def bisection_get() -> Response:
-    """This function is responsible to deal with requests
-    coming from index URL. It returns a simple text indicating
-    the server is running.
-
-    Returns:
-        Response: a dictionary with the tooltips and method help
-    """
-
 
     response = make_response(jsonify({
         'message': 'Bisection method',
@@ -43,13 +31,6 @@ def bisection_get() -> Response:
 
 @bp.route('/bisection', methods=['POST'])
 def bisection_post() -> Response:
-    """This function is responsible to deal with requests
-    coming from index URL. It return a simple text indicating
-    the server is running.
-
-    Returns:
-        str: a text message
-    """
     if not request.is_json:
         abort(400)
 

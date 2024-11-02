@@ -1,36 +1,54 @@
-""" This module contains the 'index' Blueprint which organize and
-group, views related to the index endpoint of HTTP REST API.
-"""
+from flask import Blueprint, make_response, jsonify, request, abort
 
-
-from flask import Blueprint
-
+from Backend.app.pw_library.python_methods.incremental import incremental_search
 
 bp = Blueprint('incremental', __name__, url_prefix='/methods')
 
 
 @bp.route('/incremental', methods=['GET'])
 def incremental_get() -> str:
-    """This function is responsible to deal with requests
-    coming from index URL. It return a simple text indicating
-    the server is running.
 
-    Returns:
-        str: a text message
-    """
-
-    return "The incremental endpoint is running"
+    return make_response(jsonify({'success': True,
+                                        'description': '''
+                                            Incremental Search Method is a numerical method used to find the roots of a function
+                                            (i.e., where the function equals zero).
+                                            This method works by iteratively narrowing down an interval where a root
+                                            lies.
+                                            The goal is to find an approximation of the root with increasing precision.
+                                        ''',
+                                        'instructions': '''
+                                            INPUT:
+                                            - f: continuous function for which a sign change is sought.
+                                            - x0: initial point.
+                                            - h: step size (increment in each iteration).
+                                            - Nmax: maximum number of iterations.
+                                        
+                                            OUTPUT:
+                                            - a: left endpoint of the interval where a sign change occurs.
+                                            - b: right endpoint of the interval where a sign change occurs.
+                                            - iter: number of iterations performed.
+                                            - data_frame: table of results with details of each iteration.
+                                        '''}), 200)
 
 
 @bp.route('/incremental', methods=['POST'])
 def incremental_post() -> str:
-    """This function is responsible to deal with requests
-    coming from index URL. It return a simple text indicating
-    the server is running.
+    if not request.is_json:
+        abort(400)
 
-    Returns:
-        str: a text message
-    """
+    f = request.json.get('f')
+    h = request.json.get('g')
+    x0 = request.json.get('x0')
 
-    return "The incremental endpoint is running"
+    root, iterations, converged, df_result = incremental_search(f, x0, h)
+
+    result = {
+        'root': root,
+        'iterations': iterations,
+        'converged': converged,
+        'df_result': df_result
+    }
+
+    return make_response(jsonify({'status': "success",
+                                        'data': result}), 200)
 

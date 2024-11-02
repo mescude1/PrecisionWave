@@ -1,8 +1,3 @@
-""" This module contains the 'index' Blueprint which organize and
-group, views related to the index endpoint of HTTP REST API.
-"""
-
-
 from flask import Blueprint, make_response, request, abort, jsonify
 from Backend.app.pw_library.python_methods.seccant import secant_method
 

@@ -879,6 +879,11 @@ Iteration & x\_i                 & f(x\_i)                 & g(x\_i)            
 
 
     \subsection{Newton}
+        The Newton-Raphson Method is an iterative numerical technique for finding roots (or zeroes) of a real-valued
+        function f(x)f(x)f(x). It is one of the most widely used methods for solving nonlinear equations due to its
+        simplicity and fast convergence near a root. The method is particularly effective for functions that are
+        continuously differentiable and where the initial guess is relatively close to the true root.
+
         \subsubsection{Pseudo-code}
 \begin{lstlisting}
 FUNCTION NewtonRaphson(f, df, x0, tol=1e-7, max_iter=30):
@@ -1234,6 +1239,12 @@ END FUNCTION
             \end{tabular}
             }
     \subsection{Multiple Roots}
+        The Multiple Roots Method (or Method for Multiple Roots) is a numerical technique for finding roots of functions
+        when the root is known to have a multiplicity greater than one. Standard root-finding methods, like Newton-Raphson,
+        can converge slowly or even fail for roots with multiplicity because they assume simple (single) roots.
+        The multiple roots method, however, adjusts the iteration formula to handle such cases more effectively,
+        improving convergence for these types of roots.
+
         \subsubsection{Pseudo-code}
 \begin{lstlisting}
 FUNCTION MultipleRootMethod(f, df, ddf, x0, tol=1e-7, max_iter=100):

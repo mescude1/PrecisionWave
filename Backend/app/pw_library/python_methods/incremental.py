@@ -2,7 +2,7 @@ import math
 import pandas as pd
 
 
-def incremental_search(function, x0, h, nmax):
+def incremental_search(function, x0, h, nmax=100):
     """
     This program finds an interval where f(x) has a sign change using the incremental search method.
     Inputs:
