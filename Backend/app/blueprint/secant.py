@@ -3,34 +3,62 @@ group, views related to the index endpoint of HTTP REST API.
 """
 
 
-from flask import Blueprint
-
+from flask import Blueprint, make_response, request, abort, jsonify
+from Backend.app.pw_library.python_methods.seccant import secant_method
 
 bp = Blueprint('secant', __name__, url_prefix='/methods')
 
 
 @bp.route('/secant', methods=['GET'])
 def secant_get() -> str:
-    """This function is responsible to deal with requests
-    coming from index URL. It return a simple text indicating
-    the server is running.
 
-    Returns:
-        str: a text message
-    """
-
-    return "The secant endpoint is running"
+    return make_response({'status': 200,
+                          'data': {'description': '''The secant method is an iterative numerical technique used to find 
+                                                     roots of a real-valued function, 𝑓(𝑥)=0. It's similar to the 
+                                                     Newton-Raphson method, but it doesn’t require calculating derivatives, 
+                                                     making it useful for functions where derivatives are hard to compute.''',
+                                   'instructions': '''Parameters:
+                                                        f : function
+                                                            The function for which we are trying to find a root.
+                                                        x0 : float
+                                                            Initial guess 1.
+                                                        x1 : float
+                                                            Initial guess 2.
+                                                        tol : float, optional
+                                                            Tolerance for stopping the iteration. Default is 1e-6.
+                                                        max_iter : int, optional
+                                                            Maximum number of iterations. Default is 100.
+                                                    
+                                                        Returns:
+                                                        float
+                                                            The root of the function f.'''
+                                   }
+                          }
+                         )
 
 
 @bp.route('/secant', methods=['POST'])
 def secant_post() -> str:
-    """This function is responsible to deal with requests
-    coming from index URL. It return a simple text indicating
-    the server is running.
+    if not request.is_json:
+        abort(400)
 
-    Returns:
-        str: a text message
-    """
+    f = request.json.get('f')
+    g = request.json.get('g')
+    x0 = request.json.get('x0')
 
-    return "The secant endpoint is running"
+    x1 = request.json.get('x1')
+    tol = request.json.get('tol')
+    max_iter = request.json.get('max_iter')
+
+    root, iterations, converged, result_df = secant_method(f, x0, x1, tol, max_iter)
+
+    result = {
+        'root': root,
+        'iterations': iterations,
+        'converged': converged,
+        'result_df': result_df.to_json()
+    }
+
+    return make_response(jsonify({'status': "success",
+                                  'data': result}), 200)
 

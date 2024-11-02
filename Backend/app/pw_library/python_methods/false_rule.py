@@ -1,8 +1,11 @@
 import math
 import pandas as pd
+from pandas.core.interchange.dataframe_protocol import DataFrame
+
+from Backend.app.helpers.function_parser import string_function_evaluator
 
 
-def false_rule(f, a, b, tol, Nmax):
+def false_rule(f, a, b, tol=1e-7, Nmax=100):
     """
     This program finds the solution to the equation f(x) = 0 en el interval [a, b] using the method of the false rule
 
@@ -19,10 +22,10 @@ def false_rule(f, a, b, tol, Nmax):
     err: estimated error
     """
     # Initialization
-    fa = f(a)
-    fb = f(b)
+    fa = string_function_evaluator(f, a)
+    fb = string_function_evaluator(f,b)
     pm = (fb * a - fa * b) / (fb - fa)
-    fpm = f(pm)
+    fpm = string_function_evaluator(f, pm)
     E = 1000  # Initial large error
     cont = 1  # Iteration counted
     
@@ -40,7 +43,7 @@ def false_rule(f, a, b, tol, Nmax):
         # Updating previous point
         p0 = pm
         pm = (fb * a - fa * b) / (fb - fa)
-        fpm = f(pm)
+        fpm = string_function_evaluator(f, pm)
         E = abs(pm - p0)
 
         result = {
@@ -57,4 +60,4 @@ def false_rule(f, a, b, tol, Nmax):
     x = pm
     iter = cont
     err = E
-    return x, iter, err, result_array
+    return x, iter, err, pd.DataFrame(data=result_array)

@@ -1,7 +1,5 @@
-import math
-
 import pandas as pd
-import numpy as np
+
 
 def fixed_point_method(f, g, x0, tol=1e-7, max_iter=1000):
     """

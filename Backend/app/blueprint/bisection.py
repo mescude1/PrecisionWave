@@ -3,7 +3,7 @@ group, views related to the index endpoint of HTTP REST API.
 """
 
 from flask import (
-    current_app, abort, Blueprint, request, Response, make_response, jsonify
+    abort, Blueprint, request, Response, make_response, jsonify
 )
 
 from ..pw_library.python_methods.bisection import bisection_method

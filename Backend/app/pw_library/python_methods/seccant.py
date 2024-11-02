@@ -27,7 +27,7 @@ def secant_method(f, x0, x1, tol=1e-7, max_iter=100):
 
     for i in range(max_iter):
         # Calculate the value of f at the two initial guesses
-        f_x0 = f(x0)
+        f_x0 = (x0)
         f_x1 = f(x1)
 
         # Avoid division by zero
@@ -46,7 +46,7 @@ def secant_method(f, x0, x1, tol=1e-7, max_iter=100):
             result_array.append(result)
             print(DataFrame(result_array))
             print(f"Converged after {i + 1} iterations.")
-            return x2
+            return x2, i+1, True, DataFrame(result_array)
 
         # add results to list
         result = {'i': i,
