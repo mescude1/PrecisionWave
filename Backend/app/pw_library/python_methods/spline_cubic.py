@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def cubic_spline(x, y, x_new):
+def cubic_spline_coefficients(x, y, x_new):
     n = len(x) - 1
     h = np.diff(x)
     alpha = [0] * (n + 1)

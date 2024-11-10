@@ -35,7 +35,5 @@ def vandermonde_post() -> str:
         'vector': vector_df
     }
 
-    return make_response(jsonify({'status': "success",
-                                        'data': result
-                                  }), 200)
+    return make_response(jsonify({'status': "success", 'data': result}), 200)
 

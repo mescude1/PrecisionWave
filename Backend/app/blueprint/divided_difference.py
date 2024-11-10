@@ -1,5 +1,4 @@
 from flask import Blueprint, make_response, jsonify, request
-from Backend.app.pw_library.python_methods.lagrange import lagrange_polynomial
 from Backend.app.pw_library.python_methods.newton_divided_difference import newton_divided_difference_table
 
 bp = Blueprint('divided_difference', __name__, url_prefix='/methods')
@@ -31,14 +30,13 @@ def divided_difference_get() -> str:
 def divided_difference_post() -> str:
     x = request.get_json('x')
     y = request.get_json('y')
-    p, table_df= newton_divided_difference_table(x, y)
+
+    p, table_df = newton_divided_difference_table(x, y)
 
     result = {
         'p': p,
         'table_df': table_df
     }
 
-    return make_response(jsonify({'status': "success",
-                                        'data': result
-                                  }), 200)
+    return make_response(jsonify({'status': "success", 'data': result}), 200)
 

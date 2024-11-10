@@ -38,9 +38,7 @@ def secant_post() -> str:
         abort(400)
 
     f = request.json.get('f')
-    g = request.json.get('g')
     x0 = request.json.get('x0')
-
     x1 = request.json.get('x1')
     tol = request.json.get('tol')
     max_iter = request.json.get('max_iter')
@@ -54,6 +52,5 @@ def secant_post() -> str:
         'result_df': result_df.to_json()
     }
 
-    return make_response(jsonify({'status': "success",
-                                  'data': result}), 200)
+    return make_response(jsonify({'status': "success", 'data': result}), 200)
 

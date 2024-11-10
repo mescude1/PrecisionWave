@@ -1,5 +1,4 @@
 from flask import Blueprint, make_response, jsonify, request, abort
-
 from Backend.app.helpers.function_parser import string_function_differentiator
 from Backend.app.pw_library.python_methods.newton import newton_raphson
 
@@ -49,6 +48,5 @@ def newton_post() -> str:
         'df_result': df_result
     }
 
-    return make_response(jsonify({'status': "success",
-                                        'data': result}), 200)
+    return make_response(jsonify({'status': "success", 'data': result}), 200)
 

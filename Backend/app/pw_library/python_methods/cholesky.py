@@ -16,9 +16,9 @@ def cholesky_decomposition(A):
             sum_val = sum(L[i][k] * L[j][k].conjugate() for k in range(j))
 
             if i == j:  # Diagonal elements
-                L[i, j] = np.sqrt(A[i, i] - sum_val)
+                L[i][j] = np.sqrt(A[i][i] - sum_val)
             else:
-                L[i, j] = (A[i][j] - sum_val) / L[j][j]
+                L[i][j] = (A[i][j] - sum_val) / L[j][j]
 
     return L
 

@@ -30,9 +30,11 @@ def lagrange_post() -> str:
     y = request.get_json('y')
     p = lagrange_polynomial(x, y)
 
-    return make_response(jsonify({'status': "success",
-                                        'data': p,
-                                        'x-values': x,
-                                        'y-values': y
-                                  }), 200)
+    result = {
+        'x-values': x,
+        'y-values': y,
+        'p': p
+    }
+
+    return make_response(jsonify({'status': "success", 'data': result}), 200)
 

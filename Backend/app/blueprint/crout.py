@@ -32,12 +32,13 @@ def cholesky_post() -> Response:
     a = request.json.get('a')
     b = request.json.get('b')
 
-    x, y, l = solve_crout(a, b)
+    x, y, l, u = solve_crout(a, b)
 
     result = {
         'x': x,
         'y': y,
-        'L': l
+        'l': l,
+        'u': u
     }
 
     return make_response(jsonify({'status': 'success','data': result}), 200)

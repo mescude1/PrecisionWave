@@ -1,5 +1,4 @@
 from flask import Blueprint, make_response, jsonify, request, abort
-
 from Backend.app.pw_library.python_methods.incremental import incremental_search
 
 bp = Blueprint('incremental', __name__, url_prefix='/methods')
@@ -49,6 +48,5 @@ def incremental_post() -> str:
         'df_result': df_result
     }
 
-    return make_response(jsonify({'status': "success",
-                                        'data': result}), 200)
+    return make_response(jsonify({'status': "success", 'data': result}), 200)
 

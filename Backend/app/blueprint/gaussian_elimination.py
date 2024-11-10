@@ -1,5 +1,4 @@
 from flask import Blueprint, make_response, jsonify, request
-
 from Backend.app.pw_library.python_methods.gaussian_elimination import gaussian_elimination_verbose
 from Backend.app.pw_library.python_methods.gaussian_elimination_no_pivot import gaussian_elimination_no_pivot_verbose
 from Backend.app.pw_library.python_methods.gaussian_partial_pivot import \
@@ -38,6 +37,7 @@ def gaussian_elimination_post() -> str:
     a = request.get_json('A')
     b = request.get_json('b')
     pivot = request.get_json('pivot')
+
     if  pivot == 'none':
         x, steps = gaussian_elimination_no_pivot_verbose(a, b)
     elif pivot == 'full':
@@ -49,5 +49,6 @@ def gaussian_elimination_post() -> str:
         'x': x,
         'steps': steps
     }
+
     return make_response(jsonify({'status': "success", 'data': result}), 200)
 

@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def quadratic_spline(x, y, x_new):
+def quadratic_spline_coefficients(x, y, x_new):
     n = len(x) - 1
     h = np.diff(x)
     a = y[:-1]

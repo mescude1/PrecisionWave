@@ -37,5 +37,6 @@ def sor_post() -> str:
         'x': x,
         'steps': steps
     }
+
     return make_response(jsonify({'status': "success", 'data': result}), 200)
 

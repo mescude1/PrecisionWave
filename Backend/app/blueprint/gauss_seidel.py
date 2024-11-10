@@ -1,5 +1,4 @@
 from flask import Blueprint, make_response, jsonify, request
-
 from Backend.app.pw_library.python_methods.gauss_seidel import gauss_seidel
 
 bp = Blueprint('gauss_seidel', __name__, url_prefix='/methods')

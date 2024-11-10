@@ -1,9 +1,4 @@
 from flask import Blueprint, make_response, jsonify, request
-
-from Backend.app.pw_library.python_methods.gaussian_elimination import gaussian_elimination_verbose
-from Backend.app.pw_library.python_methods.gaussian_elimination_no_pivot import gaussian_elimination_no_pivot_verbose
-from Backend.app.pw_library.python_methods.gaussian_partial_pivot import \
-    gaussian_elimination_with_partial_pivoting_verbose
 from Backend.app.pw_library.python_methods.lu_factorization_simple_elimination import solve_lu
 from Backend.app.pw_library.python_methods.lu_factorization_with_pivoting import solve_lu_with_pivoting
 
@@ -37,6 +32,7 @@ def lu_factorization_post() -> str:
     a = request.get_json('A')
     b = request.get_json('b')
     pivot = request.get_json('pivot')
+
     if not pivot:
         x, l, u = solve_lu(a, b)
 
