@@ -25,3 +25,9 @@ def jacobi(A, b, x0, tol=1e-10, max_iterations=1000):
 # x0 = np.zeros_like(b)
 # x_sol, iterations = jacobi(A, b, x0)
 # print(f"Solution: {x_sol}, Iterations: {iterations}")
+
+
+A = np.array([[-1, -1, 4, -3.38], [0, 4, -1, -1], [4, 0, -1, 4.38], [-1, -1, 0, 4]], dtype=float)
+print(np.linalg.eigvals(A))
+
+print(jacobi(A, [20, 60, 0 ,40], [0,0,0,0]))

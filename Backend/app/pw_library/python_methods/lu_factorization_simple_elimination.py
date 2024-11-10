@@ -1,26 +1,28 @@
 import numpy as np
 
-def doolittle_decomposition(A):
+
+def lu_factorization(A):
     """
-    Performs Doolittle decomposition on matrix A.
+    Performs LU factorization on matrix A without pivoting.
     Returns matrices L and U such that A = L * U.
     """
-    n = A.shape[0]
-    L = np.eye(n, dtype=float)  # L starts as an identity matrix
-    U = np.zeros((n, n), dtype=float)
+    n = len(A)
+    L = np.eye(n)  # Initialize L as an identity matrix
+    U = A.copy()  # U starts as a copy of A
 
     for i in range(n):
-        # Calculate elements of U in the i-th row
-        for j in range(i, n):
-            U[i, j] = A[i, j] - sum(L[i, k] * U[k, j] for k in range(i))
-
-        # Calculate elements of L in the i-th column
         for j in range(i + 1, n):
             if U[i, i] == 0:
-                raise ValueError("Matrix is singular; zero pivot encountered.")
-            L[j, i] = (A[j, i] - sum(L[j, k] * U[k, i] for k in range(i))) / U[i, i]
+                raise ValueError("Zero pivot encountered; LU factorization without pivoting cannot proceed.")
+
+            # Calculate the multiplier
+            L[j, i] = U[j, i] / U[i, i]
+
+            # Eliminate entries below the pivot
+            U[j, i:] = U[j, i:] - L[j, i] * U[i, i:]
 
     return L, U
+
 
 def forward_substitution(L, b):
     """
@@ -34,6 +36,7 @@ def forward_substitution(L, b):
 
     return y
 
+
 def backward_substitution(U, y):
     """
     Solves the equation Ux = y for x, where U is an upper triangular matrix.
@@ -42,16 +45,17 @@ def backward_substitution(U, y):
     x = np.zeros_like(y, dtype=float)
 
     for i in range(n - 1, -1, -1):
-        x[i] = (y[i] - np.dot(U[i, i+1:], x[i+1:])) / U[i, i]
+        x[i] = (y[i] - np.dot(U[i, i + 1:], x[i + 1:])) / U[i, i]
 
     return x
 
-def solve_doolittle(A, b):
+
+def solve_lu(A, b):
     """
-    Solves the linear system Ax = b using Doolittle decomposition.
+    Solves the linear system Ax = b using LU factorization.
     """
-    # Perform Doolittle decomposition
-    L, U = doolittle_decomposition(A)
+    # Perform LU factorization
+    L, U = lu_factorization(A)
 
     # Solve Ly = b for y
     y = forward_substitution(L, b)
@@ -59,4 +63,4 @@ def solve_doolittle(A, b):
     # Solve Ux = y for x
     x = backward_substitution(U, y)
 
-    return x, y, L, U
+    return x, L, U

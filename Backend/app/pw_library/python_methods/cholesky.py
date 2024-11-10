@@ -1,15 +1,10 @@
 import numpy as np
 
 
-def cholesky_factorization(A):
+def cholesky_decomposition(A):
     """
-    Perform Cholesky factorization on matrix A, allowing for complex numbers.
-
-    Parameters:
-        A (numpy.ndarray): A Hermitian positive-definite matrix (n x n).
-
-    Returns:
-        L (numpy.ndarray): Lower triangular matrix, where A = L @ L.H
+    Performs Cholesky decomposition on a Hermitian, positive-definite matrix A.
+    Returns the lower triangular matrix L such that A = L * L.H (L conjugate transpose).
     """
     n = A.shape[0]
     L = np.zeros_like(A, dtype=np.complex128)
@@ -24,3 +19,45 @@ def cholesky_factorization(A):
                 L[i, j] = (A[i, j] - sum_val) / L[j, j]
 
     return L
+
+
+def forward_substitution(L, b):
+    """
+    Solves the equation Ly = b for y, where L is a lower triangular matrix.
+    """
+    n = len(b)
+    y = np.zeros_like(b, dtype=np.complex128)
+
+    for i in range(n):
+        y[i] = (b[i] - np.dot(L[i, :i], y[:i])) / L[i, i]
+
+    return y
+
+
+def backward_substitution(L, y):
+    """
+    Solves the equation L.H x = y for x, where L is a lower triangular matrix and L.H is its conjugate transpose.
+    """
+    n = len(y)
+    x = np.zeros_like(y, dtype=np.complex128)
+
+    for i in range(n - 1, -1, -1):
+        x[i] = (y[i] - np.dot(L[i + 1:, i].conjugate(), x[i + 1:])) / L[i, i].conjugate()
+
+    return x
+
+
+def solve_cholesky(A, b):
+    """
+    Solves the linear system Ax = b using Cholesky decomposition, accounting for complex numbers.
+    """
+    # Perform Cholesky decomposition
+    L = cholesky_decomposition(A)
+
+    # Solve Ly = b for y
+    y = forward_substitution(L, b)
+
+    # Solve L.H x = y for x
+    x = backward_substitution(L, y)
+
+    return x, y, L
