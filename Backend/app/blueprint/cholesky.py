@@ -3,7 +3,7 @@ from flask import (
 )
 
 from ..pw_library.python_methods.bisection import bisection_method
-from ..pw_library.python_methods.cholesky import cholesky_factorization
+from ..pw_library.python_methods.cholesky import cholesky_factorization, solve_cholesky
 
 bp = Blueprint('bisection', __name__, url_prefix='/methods')
 
@@ -35,7 +35,7 @@ def cholesky_post() -> Response:
     a = request.json.get('a')
     b = request.json.get('b')
 
-    x, y, l = cholesky_factorization(a, b)
+    x, y, l = solve_cholesky(a, b)
 
     result = {
         'x': x,
