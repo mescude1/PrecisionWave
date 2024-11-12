@@ -17,14 +17,155 @@ import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
 const _nav = [
   {
+    component: CNavTitle,
+    name: 'Input and Visualization',
+  },
+  {
+    component: CNavGroup,
+    name: 'Tools',
+    to: '/tools',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon"/>,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Function Plotter',
+        to: '/tools/function-plotter',
+      },
+      {
+        component: CNavItem,
+        name: "Data Upload",
+        to: '/tools/data-upload',
+      },
+    ]
+  },
+  {
+    component: CNavTitle,
+    name: 'Numerical Methods',
+  },
+  {
+    component: CNavGroup,
+    name: 'Root Finding',
+    to: '/root-finding',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon"/>,
+    items: [
+        {
+          component: CNavItem,
+          name: 'Incremental Search',
+          to: '/root-finding/incremental-search',
+        },
+         {
+          component: CNavItem,
+          name: 'Bisection',
+          to: '/root-finding/bisection',
+        },
+         {
+          component: CNavItem,
+          name: 'False Rule',
+          to: '/root-finding/false-rule',
+        },
+         {
+          component: CNavItem,
+          name: 'Fixed Point',
+          to: '/root-finding/fixed-point',
+        },
+         {
+          component: CNavItem,
+          name: 'Newton-Raphson',
+          to: '/root-finding/newton-raphson',
+        },
+         {
+          component: CNavItem,
+          name: 'Secant',
+          to: '/root-finding/secant',
+        },
+         {
+          component: CNavItem,
+          name: 'Multiple Roots',
+          to: '/root-finding/multiple-roots',
+        },
+    ]
+  },
+  {
+    component: CNavGroup,
+    name: 'Linear Equation System Solving',
+    to: '/linear-equation-solvers',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon"/>,
+    items: [
+      {
+        component: CNavItem,
+        name: 'Gaussian Elimination',
+        to: '/linear-equation-solvers/gaussian-elimination',
+      },
+      {
+        component: CNavItem,
+        name: 'LU Factorization',
+        to: '/linear-equation-solvers/lu-factorization',
+      },
+      {
+          component: CNavItem,
+          name: 'Crout',
+          to: '/linear-equation-solvers/crout',
+      },
+      {
+          component: CNavItem,
+          name: 'Doolittle',
+          to: '/linear-equation-solvers/doolittle',
+      },
+      {
+          component: CNavItem,
+          name: 'Cholesky',
+          to: '/linear-equation-solvers/cholesky',
+      },
+      {
+          component: CNavItem,
+          name: 'Jacobi',
+          to: '/linear-equation-solvers/jacobi',
+      },
+      {
+          component: CNavItem,
+          name: 'Gauss-Seidel',
+          to: '/linear-equation-solvers/gauss-seidel',
+      },
+      {
+          component: CNavItem,
+          name: 'S.O.R (Successive Over Relaxation)',
+          to: '/linear-equation-solversg/sor',
+      },
+    ]
+  },
+  {
+    component: CNavGroup,
+    name: 'Regression Analysis',
+    to: '/regression-analysis',
+    icon: <CIcon icon={cilPuzzle} customClassName="nav-icon"/>,
+    items: [
+        {
+          component: CNavItem,
+          name: 'Vandermonde',
+          to: '/regression-analysis/vandermonde',
+        },
+        {
+          component: CNavItem,
+          name: "Newton's Divided Differences",
+          to: '/regression-analysis/divided-differences',
+        },
+        {
+          component: CNavItem,
+          name: "Lagrange",
+          to: '/regression-analysis/lagrange',
+        },
+        {
+          component: CNavItem,
+          name: "Spline Interpolation",
+          to: '/regression-analysis/spline-interpolation',
+        },
+    ]
+  },
+  {
     component: CNavItem,
     name: 'Dashboard',
     to: '/dashboard',
-    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />,
-    badge: {
-      color: 'info',
-      text: 'NEW',
-    },
+    icon: <CIcon icon={cilSpeedometer} customClassName="nav-icon" />
   },
   {
     component: CNavTitle,
@@ -32,7 +173,7 @@ const _nav = [
   },
   {
     component: CNavItem,
-    name: 'Colors',
+    name: 'Colores',
     to: '/theme/colors',
     icon: <CIcon icon={cilDrop} customClassName="nav-icon" />,
   },
@@ -304,7 +445,7 @@ const _nav = [
     name: 'Docs',
     href: 'https://coreui.io/react/docs/templates/installation/',
     icon: <CIcon icon={cilDescription} customClassName="nav-icon" />,
-  },
+  }
 ]
 
 export default _nav

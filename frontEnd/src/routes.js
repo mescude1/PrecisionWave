@@ -1,8 +1,19 @@
 import React from 'react'
+import {cibOsi} from "@coreui/icons";
 
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
+
+// Numerical Methods
+// Root Finding
+const IncrementalSearch = React.lazy(() => import('./views/numerical-methods/root-finding/IncrementalSearch'))
+const Bisection = React.lazy(() => import('./views/numerical-methods/root-finding/Bisection'))
+const FalseRule = React.lazy(() => import('./views/numerical-methods/root-finding/FalseRule'))
+const FixedPoint = React.lazy(() => import('./views/numerical-methods/root-finding/FixedPoint'))
+const NewtonRaphson = React.lazy(() => import('./views/numerical-methods/root-finding/NewtonRaphson'))
+const Secant = React.lazy(() => import('./views/numerical-methods/root-finding/Secant'))
+const MultipleRoots = React.lazy(() => import('./views/numerical-methods/root-finding/MultipleRoots'))
 
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
@@ -53,6 +64,13 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  { path: '/root-finding/incremental-search', exact: true, name: 'IncrementalSearch', element: IncrementalSearch },
+  { path: '/root-finding/Bisection', exact: true, name: 'Bisection', element: Bisection },
+  { path: '/root-finding/false-rule', exact: true, name: 'FalseRule', element: FalseRule },
+  { path: '/root-finding/fixed-point', exact: true, name: 'FixedPoint', element: FixedPoint },
+  { path: '/root-finding/newton-raphson', exact: true, name: 'NewtonRaphson', element: NewtonRaphson },
+  { path: '/root-finding/secant', exact: true, name: 'Secant', element: Secant },
+  { path: '/root-finding/multiple-roots', exact: true, name: 'MultipleRoots', element: MultipleRoots },
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
