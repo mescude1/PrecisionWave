@@ -14,7 +14,20 @@ const FixedPoint = React.lazy(() => import('./views/numerical-methods/root-findi
 const NewtonRaphson = React.lazy(() => import('./views/numerical-methods/root-finding/NewtonRaphson'))
 const Secant = React.lazy(() => import('./views/numerical-methods/root-finding/Secant'))
 const MultipleRoots = React.lazy(() => import('./views/numerical-methods/root-finding/MultipleRoots'))
-
+// Matrix Solvers
+const GaussianElimination = React.lazy(() => import('./views/numerical-methods/matrix-solvers/GaussianElimination'))
+const LuFactorization = React.lazy(() => import('./views/numerical-methods/matrix-solvers/LuFactorization'))
+const Cholesky = React.lazy(() => import('./views/numerical-methods/matrix-solvers/Cholesky'))
+const Crout = React.lazy(() => import('./views/numerical-methods/matrix-solvers/Crout'))
+const Doolittle  = React.lazy(() => import('./views/numerical-methods/matrix-solvers/Doolittle'))
+const GaussSeidel = React.lazy(() => import('./views/numerical-methods/matrix-solvers/GaussSeidel'))
+const Jacobi = React.lazy(() => import('./views/numerical-methods/matrix-solvers/Jacobi'))
+const SOR = React.lazy(() => import('./views/numerical-methods/matrix-solvers/SOR'))
+// Interpolation
+const DividedDifferences = React.lazy(() => import('./views/numerical-methods/interpolation/DividedDifferences'))
+const Lagrange = React.lazy(() => import('./views/numerical-methods/interpolation/Lagrange'))
+const SplineInterpolation = React.lazy(() => import('./views/numerical-methods/interpolation/SplineInterpolation'))
+const Vandermonde = React.lazy(() => import('./views/numerical-methods/interpolation/Vandermonde'))
 // Base
 const Accordion = React.lazy(() => import('./views/base/accordion/Accordion'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'))
@@ -64,6 +77,7 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  // root finding methods
   { path: '/root-finding/incremental-search', exact: true, name: 'IncrementalSearch', element: IncrementalSearch },
   { path: '/root-finding/Bisection', exact: true, name: 'Bisection', element: Bisection },
   { path: '/root-finding/false-rule', exact: true, name: 'FalseRule', element: FalseRule },
@@ -71,6 +85,21 @@ const routes = [
   { path: '/root-finding/newton-raphson', exact: true, name: 'NewtonRaphson', element: NewtonRaphson },
   { path: '/root-finding/secant', exact: true, name: 'Secant', element: Secant },
   { path: '/root-finding/multiple-roots', exact: true, name: 'MultipleRoots', element: MultipleRoots },
+  // matrix solving methods
+  { path: '/matrix-solving/gaussian-elimination', exact: true, name: 'GaussianElimination', element: GaussianElimination },
+  { path: '/matrix-solving/lu-factorization', exact: true, name: 'LuFactorization', element: LuFactorization },
+  { path: '/matrix-solving/cholesky', exact: true, name: 'Cholesky', element: Cholesky },
+  { path: '/matrix-solving/crout', exact: true, name: 'Crout', element: Crout },
+  { path: '/matrix-solving/doolittle', exact: true, name: 'Doolittle', element: Doolittle },
+  { path: '/matrix-solving/jacobi', exact: true, name: 'Jacobi', element: Jacobi },
+  { path: '/matrix-solving/gauss-seidel', exact: true, name: 'GaussSeidel', element: GaussSeidel },
+  { path: '/matrix-solving/sor', exact: true, name: 'SOR', element: SOR },
+  // interpolation methods
+  { path: '/interpolation/divided-differences', exact: true, name: 'DividedDifferences', element: DividedDifferences },
+  { path: '/interpolation/lagrange', exact: true, name: 'Lagrange', element: Lagrange },
+  { path: '/interpolation/spline-interpolation', exact: true, name: 'SplineInterpolation', element: SplineInterpolation },
+  { path: '/interpolation/vandermonde', exact: true, name: 'Vandermonde', element: Vandermonde },
+  // Base
   { path: '/dashboard', name: 'Dashboard', element: Dashboard },
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
