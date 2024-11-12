@@ -29,7 +29,7 @@ const _nav = [
       {
         component: CNavItem,
         name: 'Function Plotter',
-        to: '/tools/function-plotter',
+        to: '/tools/visualizer',
       },
       {
         component: CNavItem,
@@ -88,48 +88,48 @@ const _nav = [
   {
     component: CNavGroup,
     name: 'Linear Equation System Solving',
-    to: '/linear-equation-solvers',
+    to: '/matrix-solvers',
     icon: <CIcon icon={cilPuzzle} customClassName="nav-icon"/>,
     items: [
       {
         component: CNavItem,
         name: 'Gaussian Elimination',
-        to: '/linear-equation-solvers/gaussian-elimination',
+        to: '/matrix-solvers/gaussian-elimination',
       },
       {
         component: CNavItem,
         name: 'LU Factorization',
-        to: '/linear-equation-solvers/lu-factorization',
+        to: '/matrix-solvers/lu-factorization',
       },
       {
           component: CNavItem,
           name: 'Crout',
-          to: '/linear-equation-solvers/crout',
+          to: '/matrix-solvers/crout',
       },
       {
           component: CNavItem,
           name: 'Doolittle',
-          to: '/linear-equation-solvers/doolittle',
+          to: '/matrix-solvers/doolittle',
       },
       {
           component: CNavItem,
           name: 'Cholesky',
-          to: '/linear-equation-solvers/cholesky',
+          to: '/matrix-solvers/cholesky',
       },
       {
           component: CNavItem,
           name: 'Jacobi',
-          to: '/linear-equation-solvers/jacobi',
+          to: '/matrix-solvers/jacobi',
       },
       {
           component: CNavItem,
           name: 'Gauss-Seidel',
-          to: '/linear-equation-solvers/gauss-seidel',
+          to: '/matrix-solvers/gauss-seidel',
       },
       {
           component: CNavItem,
           name: 'S.O.R (Successive Over Relaxation)',
-          to: '/linear-equation-solversg/sor',
+          to: '/matrix-solvers/sor',
       },
     ]
   },
@@ -142,22 +142,22 @@ const _nav = [
         {
           component: CNavItem,
           name: 'Vandermonde',
-          to: '/regression-analysis/vandermonde',
+          to: '/interpolation/vandermonde',
         },
         {
           component: CNavItem,
           name: "Newton's Divided Differences",
-          to: '/regression-analysis/divided-differences',
+          to: '/interpolation/divided-differences',
         },
         {
           component: CNavItem,
           name: "Lagrange",
-          to: '/regression-analysis/lagrange',
+          to: '/interpolation/lagrange',
         },
         {
           component: CNavItem,
           name: "Spline Interpolation",
-          to: '/regression-analysis/spline-interpolation',
+          to: '/interpolation/spline-interpolation',
         },
     ]
   },

@@ -4,7 +4,9 @@ import {cibOsi} from "@coreui/icons";
 const Dashboard = React.lazy(() => import('./views/dashboard/Dashboard'))
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
-
+// Tools
+const DataUpload = React.lazy(() => import('./views/tools/DataUpload'))
+const Visualizer = React.lazy(() => import('./views/tools/Visualizer'))
 // Numerical Methods
 // Root Finding
 const IncrementalSearch = React.lazy(() => import('./views/numerical-methods/root-finding/IncrementalSearch'))
@@ -77,6 +79,9 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
+  // tools
+  { path: '/tools/data-upload', exact: true, name: 'DataUpload', element: DataUpload },
+  { path: '/tools/visualizer', exact: true, name: 'Visualizer', element: Visualizer },
   // root finding methods
   { path: '/root-finding/incremental-search', exact: true, name: 'IncrementalSearch', element: IncrementalSearch },
   { path: '/root-finding/Bisection', exact: true, name: 'Bisection', element: Bisection },
@@ -86,14 +91,14 @@ const routes = [
   { path: '/root-finding/secant', exact: true, name: 'Secant', element: Secant },
   { path: '/root-finding/multiple-roots', exact: true, name: 'MultipleRoots', element: MultipleRoots },
   // matrix solving methods
-  { path: '/matrix-solving/gaussian-elimination', exact: true, name: 'GaussianElimination', element: GaussianElimination },
-  { path: '/matrix-solving/lu-factorization', exact: true, name: 'LuFactorization', element: LuFactorization },
-  { path: '/matrix-solving/cholesky', exact: true, name: 'Cholesky', element: Cholesky },
-  { path: '/matrix-solving/crout', exact: true, name: 'Crout', element: Crout },
-  { path: '/matrix-solving/doolittle', exact: true, name: 'Doolittle', element: Doolittle },
-  { path: '/matrix-solving/jacobi', exact: true, name: 'Jacobi', element: Jacobi },
-  { path: '/matrix-solving/gauss-seidel', exact: true, name: 'GaussSeidel', element: GaussSeidel },
-  { path: '/matrix-solving/sor', exact: true, name: 'SOR', element: SOR },
+  { path: '/matrix-solvers/gaussian-elimination', exact: true, name: 'GaussianElimination', element: GaussianElimination },
+  { path: '/matrix-solvers/lu-factorization', exact: true, name: 'LuFactorization', element: LuFactorization },
+  { path: '/matrix-solvers/cholesky', exact: true, name: 'Cholesky', element: Cholesky },
+  { path: '/matrix-solvers/crout', exact: true, name: 'Crout', element: Crout },
+  { path: '/matrix-solvers/doolittle', exact: true, name: 'Doolittle', element: Doolittle },
+  { path: '/matrix-solvers/jacobi', exact: true, name: 'Jacobi', element: Jacobi },
+  { path: '/matrix-solvers/gauss-seidel', exact: true, name: 'GaussSeidel', element: GaussSeidel },
+  { path: '/matrix-solvers/sor', exact: true, name: 'SOR', element: SOR },
   // interpolation methods
   { path: '/interpolation/divided-differences', exact: true, name: 'DividedDifferences', element: DividedDifferences },
   { path: '/interpolation/lagrange', exact: true, name: 'Lagrange', element: Lagrange },
