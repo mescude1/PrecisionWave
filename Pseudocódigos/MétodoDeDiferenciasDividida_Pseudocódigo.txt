@@ -1,0 +1,24 @@
+FUNCIÓN MétodoDeDiferenciasDivididas(x, y):
+
+    ENTRADA:
+    - x: Lista o vector de valores x (puntos conocidos en el eje x)
+    - y: Lista o vector de valores y (valores de la función correspondientes a los puntos x)
+    
+    SALIDA:
+    - p: Polinomio de Newton como expresión simbólica
+    - tabla_df: Tabla de diferencias divididas calculadas
+    - convergió: Indicador de si el algoritmo fue exitoso
+
+    // Verificar si x y y tienen la misma longitud
+    SI longitud(x) != longitud(y) ENTONCES:
+        Lanzar un error ("Los vectores x e y deben tener la misma longitud")
+    
+    // Inicializar la tabla de diferencias divididas y calcular el polinomio
+    (p, tabla_df) = NewtonDividedDifferenceTable(x, y)  // Calcular el polinomio de Newton y la tabla de diferencias
+
+    convergió = True  // Asumimos que el método siempre converge si las entradas son válidas
+
+    // Crear y devolver los resultados
+    DEVOLVER (p, tabla_df, convergió)
+
+FIN FUNCIÓN
