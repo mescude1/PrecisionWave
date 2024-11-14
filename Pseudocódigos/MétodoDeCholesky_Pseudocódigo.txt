@@ -1,0 +1,26 @@
+FUNCIÓN MétodoDeCholesky(a, b):
+    
+    ENTRADA:
+    - a: Matriz del sistema \( A \)
+    - b: Vector de soluciones \( b \)
+    
+    SALIDA:
+    - x: Solución del sistema \( Ax = b \)
+    - y: Vector intermedio de la descomposición
+    - L: Matriz triangular inferior de la descomposición
+    - convergió: indicador de si el algoritmo fue exitoso
+    
+    SI a NO es una matriz cuadrada O NO es positiva definida ENTONCES:
+        Lanzar un error ("La matriz A debe ser cuadrada y positiva definida")
+    
+    // Inicializar variables
+    L = CholeskyFactorization(a)  // Calcular la descomposición de Cholesky
+    y = ResolverSistemaTriangularInferior(L, b)  // Resolver \( Ly = b \)
+    x = ResolverSistemaTriangularSuperior(Transpuesta(L), y)  // Resolver \( L^T x = y \)
+    
+    convergió = True  // Asumimos que el método siempre converge si las condiciones iniciales son correctas
+    
+    // Crear y devolver los resultados
+    DEVOLVER (x, y, L, convergió)
+
+FIN FUNCIÓN
