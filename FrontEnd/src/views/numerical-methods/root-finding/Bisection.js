@@ -41,7 +41,7 @@ const Bisection = () => {
     e.preventDefault();
     setError(null); // Reset error state on new submission
     try {
-      const res = await axios.post('http://localhost:8000/methods/bisection', formData);
+      const res = await axios.post('http://precision-wave.azuloso.me/methods/bisection', formData);
       setResponse(res.data); // Set the response data
     } catch (err) {
       setError('Error finding root. Please check your input and try again.');
