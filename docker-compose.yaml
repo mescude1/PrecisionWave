@@ -9,21 +9,11 @@ services:
       FLASK_APP: wsgi
       DATABASE_URL: postgresql+psycopg2://waveUser:610c608f98b4587971831acf884a5d83@db.precisionwave.orb.local:5432/waveDB
     ports:
-      - "5000:5000"
+      - "80:80"
     networks:
       - app-network
     depends_on:
       - db
-
-  frontend:
-    build: ./frontend
-    container_name: frontend
-    ports:
-      - "3000:80"
-    networks:
-      - app-network
-    depends_on:
-      - backend
 
   db:
     image: postgres:13

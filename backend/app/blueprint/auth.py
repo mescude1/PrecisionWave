@@ -9,9 +9,9 @@ from flask_jwt_extended import (
     jwt_required, create_access_token, create_refresh_token, get_raw_jwt,
     jwt_refresh_token_required, get_jwt_identity
 )
-from ..exceptions import TokenNotFound
-from ..model import User, Token
-from ..model import UserRepository, TokenRepository
+from app.exceptions import TokenNotFound
+from app.model import User, Token
+from app.model import UserRepository, TokenRepository
 
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')

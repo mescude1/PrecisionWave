@@ -1,6 +1,6 @@
 from flask import Blueprint, make_response, jsonify, request, abort
-from Backend.app.helpers.function_parser import string_function_differentiator
-from Backend.app.pw_library.python_methods.newton import newton_raphson
+from app.helpers.function_parser import string_function_differentiator
+from app.pw_library.python_methods.newton import newton_raphson
 
 bp = Blueprint('newton', __name__, url_prefix='/methods')
 

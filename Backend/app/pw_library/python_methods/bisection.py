@@ -1,7 +1,7 @@
 
 import pandas as pd
 
-from Backend.app.helpers.function_parser import string_function_evaluator
+from app.helpers.function_parser import string_function_evaluator
 
 
 def bisection_method(f, a, b, tolerance=1e-7, max_iterations=100):

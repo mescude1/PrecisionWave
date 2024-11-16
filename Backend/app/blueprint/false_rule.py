@@ -1,5 +1,5 @@
 from flask import Blueprint, Response, make_response, jsonify, request, abort
-from Backend.app.pw_library.python_methods.false_rule import false_rule
+from app.pw_library.python_methods.false_rule import false_rule
 
 bp = Blueprint('false_rule', __name__, url_prefix='/methods')
 

@@ -1,7 +1,7 @@
 from flask import Blueprint, make_response, jsonify, request
-from Backend.app.pw_library.python_methods.gaussian_elimination import gaussian_elimination_verbose
-from Backend.app.pw_library.python_methods.gaussian_elimination_no_pivot import gaussian_elimination_no_pivot_verbose
-from Backend.app.pw_library.python_methods.gaussian_partial_pivot import \
+from app.pw_library.python_methods.gaussian_elimination import gaussian_elimination_verbose
+from app.pw_library.python_methods.gaussian_elimination_no_pivot import gaussian_elimination_no_pivot_verbose
+from app.pw_library.python_methods.gaussian_partial_pivot import \
     gaussian_elimination_with_partial_pivoting_verbose
 
 bp = Blueprint('gaussian_elimination', __name__, url_prefix='/methods')

@@ -1,6 +1,6 @@
 # /backend/Dockerfile
 
-FROM python:3.9-slim
+FROM python:3.9-bookworm
 
 WORKDIR /app
 
@@ -11,4 +11,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["flask", "run"]
+CMD ["waitress-serve", "--call", "app:create_app"]

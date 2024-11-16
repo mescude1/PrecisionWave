@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, jsonify, request, abort
-from Backend.app.pw_library.python_methods.fixed_point import fixed_point_method
+from app.pw_library.python_methods.fixed_point import fixed_point_method
 
 bp = Blueprint('fixed_point', __name__, url_prefix='/methods')
 

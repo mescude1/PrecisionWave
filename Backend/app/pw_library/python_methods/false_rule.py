@@ -2,7 +2,7 @@ import math
 import pandas as pd
 from pandas.core.interchange.dataframe_protocol import DataFrame
 
-from Backend.app.helpers.function_parser import string_function_evaluator
+from app.helpers.function_parser import string_function_evaluator
 
 
 def false_rule(f, a, b, tol=1e-7, Nmax=100):

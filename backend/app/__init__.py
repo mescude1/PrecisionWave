@@ -17,7 +17,7 @@ import os
 from flask import Flask
 from flask_jwt_extended import JWTManager
 
-from .blueprint import (
+from app.blueprint import (
     bisection, false_rule, fixed_point, gaussian_elimination, incremental, multiple_roots, newton, secant
 )
 
@@ -39,10 +39,10 @@ def create_app(test_config: dict = {}) -> Flask:
     load_config(app, test_config)
 
     init_instance_folder(app)
-    init_database(app)
+    #init_database(app)
     init_blueprints(app)
-    init_commands(app)
-    init_jwt_manager(app)
+    #init_commands(app)
+    #init_jwt_manager(app)
 
     return app
 
@@ -102,10 +102,10 @@ def init_blueprints(app: Flask) -> None:
     register_handler(app)
 
     # error Handlers
-    from .blueprint import index, auth, account
+    from .blueprint import index#, auth, account
     app.register_blueprint(index.bp)
-    app.register_blueprint(auth.bp)
-    app.register_blueprint(account.bp)
+    #app.register_blueprint(auth.bp)
+    #app.register_blueprint(account.bp)
     app.register_blueprint(bisection.bp)
     app.register_blueprint(false_rule.bp)
     app.register_blueprint(fixed_point.bp)

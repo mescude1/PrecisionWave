@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, request, abort, jsonify
-from Backend.app.pw_library.python_methods.seccant import secant_method
+from app.pw_library.python_methods.seccant import secant_method
 
 bp = Blueprint('secant', __name__, url_prefix='/methods')
 

@@ -7,7 +7,7 @@ from flask_jwt_extended import decode_token
 
 from app.exceptions import TokenNotFound
 
-from .models import Token
+from .models import (Token)
 from .repository import Repository
 
 

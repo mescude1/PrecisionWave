@@ -1,6 +1,6 @@
 from flask import Blueprint, make_response, jsonify, request, abort
-from Backend.app.helpers.function_parser import string_function_differentiator
-from Backend.app.pw_library.python_methods.multiple_roots import multiple_root_method
+from app.helpers.function_parser import string_function_differentiator
+from app.pw_library.python_methods.multiple_roots import multiple_root_method
 
 bp = Blueprint('multiple_roots', __name__, url_prefix='/methods')
 

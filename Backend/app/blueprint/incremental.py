@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, jsonify, request, abort
-from Backend.app.pw_library.python_methods.incremental import incremental_search
+from app.pw_library.python_methods.incremental import incremental_search
 
 bp = Blueprint('incremental', __name__, url_prefix='/methods')
 
@@ -36,7 +36,7 @@ def incremental_post() -> str:
         abort(400)
 
     f = request.json.get('f')
-    h = request.json.get('g')
+    h = request.json.get('h')
     x0 = request.json.get('x0')
 
     root, iterations, converged, df_result = incremental_search(f, x0, h)

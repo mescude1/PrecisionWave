@@ -1,17 +1,7 @@
 import React from 'react'
 import {BlockMath, InlineMath} from 'react-katex';
 import 'katex/dist/katex.min.css';
-import {
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CRow,
-  CAccordion,
-  CAccordionBody,
-  CAccordionHeader,
-  CAccordionItem,
-} from '@coreui/react'
+import {CCard, CCardBody, CCardHeader, CCol, CRow,} from '@coreui/react'
 
 const Vandermonde = () => {
   return (
