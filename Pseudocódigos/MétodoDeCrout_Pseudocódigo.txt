@@ -1,0 +1,27 @@
+FUNCIÓN MétodoDeCrout(a, b):
+
+    ENTRADA:
+    - a: Matriz del sistema \( A \)
+    - b: Vector de soluciones \( b \)
+    
+    SALIDA:
+    - x: Solución del sistema \( Ax = b \)
+    - y: Vector intermedio (resultado de resolver \( L \cdot y = b \))
+    - l: Matriz triangular inferior de la descomposición
+    - u: Matriz triangular superior de la descomposición
+    - convergió: indicador de si el algoritmo fue exitoso
+
+    SI a NO es una matriz cuadrada ENTONCES:
+        Lanzar un error ("La matriz A debe ser cuadrada para aplicar la descomposición de Crout")
+    
+    // Inicializar variables
+    l, u = CroutDecomposition(a)  // Calcular la descomposición de Crout, obteniendo L y U
+    y = ResolverSistemaTriangularInferior(l, b)  // Resolver \( L \cdot y = b \)
+    x = ResolverSistemaTriangularSuperior(u, y)  // Resolver \( U \cdot x = y \)
+    
+    convergió = True  // Suponemos éxito si se cumplen las condiciones iniciales
+    
+    // Crear y devolver los resultados
+    DEVOLVER (x, y, l, u, convergió)
+
+FIN FUNCIÓN
