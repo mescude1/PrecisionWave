@@ -49,7 +49,7 @@ def false_rule(f, a, b, tol=1e-7, Nmax=100):
         result = {
             'i': cont,
             'x_i': pm,
-            'f_xi': fpm,
+            'f_x_i': fpm,
             'e': abs(pm - p0)
         }
         result_array.append(result)
@@ -59,5 +59,4 @@ def false_rule(f, a, b, tol=1e-7, Nmax=100):
     # Results
     x = pm
     iter = cont
-    err = E
-    return x, iter, err, pd.DataFrame(data=result_array)
+    return x, iter, True, pd.DataFrame(data=result_array)

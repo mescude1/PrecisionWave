@@ -36,11 +36,11 @@ def fixed_point_method(f, g, x0, tol=1e-7, max_iter=1000):
         error = abs(x_new - x)
 
         result = {
-            'Iteration': i + 1,
+            'i': i + 1,
             'x_i': x_new,
-            'f(x_i)': f_x_new,
-            'g(x_i)': g(x_new),
-            'Error': error
+            'f_x_i': f_x_new,
+            'g_x_i': g(x_new),
+            'e': error
         }
         result_array.append(result)
 
