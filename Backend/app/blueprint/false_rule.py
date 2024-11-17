@@ -41,7 +41,7 @@ def false_rule_post() -> Response:
 
     result = {
         'root': root,
-        'iterations': iter,
+        'iterations': iterations,
         'converged': converged,
         'df_result': df_result.to_json(orient='records')
     }
