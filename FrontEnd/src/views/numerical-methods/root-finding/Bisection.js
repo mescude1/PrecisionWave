@@ -13,7 +13,7 @@ import {
   CInputGroupText,
   CRow,
 } from '@coreui/react'
-
+import {map} from "core-js/internals/array-iteration";
 
 
 const Bisection = () => {
@@ -30,18 +30,12 @@ const Bisection = () => {
 
   // Handle changes to the input fields
   const handleChange = (e) => {
-  let newFormData = {}
-   e.target.forEach((field) => {
-      const { name, value } = field;
-      if (!name) {
-        console.error('Input is missing a name attribute:', field.name);
-        return;
-      }
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-})
+    const {name, value} = e.target;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   // Handle form submission

@@ -35,8 +35,10 @@ def bisection_post() -> Response:
         abort(400)
 
     f = request.json.get('f')
-    a = request.json.get('a')
-    b = request.json.get('b')
+    a = int(request.json.get('a'))
+    b = int(request.json.get('b'))
+
+
 
     root, iterations, converged, df_result = bisection_method(f, a, b)
 
