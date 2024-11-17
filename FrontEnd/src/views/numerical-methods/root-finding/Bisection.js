@@ -15,6 +15,7 @@ import {
 } from '@coreui/react'
 
 
+
 const Bisection = () => {
   // State for the form inputs
   const [formData, setFormData] = useState({
@@ -29,11 +30,18 @@ const Bisection = () => {
 
   // Handle changes to the input fields
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  let newFormData = {}
+   e.target.forEach((field) => {
+      const { name, value } = field;
+      if (!name) {
+        console.error('Input is missing a name attribute:', field.name);
+        return;
+      }
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+})
   };
 
   // Handle form submission
@@ -41,7 +49,9 @@ const Bisection = () => {
     e.preventDefault();
     setError(null); // Reset error state on new submission
     try {
-      const res = await axios.post('http://precision-wave.azuloso.me/methods/bisection', formData);
+      const res = await axios.post('https://precision-wave.azuloso.me/methods/bisection', formData, {
+        headers: {'Content-Type': 'application/json'}
+      });
       setResponse(res.data); // Set the response data
     } catch (err) {
       setError('Error finding root. Please check your input and try again.');
@@ -161,6 +171,9 @@ const Bisection = () => {
                     placeholder="function"
                     aria-label="function"
                     aria-describedby="function"
+                    name='f'
+                    value={formData.f}
+                    onChange={handleChange}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -169,6 +182,9 @@ const Bisection = () => {
                     placeholder="Interval Start"
                     aria-label="a"
                     aria-describedby="interval start"
+                    name='a'
+                    value={formData.a}
+                    onChange={handleChange}
                   />
                 </CInputGroup>
                 <CInputGroup className="mb-3">
@@ -177,6 +193,9 @@ const Bisection = () => {
                     placeholder="Interval End"
                     aria-label="b"
                     aria-describedby="inverval end"
+                    name='b'
+                    value={formData.b}
+                    onChange={handleChange}
                   />
                 </CInputGroup>
                 <CButton color="primary" type="submit" className="mb-3">Search for Root</CButton>
