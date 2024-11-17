@@ -43,7 +43,7 @@ def false_rule_post() -> Response:
         'x': x,
         'iter': iter,
         'err': err,
-        'df_result': result_array.to_json()
+        'df_result': result_array.to_json(orient='records')
     }
     return make_response(jsonify({'status': "success", 'data': result}), 200)
 

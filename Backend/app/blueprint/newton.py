@@ -45,7 +45,7 @@ def newton_post() -> str:
         'root': root,
         'iterations': iterations,
         'converged': converged,
-        'df_result': df_result
+        'df_result': df_result.to_json(orient='records')
     }
 
     return make_response(jsonify({'status': "success", 'data': result}), 200)
