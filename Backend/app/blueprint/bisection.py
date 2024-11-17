@@ -40,12 +40,12 @@ def bisection_post() -> Response:
 
 
 
-    root, iterations, converged, df_result = bisection_method(f, a, b)
+    root, iterations, error, df_result = bisection_method(f, a, b)
 
     result = {
         'root': root,
         'iterations': iterations,
-        'converged': converged,
+        'error': error,
         'df_result': df_result.to_json(orient='records')
     }
 

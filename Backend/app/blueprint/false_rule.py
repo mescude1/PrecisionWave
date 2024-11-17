@@ -37,12 +37,12 @@ def false_rule_post() -> Response:
     a = float(request.json.get('a'))
     b = float(request.json.get('b'))
 
-    x, iter, err, result_array = false_rule(f, a, b)
+    root, iterations, Err, result_array = false_rule(f, a, b)
 
     result = {
-        'x': x,
-        'iter': iter,
-        'err': err,
+        'root': x,
+        'iterations': iter,
+        'converged': true,
         'df_result': result_array.to_json(orient='records')
     }
     return make_response(jsonify({'status': "success", 'data': result}), 200)
