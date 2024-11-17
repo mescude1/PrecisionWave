@@ -47,7 +47,7 @@ def fixed_point_post() -> str:
 
     f = request.json.get('f')
     g = request.json.get('g')
-    x0 = request.json.get('x0')
+    x0 = float(request.json.get('x0'))
 
     x_new, iterations, converged, result_df = fixed_point_method(f, g, x0)
 

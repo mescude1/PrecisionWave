@@ -35,8 +35,8 @@ def bisection_post() -> Response:
         abort(400)
 
     f = request.json.get('f')
-    a = int(request.json.get('a'))
-    b = int(request.json.get('b'))
+    a = float(request.json.get('a'))
+    b = float(request.json.get('b'))
 
 
 

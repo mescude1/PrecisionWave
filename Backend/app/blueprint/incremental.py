@@ -36,8 +36,8 @@ def incremental_post() -> str:
         abort(400)
 
     f = request.json.get('f')
-    h = request.json.get('h')
-    x0 = request.json.get('x0')
+    h = float(request.json.get('h'))
+    x0 = float(request.json.get('x0'))
 
     root, iterations, converged, df_result = incremental_search(f, x0, h)
 

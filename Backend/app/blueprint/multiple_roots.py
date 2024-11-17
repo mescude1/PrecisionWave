@@ -41,7 +41,7 @@ def multiple_roots_post() -> str:
     f = request.json.get('f')
     df = string_function_differentiator(f)
     ddf = string_function_differentiator(df)
-    x0 = request.json.get('x0')
+    x0 = float(request.json.get('x0'))
 
     root, iterations, converged, df_result = multiple_root_method(f, df, ddf, x0)
 

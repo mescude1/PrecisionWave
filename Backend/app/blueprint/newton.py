@@ -37,7 +37,7 @@ def newton_post() -> str:
 
     f = request.json.get('f')
     df = string_function_differentiator(f)
-    x0 = request.json.get('x0')
+    x0 = float(request.json.get('x0'))
 
     root, iterations, converged, df_result = newton_raphson(f, df, x0)
 

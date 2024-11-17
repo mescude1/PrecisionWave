@@ -34,8 +34,8 @@ def false_rule_post() -> Response:
         abort(400)
 
     f = request.json.get('f')
-    a = request.json.get('a')
-    b = request.json.get('b')
+    a = float(request.json.get('a'))
+    b = float(request.json.get('b'))
 
     x, iter, err, result_array = false_rule(f, a, b)
 
