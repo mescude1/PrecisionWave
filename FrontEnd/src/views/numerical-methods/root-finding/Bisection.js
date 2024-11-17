@@ -7,12 +7,17 @@ import {
   CCardBody,
   CCardHeader,
   CCol,
+  CCollapse,
   CFormInput,
   CInputGroup,
   CInputGroupText,
   CRow,
-  CCollapse,
-  CTable
+  CTable,
+  CTableHead,
+  CTableRow,
+  CTableHeaderCell,
+  CTableBody,
+  CTableDataCell
 } from '@coreui/react'
 import BisectionTheory from "src/views/numerical-methods/theory/bisection_theory";
 
@@ -57,119 +62,133 @@ const Bisection = () => {
     }
   };
 
-    return (
-      <CRow>
-        <CCol xs={6}>
-          <CCard className="mb-4">
-            <CCardHeader>
-              <strong>Theory</strong>
-            </CCardHeader>
-            <CCardBody>
-              <h2>Bisection</h2>
-              <CButton color="primary" onClick={() => setVisible(!visible)} className="me-md-2">
-                show/hide
-              </CButton>
-              <CCollapse visible={visible}>
-                <BisectionTheory></BisectionTheory>
-              </CCollapse>
-            </CCardBody>
-          </CCard>
-        </CCol>
-        <CCol xs={6}>
-          <CCard className="mb-4">
-            <CCardHeader>
-              <strong>Playground</strong>
-            </CCardHeader>
-            <CCardBody>
-              <form onSubmit={handleSubmit}>
-                <CInputGroup className="mb-3">
-                  <CInputGroupText id="f">f</CInputGroupText>
-                  <CFormInput
-                    placeholder="function"
-                    aria-label="function"
-                    aria-describedby="function"
-                    name='f'
-                    value={formData.f}
-                    onChange={handleChange}
-                  />
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CInputGroupText id="a">a</CInputGroupText>
-                  <CFormInput
-                    placeholder="Interval Start"
-                    aria-label="a"
-                    aria-describedby="interval start"
-                    name='a'
-                    value={formData.a}
-                    onChange={handleChange}
-                  />
-                </CInputGroup>
-                <CInputGroup className="mb-3">
-                  <CInputGroupText id="b">b</CInputGroupText>
-                  <CFormInput
-                    placeholder="Interval End"
-                    aria-label="b"
-                    aria-describedby="inverval end"
-                    name='b'
-                    value={formData.b}
-                    onChange={handleChange}
-                  />
-                </CInputGroup>
-                <CButton color="primary" type="submit" className="mb-3">Search for Root</CButton>
-              </form>
+  return (
+    <CRow>
+      <CCol xs={6}>
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Theory</strong>
+          </CCardHeader>
+          <CCardBody>
+            <h2>Bisection</h2>
+            <CButton color="primary" onClick={() => setVisible(!visible)} className="me-md-2">
+              show/hide
+            </CButton>
+            <CCollapse visible={visible}>
+              <BisectionTheory></BisectionTheory>
+            </CCollapse>
+          </CCardBody>
+        </CCard>
+      </CCol>
+      <CCol xs={6}>
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Playground</strong>
+          </CCardHeader>
+          <CCardBody>
+            <form onSubmit={handleSubmit}>
+              <CInputGroup className="mb-3">
+                <CInputGroupText id="f">f</CInputGroupText>
+                <CFormInput
+                  placeholder="function"
+                  aria-label="function"
+                  aria-describedby="function"
+                  name='f'
+                  value={formData.f}
+                  onChange={handleChange}
+                />
+              </CInputGroup>
+              <CInputGroup className="mb-3">
+                <CInputGroupText id="a">a</CInputGroupText>
+                <CFormInput
+                  placeholder="Interval Start"
+                  aria-label="a"
+                  aria-describedby="interval start"
+                  name='a'
+                  value={formData.a}
+                  onChange={handleChange}
+                />
+              </CInputGroup>
+              <CInputGroup className="mb-3">
+                <CInputGroupText id="b">b</CInputGroupText>
+                <CFormInput
+                  placeholder="Interval End"
+                  aria-label="b"
+                  aria-describedby="inverval end"
+                  name='b'
+                  value={formData.b}
+                  onChange={handleChange}
+                />
+              </CInputGroup>
+              <CButton color="primary" type="submit" className="mb-3">Search for Root</CButton>
+            </form>
 
-              {/* Display error message */}
-              {error && (
-                <div className="mt-3 text-danger">
-                  <p>{error}</p>
-                </div>
-              )}
+            {/* Display error message */}
+            {error && (
+              <div className="mt-3 text-danger">
+                <p>{error}</p>
+              </div>
+            )}
 
-            </CCardBody>
-          </CCard>
-        </CCol>
-        <CCol xs={12}>
-          <CCard className="mb-4">
-            <CCardHeader>
-              <strong>Visualization</strong>
-            </CCardHeader>
-            <CCardBody>
-              {/* Display the response */}
-              {response && (
-                <div className="mt-3">
-                  <h5>Root Search Result</h5>
-                  <p>Approximate Root: {response.data.root}</p>
-                  <p>Iterations: {response.data.iterations}</p>
-                  <p>Iterations Table:</p>
-                  <CTable columns={[
-  {
-    key: 'iteration',
-    label: '#',
-    _props: { scope: 'col' },
-  },
-  {
-    key: 'x_i',
-    label: 'Heading',
-    _props: { scope: 'col' },
-  },
-  {
-    key: 'f(x)',
-    label: 'Heading',
-    _props: { scope: 'col' },
-  },
-  {
-    key: 'Error',
-    label: 'Heading',
-    _props: { scope: 'col' },
-  }
-]} items={JSON.parse(response.data.df_result)} />
-                </div>
-              )}
-            </CCardBody>
-          </CCard>
-        </CCol>
-      </CRow>
-    )
-  }
+          </CCardBody>
+        </CCard>
+      </CCol>
+      <CCol xs={12}>
+        <CCard className="mb-4">
+          <CCardHeader>
+            <strong>Visualization</strong>
+          </CCardHeader>
+          <CCardBody>
+            {/* Display the response */}
+            {response && (
+              <div className="mt-3">
+                <h5>Root Search Result</h5>
+
+                <CTable>
+                  <CTableHead>
+                    <CTableRow>
+                      <CTableHeaderCell scope="col">Approximate Root</CTableHeaderCell>
+                      <CTableHeaderCell scope="col">Iterations</CTableHeaderCell>
+                    </CTableRow>
+                  </CTableHead>
+                  <CTableBody>
+                    <CTableRow>
+                      <CTableDataCell>{response.data.root}</CTableDataCell>
+                      <CTableDataCell>{response.data.iterations}</CTableDataCell>
+                    </CTableRow>
+                  </CTableBody>
+                </CTable>
+
+                <h4>Iterations Table:</h4>
+                <CTable columns={[
+                  {
+                    key: 'i',
+                    label: 'Iterations',
+                    _props: {scope: 'col'},
+                  },
+                  {
+                    key: 'x_i',
+                    label: 'Value for x',
+                    _props: {scope: 'col'},
+                  },
+                  {
+                    key: 'f_x_i',
+                    label: 'Eval Result',
+                    _props: {scope: 'col'},
+                  },
+                  {
+                    key: 'e',
+                    label: 'Error',
+                    _props: {scope: 'col'},
+                  }
+                ]} items={JSON.parse(response.data.df_result)}/>
+              </div>
+            )}
+          </CCardBody>
+        </CCard>
+      </CCol>
+    </CRow>
+  )
+}
 
 export default Bisection
