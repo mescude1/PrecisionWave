@@ -1,6 +1,5 @@
-import math
 from pandas import DataFrame
-from Backend.app.helpers.function_parser import string_function_evaluator
+from app.helpers.function_parser import string_function_evaluator
 
 
 def secant_method(f, x0, x1, tol=1e-7, max_iter=100):

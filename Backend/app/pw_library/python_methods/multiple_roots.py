@@ -1,6 +1,6 @@
 import pandas as pd
 
-from Backend.app.helpers.function_parser import string_function_evaluator
+from app.helpers.function_parser import string_function_evaluator
 
 
 def multiple_root_method(f, df, ddf, x0, tol=1e-7, max_iter=100):
