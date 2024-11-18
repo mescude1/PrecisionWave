@@ -52,4 +52,4 @@ def incremental_search(function, x0, h, n_max=100):
     # Result delivery
 
     result_df = pd.DataFrame(result_array)
-    return xant, xact, i, result_df
+    return xact, i, True, result_df
