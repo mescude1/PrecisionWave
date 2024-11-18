@@ -50,7 +50,7 @@ const IncrementalSearch = () => {
     e.preventDefault();
     setError(null); // Reset error state on new submission
     try {
-      const res = await axios.post('https://precision-wave.azuloso.me/methods/incremental-search', formData, {
+      const res = await axios.post('https://precision-wave.azuloso.me/methods/incremental', formData, {
         headers: {'Content-Type': 'application/json'}
       });
       setResponse(res.data); // Set the response data
