@@ -40,10 +40,8 @@ def secant_post() -> str:
     f = request.json.get('f')
     x0 = request.json.get('x0')
     x1 = request.json.get('x1')
-    tol = request.json.get('tol')
-    max_iter = request.json.get('max_iter')
 
-    root, iterations, converged, result_df = secant_method(f, x0, x1, tol, max_iter)
+    root, iterations, converged, result_df = secant_method(f, x0, x1)
 
     result = {
         'root': root,
