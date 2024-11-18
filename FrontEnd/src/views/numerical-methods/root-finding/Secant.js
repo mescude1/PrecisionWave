@@ -50,7 +50,7 @@ const Secant = () => {
     e.preventDefault();
     setError(null); // Reset error state on new submission
     try {
-      const res = await axios.post('https://precision-wave.azuloso.me/methods/fixed-point', formData, {
+      const res = await axios.post('https://precision-wave.azuloso.me/methods/secant', formData, {
         headers: {'Content-Type': 'application/json'}
       });
       setResponse(res.data); // Set the response data
@@ -85,7 +85,42 @@ const Secant = () => {
             <strong>Playground</strong>
           </CCardHeader>
           <CCardBody>
-
+            <form onSubmit={handleSubmit}>
+              <CInputGroup className="mb-3">
+                <CInputGroupText id="f">f</CInputGroupText>
+                <CFormInput
+                  placeholder="function F"
+                  aria-label="function"
+                  aria-describedby="function"
+                  name='f'
+                  value={formData.f}
+                  onChange={handleChange}
+                />
+              </CInputGroup>
+              <CInputGroup className="mb-3">
+                <CInputGroupText id="x0">x0</CInputGroupText>
+                <CFormInput
+                  placeholder="Initial inference"
+                  aria-label="x0"
+                  aria-describedby="interval start"
+                  name='x0'
+                  value={formData.x0}
+                  onChange={handleChange}
+                />
+              </CInputGroup>
+              <CInputGroup className="mb-3">
+                <CInputGroupText id="x1">x1</CInputGroupText>
+                <CFormInput
+                  placeholder="Initial inference"
+                  aria-label="x1"
+                  aria-describedby="interval start"
+                  name='x1'
+                  value={formData.x1}
+                  onChange={handleChange}
+                />
+              </CInputGroup>
+              <CButton color="primary" type="submit" className="mb-3">Search for Root</CButton>
+            </form>
           </CCardBody>
         </CCard>
       </CCol>
@@ -95,7 +130,51 @@ const Secant = () => {
             <strong>Visualization</strong>
           </CCardHeader>
           <CCardBody>
+            {/* Display the response */}
+            {response && (
+              <div className="mt-3">
+                <h5>Root Search Result</h5>
 
+                <CTable>
+                  <CTableHead>
+                    <CTableRow>
+                      <CTableHeaderCell scope="col">Approximate Root</CTableHeaderCell>
+                      <CTableHeaderCell scope="col">Iterations</CTableHeaderCell>
+                    </CTableRow>
+                  </CTableHead>
+                  <CTableBody>
+                    <CTableRow>
+                      <CTableDataCell>{response.data.root}</CTableDataCell>
+                      <CTableDataCell>{response.data.iterations}</CTableDataCell>
+                    </CTableRow>
+                  </CTableBody>
+                </CTable>
+
+                <h4>Iterations Table:</h4>
+                <CTable columns={[
+                  {
+                    key: 'i',
+                    label: 'Iterations',
+                    _props: {scope: 'col'},
+                  },
+                  {
+                    key: 'x_i',
+                    label: 'Value for x',
+                    _props: {scope: 'col'},
+                  },
+                  {
+                    key: 'f_x_i',
+                    label: 'Eval F Result',
+                    _props: {scope: 'col'},
+                  },
+                  {
+                    key: 'e',
+                    label: 'Error',
+                    _props: {scope: 'col'},
+                  }
+                ]} items={JSON.parse(response.data.result_df)}/>
+              </div>
+            )}
           </CCardBody>
         </CCard>
       </CCol>
