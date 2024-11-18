@@ -33,4 +33,4 @@ def string_function_evaluator(function_string, x) -> [float, ValueError]:
 
 def string_function_differentiator(function_string:str) -> str:
     if is_valid_string(function_string):
-        return diff(function_string)
+        return str(diff(function_string))

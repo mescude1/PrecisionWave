@@ -31,9 +31,8 @@ def newton_raphson(f, df, x0, tol=1e-7, max_iter=100):
                 'e': abs(xn - (xn - fxn / dfxn))
             }
             result_array.append(result)
-            print(f"Found solution after {n} iterations.")
-            print(pd.DataFrame(result_array))
-            return xn
+
+            return xn, n, True, pd.DataFrame(result_array)
 
         if dfxn == 0:
             print("Zero derivative. No solution found.")
@@ -48,5 +47,4 @@ def newton_raphson(f, df, x0, tol=1e-7, max_iter=100):
         result_array.append(result)
         # Update the next approximation using Newton-Raphson formula
         xn = xn - fxn / dfxn
-    print("Exceeded maximum iterations. No solution found.")
     return None
