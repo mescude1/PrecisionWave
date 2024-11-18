@@ -1,5 +1,7 @@
 import pandas as pd
 
+from Backend.app.helpers.function_parser import string_function_evaluator
+
 
 def fixed_point_method(f, g, x0, tol=1e-7, max_iter=1000):
     """
@@ -31,21 +33,21 @@ def fixed_point_method(f, g, x0, tol=1e-7, max_iter=1000):
     x = x0
 
     for i in range(max_iter):
-        x_new = g(x)
-        f_x_new = f(x_new)
+        x_new = string_function_evaluator(g, x)
+        f_x_new = string_function_evaluator(f, x_new)
         error = abs(x_new - x)
 
         result = {
             'i': i + 1,
             'x_i': x_new,
             'f_x_i': f_x_new,
-            'g_x_i': g(x_new),
+            'g_x_i': string_function_evaluator(g,x_new),
             'e': error
         }
         result_array.append(result)
 
         # Check for convergence based on tolerance
-        if error < tol and abs(f_x_new) < tol:
+        if error < tol:
             result_df = pd.DataFrame(result_array)
             return x_new, i + 1, True, result_df
 

@@ -19,6 +19,7 @@ import {
   CTableDataCell
 } from '@coreui/react'
 import axios from "axios";
+import FixedPointTheory from "src/views/numerical-methods/theory/fixed_point_theory";
 
 const FixedPoint = () => {
 
@@ -74,7 +75,7 @@ const FixedPoint = () => {
               show/hide
             </CButton>
             <CCollapse visible={visible}>
-              <FixedPoint></FixedPoint>
+              <FixedPointTheory></FixedPointTheory>
             </CCollapse>
           </CCardBody>
         </CCard>
