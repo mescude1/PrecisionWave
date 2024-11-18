@@ -49,13 +49,13 @@ def fixed_point_post() -> str:
     g = request.json.get('g')
     x0 = float(request.json.get('x0'))
 
-    x_new, iterations, converged, result_df = fixed_point_method(f, g, x0)
+    x_new, iterations, converged, df_result = fixed_point_method(f, g, x0)
 
     result = {
         'root': x_new,
         'iterations': iterations,
         'converged': converged,
-        'result_df': result_df.to_json(orient='records')
+        'df_result': df_result.to_json(orient='records')
     }
 
     return make_response(jsonify({'status': "success", 'data': result}), 200)
