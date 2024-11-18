@@ -38,8 +38,8 @@ def secant_post() -> str:
         abort(400)
 
     f = request.json.get('f')
-    x0 = request.json.get('x0')
-    x1 = request.json.get('x1')
+    x0 = float(request.json.get('x0'))
+    x1 = float(request.json.get('x1'))
 
     root, iterations, converged, result_df = secant_method(f, x0, x1)
 
