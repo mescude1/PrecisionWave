@@ -1,8 +1,9 @@
-import math
 import pandas as pd
 
+from Backend.app.helpers.function_parser import string_function_evaluator
 
-def newton_raphson(f, df, x0, tol=1e-7, max_iter=30):
+
+def newton_raphson(f, df, x0, tol=1e-7, max_iter=100):
     """
     Solves f(x) = 0 using the Newton-Raphson method.
 
@@ -19,15 +20,15 @@ def newton_raphson(f, df, x0, tol=1e-7, max_iter=30):
     xn = x0
     result_array = []
     for n in range(0, max_iter):
-        fxn = f(xn)
-        dfxn = df(xn)
+        fxn = string_function_evaluator(f,xn)
+        dfxn = string_function_evaluator(df, xn)
 
         if abs(xn - (xn - fxn / dfxn)) < tol:
             result = {
                 'i:': n,
-                'xi:': xn,
-                'f_xi:': fxn,
-                'E': abs(xn - (xn - fxn / dfxn))
+                'x_i:': xn,
+                'f_x_i:': fxn,
+                'e': abs(xn - (xn - fxn / dfxn))
             }
             result_array.append(result)
             print(f"Found solution after {n} iterations.")
@@ -39,10 +40,10 @@ def newton_raphson(f, df, x0, tol=1e-7, max_iter=30):
             return None
 
         result = {
-            'i:': n,
-            'xi:': xn,
-            'f_xi:': fxn,
-            'E': abs(xn - (xn - fxn / dfxn))
+            'i': n,
+            'x_i': xn,
+            'f_x_i': fxn,
+            'e': abs(xn - (xn - fxn / dfxn))
         }
         result_array.append(result)
         # Update the next approximation using Newton-Raphson formula

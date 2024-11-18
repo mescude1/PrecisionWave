@@ -1,8 +1,9 @@
-import math
 import pandas as pd
 
+from app.helpers.function_parser import string_function_evaluator
 
-def incremental_search(function, x0, h, nmax=100):
+
+def incremental_search(function, x0, h, n_max=100):
     """
     This program finds an interval where f(x) has a sign change using the incremental search method.
     Inputs:
@@ -20,13 +21,13 @@ def incremental_search(function, x0, h, nmax=100):
     # Initialization
 
     xant = x0
-    fant = function(xant)
+    fant = string_function_evaluator(function, xant)
     xact = xant + h
-    fact = function(xact)
+    fact = string_function_evaluator(function, xact)
     result_array = []
     # Loop
     i = 0
-    for i in range(1, nmax+1):
+    for i in range(1, n_max + 1):
         if fant * fact < 0:
             result = {
                 'i': i,
@@ -46,9 +47,9 @@ def incremental_search(function, x0, h, nmax=100):
         xant = xact
         fant = fact
         xact = xant + h
-        fact = f(xact)
+        fact = string_function_evaluator(function, xact)
 
     # Result delivery
 
-    result_data_frame = pd.DataFrame(result_array)
-    return xant, xact, i, result_data_frame
+    result_df = pd.DataFrame(result_array)
+    return xant, xact, i, result_df

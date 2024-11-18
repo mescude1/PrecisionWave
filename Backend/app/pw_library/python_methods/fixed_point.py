@@ -1,6 +1,6 @@
 import pandas as pd
 
-from Backend.app.helpers.function_parser import string_function_evaluator
+from app.helpers.function_parser import string_function_evaluator
 
 
 def fixed_point_method(f, g, x0, tol=1e-7, max_iter=1000):

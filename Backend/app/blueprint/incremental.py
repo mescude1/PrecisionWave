@@ -39,13 +39,13 @@ def incremental_post() -> str:
     h = float(request.json.get('h'))
     x0 = float(request.json.get('x0'))
 
-    root, iterations, converged, df_result = incremental_search(f, x0, h)
+    root, iterations, converged, result_df = incremental_search(f, x0, h)
 
     result = {
         'root': root,
         'iterations': iterations,
         'converged': converged,
-        'df_result': df_result.to_json(orient='records')
+        'result_df': result_df.to_json(orient='records')
     }
 
     return make_response(jsonify({'status': "success", 'data': result}), 200)

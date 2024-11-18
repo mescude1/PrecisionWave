@@ -1,7 +1,4 @@
-import math
 import pandas as pd
-from pandas.core.interchange.dataframe_protocol import DataFrame
-
 from app.helpers.function_parser import string_function_evaluator
 
 
@@ -10,7 +7,7 @@ def false_rule(f, a, b, tol=1e-7, Nmax=100):
     This program finds the solution to the equation f(x) = 0 en el interval [a, b] using the method of the false rule
 
     Inputs:
-    f: continious function
+    f: continuos function
     a: left endpoint of the initial interval
     b: right endpoint of the initial interval
     tol: tolerance

@@ -3,6 +3,7 @@ import {BlockMath, InlineMath} from 'react-katex';
 import 'katex/dist/katex.min.css';
 
 
+
 const BisectionTheory = () => {
   return (<>
         <p>The <strong>bisection method</strong> is a numerical technique for finding roots that refines an

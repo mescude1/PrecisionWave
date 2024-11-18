@@ -49,7 +49,7 @@ def secant_post() -> str:
         'root': root,
         'iterations': iterations,
         'converged': converged,
-        'result_df': result_df.to_json()
+        'result_df': result_df.to_json(orient='records')
     }
 
     return make_response(jsonify({'status': "success", 'data': result}), 200)

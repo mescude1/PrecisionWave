@@ -1,6 +1,7 @@
-import math
-
 import pandas as pd
+
+from Backend.app.helpers.function_parser import string_function_evaluator
+
 
 def multiple_root_method(f, df, ddf, x0, tol=1e-7, max_iter=100):
     """
@@ -31,9 +32,9 @@ def multiple_root_method(f, df, ddf, x0, tol=1e-7, max_iter=100):
     result_array = []
 
     for i in range(max_iter):
-        f_x0 = f(x0)
-        df_x0 = df(x0)
-        ddf_x0 = ddf(x0)
+        f_x0 = string_function_evaluator(f,x0)
+        df_x0 = string_function_evaluator(df,x0)
+        ddf_x0 = string_function_evaluator(ddf,x0)
 
         if df_x0**2 - f_x0 * ddf_x0 == 0:
             raise ValueError("Division by zero encountered in the multiple root method.")
@@ -48,19 +49,17 @@ def multiple_root_method(f, df, ddf, x0, tol=1e-7, max_iter=100):
         result = {
             'i': i,
             'x_i': x0,
-            'f(x_i)': f_x0,
-            'df(x_i)': df_x0,
-            'ddf(x_i)': ddf_x0,
+            'f_x_i': f_x0,
+            'df_x_i': df_x0,
+            'ddf_x_i': ddf_x0,
             'x_(i+1)': x1,
-            'Error': error
+            'e': error
         }
         result_array.append(result)
 
         if error < tol:
             df_result = pd.DataFrame(result_array)
-            print(df_result)
-            print(f"Converged after {i + 1} iterations.")
-            return x1, i + 1, df_result
+            return x1, i + 1, True, df_result
 
         # Update x0 for next iteration
         x0 = x1

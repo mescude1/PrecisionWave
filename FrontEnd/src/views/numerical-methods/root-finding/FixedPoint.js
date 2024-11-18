@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import 'katex/dist/katex.min.css';
 import {
   CButton,
   CCard,
@@ -23,7 +22,7 @@ import FixedPointTheory from "src/views/numerical-methods/theory/fixed_point_the
 
 const FixedPoint = () => {
 
-    // state for the collapsible panel
+  // state for the collapsible panel
   const [visible, setVisible] = useState(false)
   // State for the form inputs
   const [formData, setFormData] = useState({
@@ -99,7 +98,7 @@ const FixedPoint = () => {
                 />
               </CInputGroup>
               <CInputGroup className="mb-3">
-                <CInputGroupText id="g">f</CInputGroupText>
+                <CInputGroupText id="g">g</CInputGroupText>
                 <CFormInput
                   placeholder="function G"
                   aria-label="function"
@@ -110,7 +109,7 @@ const FixedPoint = () => {
                 />
               </CInputGroup>
               <CInputGroup className="mb-3">
-                <CInputGroupText id="x0">a</CInputGroupText>
+                <CInputGroupText id="x0">x0</CInputGroupText>
                 <CFormInput
                   placeholder="Initial inference"
                   aria-label="x0"

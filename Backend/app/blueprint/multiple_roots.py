@@ -43,13 +43,13 @@ def multiple_roots_post() -> str:
     ddf = string_function_differentiator(df)
     x0 = float(request.json.get('x0'))
 
-    root, iterations, converged, df_result = multiple_root_method(f, df, ddf, x0)
+    root, iterations, converged, result_df = multiple_root_method(f, df, ddf, x0)
 
     result ={
         'root': root,
         'iterations': iterations,
         'converged': converged,
-        'df_result': df_result.to_json(orient='records')
+        'result_df': result_df.to_json(orient='records')
     }
 
     return make_response(jsonify({'status': "success", 'data': result}), 200)

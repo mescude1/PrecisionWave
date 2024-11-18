@@ -39,13 +39,13 @@ def newton_post() -> str:
     df = string_function_differentiator(f)
     x0 = float(request.json.get('x0'))
 
-    root, iterations, converged, df_result = newton_raphson(f, df, x0)
+    root, iterations, converged, result_df = newton_raphson(f, df, x0)
 
     result = {
         'root': root,
         'iterations': iterations,
         'converged': converged,
-        'df_result': df_result.to_json(orient='records')
+        'result_df': result_df.to_json(orient='records')
     }
 
     return make_response(jsonify({'status': "success", 'data': result}), 200)
