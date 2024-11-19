@@ -34,9 +34,10 @@ def gaussian_elimination_get() -> str:
 
 @bp.route('/gaussian-elimination', methods=['POST'])
 def gaussian_elimination_post() -> str:
-    a = request.get_json('A')
-    b = request.get_json('b')
-    pivot = request.get_json('pivot')
+
+    a = [[float(element) for element in row] for row in request.get_json('matrix').get('matrix')]
+    b = [float(element) for element in request.get_json('vector').get('vector')]
+    pivot = request.get_json().get('pivot')[0]
 
     if  pivot == 'none':
         x, steps = gaussian_elimination_no_pivot_verbose(a, b)
