@@ -15,6 +15,6 @@ def gauss_seidel(A, b, x0, tol=1e-7, max_iterations=100):
 
         # Check for convergence
         if np.linalg.norm(x - x_old, ord=np.inf) < tol:
-            return x, k, abs(np.linalg.norm(x - x_old, ord=np.inf))
+            return x, k
 
     raise ValueError(f'Gauss-Seidel method did not converge after {max_iterations} iterations')

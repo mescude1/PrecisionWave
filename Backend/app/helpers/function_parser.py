@@ -23,6 +23,7 @@ def is_valid_string(s) -> bool:
     return bool(re.fullmatch(pattern, s))
 
 def string_function_evaluator(function_string, x) -> [float, ValueError]:
+    x = x
     if is_valid_string(function_string):
         try:
             return eval(function_string)
