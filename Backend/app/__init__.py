@@ -124,7 +124,6 @@ def init_blueprints(app: Flask) -> None:
     app.register_blueprint(gauss_seidel.bp)
     app.register_blueprint(jacobi.bp)
     app.register_blueprint(lagrange.bp)
-    app.register_blueprint(multiple_roots.bp)
     app.register_blueprint(sor.bp)
     app.register_blueprint(spline_interpolation.bp)
     app.register_blueprint(vandermonde.bp)
