@@ -1,11 +1,11 @@
 import re
 from sympy import diff
-from math import sin, cos, tan, atan, acos, asin, pi, e, log, exp
+from math import sin, cos, tan, atan, acos, asin, pi, e, log, exp, pow
 
 list_of_accepted_math_characters = ['+', '-', '*', '/', '**', '~', 'sin', 'cos', 'tan', 'cot', 'csc', 'sec', 'pi', 'e',
-                                    'exp', 'ln', 'log', 'sqrt', '(', ')', 'x', 'math', '.']
+                                    'exp', 'ln', 'log', 'sqrt', '(', ')', 'x', 'math', '.', 'pow']
 
-pattern = r'^(\+|\-|\*|\/|\**|~|x|math|.|sin|cos|tan|cot|csc|sec|pi|e|exp|ln|log|sqrt|\(|\)|[0-9])+$'
+pattern = r'^(\+|\-|\*|\/|\**|~|x|math|.|sin|cos|tan|cot|csc|sec|pi|e|pow|exp|ln|log|sqrt|\(|\)|[0-9])+$'
 
 sin = sin
 cos = cos
@@ -17,6 +17,7 @@ pi = pi
 e = e
 exp = exp
 ln = log
+pow = pow
 
 def is_valid_string(s) -> bool:
     return bool(re.fullmatch(pattern, s))
