@@ -29,9 +29,9 @@ def lu_factorization_get() -> str:
 
 @bp.route('/lu-factorization', methods=['POST'])
 def lu_factorization_post() -> str:
-    a = request.get_json('A')
-    b = request.get_json('b')
-    pivot = request.get_json('pivot')
+    a = [[float(element) for element in row] for row in request.get_json('matrix').get('matrix')]
+    b = [float(element) for element in request.get_json('vector').get('vector')]
+    pivot = request.get_json().get('pivot')
 
     if pivot == "None":
         x, l, u = solve_lu(a, b)

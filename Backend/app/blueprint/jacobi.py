@@ -27,9 +27,9 @@ def jacobi_get() -> str:
 
 @bp.route('/jacobi', methods=['POST'])
 def jacobi_post() -> str:
-    a = request.get_json('A')
-    b = request.get_json('b')
-    x0 = request.get_json('x0')
+    a = [[float(element) for element in row] for row in request.get_json('matrix').get('matrix')]
+    b = [float(element) for element in request.get_json('vector').get('vector')]
+    x0 =[float(element) for element in request.get_json('inference').get('inference')]
 
     x, steps = jacobi(a, b, x0)
 

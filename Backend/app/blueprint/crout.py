@@ -23,13 +23,13 @@ def crout_get() -> Response:
     return response
 
 
-@bp.route('/cholesky', methods=['POST'])
+@bp.route('/crout', methods=['POST'])
 def cholesky_post() -> Response:
     if not request.is_json:
         abort(400)
 
-    a = request.json.get('a')
-    b = request.json.get('b')
+    a = [[float(element) for element in row] for row in request.get_json('matrix').get('matrix')]
+    b = [float(element) for element in request.get_json('vector').get('vector')]
 
     x, y, l, u = solve_crout(a, b)
 

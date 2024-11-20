@@ -21,14 +21,16 @@ const Jacobi = () => {
   const [size, setSize] = useState(2);  // Default matrix size
   const [matrix, setMatrix] = useState(Array(size).fill(Array(size).fill(0)));
   const [vector, setVector] = useState(Array(size).fill(0));
+  const [inference, setInference] = useState(Array(size).fill(0));
   const [result, setResult] = useState(null);
 
   const handleMatrixChange = (updatedMatrix) => setMatrix(updatedMatrix);
   const handleVectorChange = (updatedVector) => setVector(updatedVector);
+  const handleInferenceChange = (updatedInference) => setInference(updatedInference);
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('https://precision-wave.azuloso.me/methods/jacobi', { matrix, vector, pivot });
+      const response = await axios.post('https://precision-wave.azuloso.me/methods/jacobi', { matrix, vector, inference });
       setResult(response.data.result);
     } catch (error) {
       console.error('Error with API call:', error);
@@ -80,6 +82,7 @@ const Jacobi = () => {
 
             <MatrixInput size={size} onChange={handleMatrixChange}/>
             <VectorInput size={size} onChange={handleVectorChange}/>
+            <InferenceInput size={size} onChange={handleInferenceChange}/>
 
             <h3></h3>
 

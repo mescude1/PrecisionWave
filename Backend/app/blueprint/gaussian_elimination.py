@@ -37,7 +37,7 @@ def gaussian_elimination_post() -> str:
 
     a = [[float(element) for element in row] for row in request.get_json('matrix').get('matrix')]
     b = [float(element) for element in request.get_json('vector').get('vector')]
-    pivot = request.get_json().get('pivot')[0]
+    pivot = request.get_json().get('pivot')
 
     if  pivot == 'none':
         x, steps = gaussian_elimination_no_pivot_verbose(a, b)

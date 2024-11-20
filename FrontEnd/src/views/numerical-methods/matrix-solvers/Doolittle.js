@@ -22,16 +22,15 @@ const Doolittle = () => {
   const [size, setSize] = useState(2);  // Default matrix size
   const [matrix, setMatrix] = useState(Array(size).fill(Array(size).fill(0)));
   const [vector, setVector] = useState(Array(size).fill(0));
-  const [pivot, setPivot] = useState(['partial'])
   const [result, setResult] = useState(null);
 
   const handleMatrixChange = (updatedMatrix) => setMatrix(updatedMatrix);
   const handleVectorChange = (updatedVector) => setVector(updatedVector);
-  const handleSelectChange = (updatedSelect) => setPivot(updatedSelect)
+
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('https://precision-wave.azuloso.me/methods/doolittle', { matrix, vector, pivot });
+      const response = await axios.post('https://precision-wave.azuloso.me/methods/doolittle', { matrix, vector });
       setResult(response.data.result);
     } catch (error) {
       console.error('Error with API call:', error);
