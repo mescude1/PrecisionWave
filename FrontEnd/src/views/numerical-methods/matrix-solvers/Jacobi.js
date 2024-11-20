@@ -14,6 +14,7 @@ import JacobiTheory from "src/views/numerical-methods/theory/jacobi_theory";
 import MatrixInput from "src/views/numerical-methods/matrixInput";
 import VectorInput from "src/views/numerical-methods/vectorInput";
 import axios from "axios";
+import InferenceInput from "src/views/numerical-methods/inferenceInput";
 
 const Jacobi = () => {
 
