@@ -34,7 +34,7 @@ def gauss_seidel_post() -> str:
     x, steps = gauss_seidel(a, b, x0)
 
     result = {
-        'x': x,
+        'x': x.tolist(),
         'steps': steps
     }
     return make_response(jsonify({'status': "success", 'data': result}), 200)

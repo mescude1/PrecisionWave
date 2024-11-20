@@ -34,7 +34,7 @@ def jacobi_post() -> str:
     x, steps = jacobi(a, b, x0)
 
     result = {
-        'x': x,
+        'x': x.tolist(),
         'steps': steps
     }
 

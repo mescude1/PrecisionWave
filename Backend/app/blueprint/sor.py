@@ -34,7 +34,7 @@ def sor_post() -> str:
     x, steps = sor(a, b, x0, w)
 
     result = {
-        'x': x,
+        'x': x.tolist(),
         'steps': steps
     }
 
