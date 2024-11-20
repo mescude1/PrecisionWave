@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, jsonify, request
-from Backend.app.pw_library.python_methods.jacobi import jacobi
+from app.pw_library.python_methods.jacobi import jacobi
 
 bp = Blueprint('jacobi', __name__, url_prefix='/methods')
 

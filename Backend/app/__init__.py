@@ -18,7 +18,9 @@ from flask import Flask
 from flask_jwt_extended import JWTManager
 
 from app.blueprint import (
-    bisection, false_rule, fixed_point, gaussian_elimination, incremental, multiple_roots, newton, secant
+    bisection, false_rule, fixed_point, gaussian_elimination, incremental, multiple_roots, newton, secant,
+    lu_factorization, cholesky, crout, divided_difference, doolittle, gauss_seidel, jacobi, lagrange,
+    multiple_roots, sor, spline_interpolation, vandermonde
 )
 
 
@@ -114,8 +116,18 @@ def init_blueprints(app: Flask) -> None:
     app.register_blueprint(multiple_roots.bp)
     app.register_blueprint(newton.bp)
     app.register_blueprint(secant.bp)
-
-
+    app.register_blueprint(lu_factorization.bp)
+    app.register_blueprint(cholesky.bp)
+    app.register_blueprint(crout.bp)
+    app.register_blueprint(divided_difference.bp)
+    app.register_blueprint(doolittle.bp)
+    app.register_blueprint(gauss_seidel.bp)
+    app.register_blueprint(jacobi.bp)
+    app.register_blueprint(lagrange.bp)
+    app.register_blueprint(multiple_roots.bp)
+    app.register_blueprint(sor.bp)
+    app.register_blueprint(spline_interpolation.bp)
+    app.register_blueprint(vandermonde.bp)
 
 def init_commands(app):
     from .commands import register_commands

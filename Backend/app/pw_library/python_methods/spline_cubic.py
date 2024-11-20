@@ -38,12 +38,3 @@ def cubic_spline_coefficients(x, y, x_new):
                 y_new.append(y_val)
                 break
     return np.array(y_new)
-
-
-# Example usage
-y_new = cubic_spline(x_points, y_points, x_new)
-
-plt.plot(x_points, y_points, 'o', label='Data points')
-plt.plot(x_new, y_new, '-', label='Cubic Spline')
-plt.legend()
-plt.show()

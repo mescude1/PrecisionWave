@@ -2,10 +2,9 @@ from flask import (
     abort, Blueprint, request, Response, make_response, jsonify
 )
 
-from ..pw_library.python_methods.bisection import bisection_method
-from ..pw_library.python_methods.cholesky import cholesky_factorization, solve_cholesky
+from ..pw_library.python_methods.cholesky import solve_cholesky
 
-bp = Blueprint('bisection', __name__, url_prefix='/methods')
+bp = Blueprint('cholesky', __name__, url_prefix='/methods')
 
 
 @bp.route('/cholesky', methods=['GET'])

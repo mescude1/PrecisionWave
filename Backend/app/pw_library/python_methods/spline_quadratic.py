@@ -27,11 +27,3 @@ def quadratic_spline_coefficients(x, y, x_new):
                 y_new.append(y_val)
                 break
     return np.array(y_new)
-
-# Example usage
-y_new = quadratic_spline(x_points, y_points, x_new)
-
-plt.plot(x_points, y_points, 'o', label='Data points')
-plt.plot(x_new, y_new, '-', label='Quadratic Spline')
-plt.legend()
-plt.show()

@@ -4,7 +4,7 @@ import {
   CCard,
   CCardBody,
   CCardHeader,
-  CCol,
+  CCol, CCollapse,
   CFormInput,
   CFormSelect,
   CInputGroup,
@@ -19,10 +19,11 @@ import axios from "axios";
 
 const GaussianElimination = () => {
 
+  const [visible, setVisible] = useState(false)
   const [size, setSize] = useState(2);  // Default matrix size
   const [matrix, setMatrix] = useState(Array(size).fill(Array(size).fill(0)));
   const [vector, setVector] = useState(Array(size).fill(0));
-  const [pivot, setPivot] = useState(['partial'])
+  const [pivot, setPivot] = useState('partial')
   const [result, setResult] = useState(null);
 
   const handleMatrixChange = (updatedMatrix) => setMatrix(updatedMatrix);
@@ -47,7 +48,12 @@ const GaussianElimination = () => {
           </CCardHeader>
           <CCardBody>
             <h2>Gaussian Elimination</h2>
-          <GaussianEliminationTheory/>
+            <CButton color="primary" onClick={() => setVisible(!visible)} className="me-md-2">
+              show/hide
+            </CButton>
+            <CCollapse visible={visible}>
+              <GaussianEliminationTheory/>
+            </CCollapse>
           </CCardBody>
         </CCard>
       </CCol>
@@ -61,9 +67,9 @@ const GaussianElimination = () => {
 
              <CFormSelect aria-label="pivot" value={pivot} onChange={handleSelectChange}>
                 <option>Select a pivoting strategy:</option>
-                <option value="full">One</option>
-                <option value="partial">Two</option>
-                <option value="none">Three</option>
+                <option value="full">Full</option>
+                <option value="partial">Partial</option>
+                <option value="none">None</option>
               </CFormSelect>
 
             <h3>Matrix Size:</h3>

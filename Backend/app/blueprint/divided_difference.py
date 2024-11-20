@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, jsonify, request
-from Backend.app.pw_library.python_methods.newton_divided_difference import newton_divided_difference_table
+from app.pw_library.python_methods.newton_divided_difference import newton_divided_difference_table
 
 bp = Blueprint('divided_difference', __name__, url_prefix='/methods')
 

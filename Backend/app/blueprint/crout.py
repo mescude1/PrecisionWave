@@ -2,8 +2,7 @@ from flask import (
     abort, Blueprint, request, Response, make_response, jsonify
 )
 
-from ..pw_library.python_methods.cholesky import cholesky_factorization
-from ..pw_library.python_methods.crout import crout_decomposition, solve_crout
+from ..pw_library.python_methods.crout import solve_crout
 
 bp = Blueprint('crout', __name__, url_prefix='/methods')
 

@@ -1,6 +1,6 @@
 from flask import Blueprint, make_response, jsonify, request
-from Backend.app.pw_library.python_methods.lu_factorization_simple_elimination import solve_lu
-from Backend.app.pw_library.python_methods.lu_factorization_with_pivoting import solve_lu_with_pivoting
+from app.pw_library.python_methods.lu_factorization_simple_elimination import solve_lu
+from app.pw_library.python_methods.lu_factorization_with_pivoting import solve_lu_with_pivoting
 
 bp = Blueprint('lu_factorization', __name__, url_prefix='/methods')
 
@@ -33,7 +33,7 @@ def lu_factorization_post() -> str:
     b = request.get_json('b')
     pivot = request.get_json('pivot')
 
-    if not pivot:
+    if pivot == "None":
         x, l, u = solve_lu(a, b)
 
         result = {

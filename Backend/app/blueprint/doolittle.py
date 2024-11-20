@@ -1,5 +1,5 @@
 from flask import abort, Blueprint, request, Response, make_response, jsonify
-from Backend.app.pw_library.python_methods.doolittle import solve_doolittle
+from app.pw_library.python_methods.doolittle import solve_doolittle
 
 bp = Blueprint('doolittle', __name__, url_prefix='/methods')
 

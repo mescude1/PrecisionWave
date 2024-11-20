@@ -18,8 +18,3 @@ def sor(A, b, x0, w, tol=1e-10, max_iterations=1000):
             return x, k
 
     raise ValueError(f'SOR method did not converge after {max_iterations} iterations')
-
-# Example usage:
-# w = 1.5  # Relaxation factor
-# x_sol, iterations = sor(A, b, x0, w)
-# print(f"Solution: {x_sol}, Iterations: {iterations}")

@@ -50,12 +50,3 @@ def newton_divided_difference_table(x_values, y_values):
     polynomial = sp.simplify(polynomial)
 
     return table_df, polynomial
-
-# Compute the divided difference table and Newton polynomial
-table_df, polynomial = newton_divided_difference_table(x_values=[0,6,12,18,24], y_values=[12,2.5,-3,5,12])
-print("Divided Difference Table:")
-print(table_df)
-print("\nNewton Polynomial:", polynomial)
-
-
-print(polynomial.subs('x', 28))

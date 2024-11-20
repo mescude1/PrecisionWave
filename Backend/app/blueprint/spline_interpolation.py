@@ -1,7 +1,7 @@
 from flask import Blueprint, make_response, jsonify, request
-from Backend.app.pw_library.python_methods.spline_quadratic import quadratic_spline_coefficients
-from Backend.app.pw_library.python_methods.spline_cubic import cubic_spline_coefficients
-from Backend.app.pw_library.python_methods.spline_linear import linear_spline_coefficients
+from app.pw_library.python_methods.spline_quadratic import quadratic_spline_coefficients
+from app.pw_library.python_methods.spline_cubic import cubic_spline_coefficients
+from app.pw_library.python_methods.spline_linear import linear_spline_coefficients
 
 bp = Blueprint('spline_interpolation', __name__, url_prefix='/methods')
 
