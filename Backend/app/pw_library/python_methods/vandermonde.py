@@ -1,6 +1,6 @@
 import pandas as pd
 
-from Backend.app.pw_library.python_methods.gaussian_elimination import gaussian_elimination_verbose
+from app.pw_library.python_methods.gaussian_elimination import gaussian_elimination_verbose
 
 
 def vandermonde_linear_regression(x, y, degree=1):
