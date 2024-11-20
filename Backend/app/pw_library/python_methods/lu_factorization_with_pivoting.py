@@ -13,25 +13,25 @@ def lu_factorization_with_pivoting(A):
 
     for i in range(n):
         # Find the pivot row
-        pivot_row = np.argmax(np.abs(U[i:, i])) + i
+        pivot_row = np.argmax(np.abs(U[i:][i])) + i
 
         # Swap rows in U and update P and L accordingly
         if pivot_row != i:
-            U[[i, pivot_row]] = U[[pivot_row, i]]
-            P[[i, pivot_row]] = P[[pivot_row, i]]
+            U[[i][pivot_row]] = U[[pivot_row][i]]
+            P[[i][pivot_row]] = P[[pivot_row][i]]
             if i > 0:
-                L[[i, pivot_row], :i] = L[[pivot_row, i], :i]
+                L[[i][pivot_row]][:i] = L[[pivot_row][i]][:i]
 
         # Eliminate entries below the pivot
         for j in range(i + 1, n):
-            if U[i, i] == 0:
+            if U[i][i] == 0:
                 raise ValueError("Zero pivot encountered, matrix may be singular.")
 
             # Calculate the multiplier and update L
-            L[j, i] = U[j, i] / U[i, i]
+            L[j][i] = U[j][i] / U[i][i]
 
             # Perform elimination
-            U[j, i:] = U[j, i:] - L[j, i] * U[i, i:]
+            U[j][i:] = U[j][i:] - L[j][i] * U[i][i:]
 
     return P, L, U
 
@@ -44,7 +44,7 @@ def forward_substitution(L, b):
     y = np.zeros_like(b, dtype=float)
 
     for i in range(n):
-        y[i] = (b[i] - np.dot(L[i, :i], y[:i])) / L[i, i]
+        y[i] = (b[i] - np.dot(L[i][:i], y[:i])) / L[i][i]
 
     return y
 
@@ -57,7 +57,7 @@ def backward_substitution(U, y):
     x = np.zeros_like(y, dtype=float)
 
     for i in range(n - 1, -1, -1):
-        x[i] = (y[i] - np.dot(U[i, i + 1:], x[i + 1:])) / U[i, i]
+        x[i] = (y[i] - np.dot(U[i][ i + 1:], x[i + 1:])) / U[i][i]
 
     return x
 
