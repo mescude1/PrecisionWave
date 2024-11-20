@@ -107,7 +107,7 @@ const GaussianElimination = () => {
             {result && (
               <div>
                 <h2>Response Vector:</h2>
-                <pre>{JSON.stringify(result)}</pre>
+                <pre>{JSON.stringify(result.data)}</pre>
               </div>
             )}
           </CCardBody>
