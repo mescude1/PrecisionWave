@@ -31,7 +31,7 @@ const SOR = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('https://precision-wave.azuloso.me/methods/sor', { matrix, vector, pivot });
+      const response = await axios.post('https://precision-wave.azuloso.me/methods/sor', { matrix, vector });
       setResult(response.data.result);
     } catch (error) {
       console.error('Error with API call:', error);
