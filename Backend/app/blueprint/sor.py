@@ -26,10 +26,10 @@ def sor_get() -> str:
 
 @bp.route('/sor', methods=['POST'])
 def sor_post() -> str:
-    a = request.get_json('A')
-    b = request.get_json('b')
-    x0 = request.get_json('x0')
-    w = request.get_json('w')
+    a = [[float(element) for element in row] for row in request.get_json('matrix').get('matrix')]
+    b = [float(element) for element in request.get_json('vector').get('vector')]
+    x0 = [float(element) for element in request.get_json('inference').get('inference')]
+    w = int(request.get_json('w'))
 
     x, steps = sor(a, b, x0, w)
 

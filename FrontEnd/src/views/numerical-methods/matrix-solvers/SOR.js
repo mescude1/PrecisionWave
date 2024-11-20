@@ -15,6 +15,7 @@ import SORTheory from "src/views/numerical-methods/theory/SOR_theory";
 import MatrixInput from "src/views/numerical-methods/matrixInput";
 import VectorInput from "src/views/numerical-methods/vectorInput";
 import axios from "axios";
+import InferenceInput from "src/views/numerical-methods/inferenceInput";
 
 const SOR = () => {
 
@@ -22,11 +23,15 @@ const SOR = () => {
   const [size, setSize] = useState(2);  // Default matrix size
   const [matrix, setMatrix] = useState(Array(size).fill(Array(size).fill(0)));
   const [vector, setVector] = useState(Array(size).fill(0));
+  const [w, setW] = 1;
+  const [inference, setInference] = useState(Array(size).fill(0));
 
   const [result, setResult] = useState(null);
 
   const handleMatrixChange = (updatedMatrix) => setMatrix(updatedMatrix);
   const handleVectorChange = (updatedVector) => setVector(updatedVector);
+  const handleWChange = (updatedW) => setW(updatedW);
+  const handleInferenceChange = (updatedInference) => setInference(updatedInference);
 
 
   const handleSubmit = async () => {
@@ -83,9 +88,20 @@ const SOR = () => {
 
             <MatrixInput size={size} onChange={handleMatrixChange}/>
             <VectorInput size={size} onChange={handleVectorChange}/>
+            <InferenceInput size={size} onChange={handleInferenceChange}/>
 
             <h3></h3>
 
+            <CInputGroup className="mb-3">
+              <CInputGroupText id="size">Relaxation Factor</CInputGroupText>
+              <CFormInput
+                type="number"
+                value={size}
+                min="2"
+                onChange={handleWChange}
+              />
+              <h3></h3>
+            </CInputGroup>
             <CButton color="primary" type="submit" className="mb-3" onClick={handleSubmit}>Solve System</CButton>
           </CCardBody>
         </CCard>

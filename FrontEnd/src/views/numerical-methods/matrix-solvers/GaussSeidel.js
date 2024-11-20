@@ -13,6 +13,7 @@ import GaussSeidelTheory from "src/views/numerical-methods/theory/gauss_seidel_t
 import MatrixInput from "src/views/numerical-methods/matrixInput";
 import VectorInput from "src/views/numerical-methods/vectorInput";
 import axios from "axios";
+import InferenceInput from "src/views/numerical-methods/inferenceInput";
 
 const GaussSeidel = () => {
 
@@ -21,13 +22,15 @@ const GaussSeidel = () => {
   const [matrix, setMatrix] = useState(Array(size).fill(Array(size).fill(0)));
   const [vector, setVector] = useState(Array(size).fill(0));
   const [result, setResult] = useState(null);
+  const [inference, setInference] = useState(Array(size).fill(0));
 
   const handleMatrixChange = (updatedMatrix) => setMatrix(updatedMatrix);
   const handleVectorChange = (updatedVector) => setVector(updatedVector);
+  const handleInferenceChange = (updatedInference) => setInference(updatedInference);
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('https://precision-wave.azuloso.me/methods/gauss-seidel', { matrix, vector });
+      const response = await axios.post('https://precision-wave.azuloso.me/methods/gauss-seidel', { matrix, vector, inference });
       setResult(response.data.result);
     } catch (error) {
       console.error('Error with API call:', error);
@@ -79,7 +82,7 @@ const GaussSeidel = () => {
 
             <MatrixInput size={size} onChange={handleMatrixChange}/>
             <VectorInput size={size} onChange={handleVectorChange}/>
-
+            <InferenceInput size={size} onChange={handleInferenceChange}/>
             <h3></h3>
 
             <CButton color="primary" type="submit" className="mb-3" onClick={handleSubmit}>Solve System</CButton>
