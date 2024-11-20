@@ -1,0 +1,38 @@
+FUNCIÓN RegresiónPolinómicaVandermonde(x, y, grado=1):
+
+    ENTRADA:
+    - x: lista de valores de entrada
+    - y: lista de valores de salida correspondientes a \(x\)
+    - grado: grado del polinomio deseado (por defecto, 1 para regresión lineal)
+
+    SALIDA:
+    - a: lista de coeficientes del polinomio en orden ascendente
+    - VTV_tabla: matriz \(V^T V\) representada como tabla
+    - VTy_tabla: vector \(V^T y\) representado como tabla
+
+    // Paso 1: Construcción de la matriz de Vandermonde
+    n = tamaño(x)  // Número de puntos de datos
+    V = MatrizDeCeros(n, grado + 1)  // Inicializar matriz Vandermonde
+    PARA i DESDE 0 HASTA n-1 HACER:
+        PARA j DESDE 0 HASTA grado HACER:
+            V[i][j] = x[i] ^ j  // Llenar elementos de la matriz Vandermonde
+
+    // Paso 2: Calcular \(V^T V\) y \(V^T y\)
+    V_transpuesta = Transpuesta(V)
+    VTV = MultiplicarMatrices(V_transpuesta, V)
+    VTy = MultiplicarMatrizVector(V_transpuesta, y)
+
+    // Paso 3: Mostrar \(V^T V\) como tabla
+    nombres_filas_columnas = [ "a" + i PARA i DESDE 0 HASTA grado ]
+    VTV_tabla = ConvertirEnTabla(VTV, nombres_filas_columnas, nombres_filas_columnas)
+
+    // Paso 4: Mostrar \(V^T y\) como tabla
+    VTy_tabla = ConvertirEnTabla(VTy, nombres_filas_columnas, ["b"])
+
+    // Paso 5: Resolver el sistema \(V^T V a = V^T y\) usando eliminación gaussiana
+    a = EliminaciónGaussianaVerbose(VTV, VTy)
+
+    // Salida
+    DEVOLVER (a, VTV_tabla, VTy_tabla)
+
+FIN FUNCIÓN

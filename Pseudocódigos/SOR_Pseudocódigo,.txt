@@ -1,0 +1,37 @@
+FUNCIÓN SOR(A, b, x0, w, tol=1e-10, max_iteraciones=1000):
+    ENTRADA:
+    - A: matriz de coeficientes del sistema
+    - b: vector de términos independientes
+    - x0: vector inicial de aproximación
+    - w: factor de relajación (0 < w < 2)
+    - tol: tolerancia para criterio de convergencia
+    - max_iteraciones: número máximo de iteraciones permitidas
+
+    SALIDA:
+    - x: solución aproximada al sistema \(Ax = b\)
+    - iteraciones: número de iteraciones realizadas
+
+    VARIABLES:
+    - n: dimensión del vector \(b\)
+    - x: vector de solución (inicializado como copia de \(x0\))
+    - x_viejo: copia del vector \(x\) antes de actualizarlo
+    - s1, s2: sumas parciales en el cálculo de \(x[i]\)
+
+    PASOS:
+
+    1. Inicializar \(x \leftarrow x0\)
+
+    2. Para \(k\) desde 0 hasta max_iteraciones - 1:
+        a. Guardar \(x_viejo \leftarrow x\)
+
+        b. Para cada \(i\) desde 0 hasta \(n-1\):
+            i. Calcular \(s1 = \sum_{j=0}^{i-1} A[i][j] \cdot x[j]\)
+            ii. Calcular \(s2 = \sum_{j=i+1}^{n-1} A[i][j] \cdot x_viejo[j]\)
+            iii. Actualizar \(x[i] = (1 - w) \cdot x_viejo[i] + w \cdot (b[i] - s1 - s2) / A[i][i]\)
+
+        c. Verificar convergencia:
+            i. Si \(\|x - x_viejo\|_\infty < tol\), devolver \(x\) y el número de iteraciones (\(k\))
+
+    3. Si no converge después de \(max_iteraciones\), generar error indicando que no se alcanzó convergencia.
+
+FIN FUNCIÓN

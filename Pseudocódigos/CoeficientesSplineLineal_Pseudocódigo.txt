@@ -1,0 +1,23 @@
+FUNCIÓN CoeficientesSplineLineal(x_vals, y_vals):
+
+    ENTRADA:
+    - x_vals: lista de coordenadas \(x\) de los puntos
+    - y_vals: lista de coordenadas \(y\) correspondientes a \(x\)
+
+    SALIDA:
+    - coeficientes: lista de tuplas donde cada tupla contiene:
+        - m: pendiente del intervalo
+        - b: intercepto del intervalo
+
+    n = tamaño(x_vals) - 1  // Número de intervalos
+    coeficientes = ListaVacía()  // Inicializar la lista de coeficientes
+
+    PARA i DESDE 0 HASTA n-1 HACER:
+        // Calcular la pendiente y el intercepto para el intervalo [x_i, x_{i+1}]
+        m = (y_vals[i+1] - y_vals[i]) / (x_vals[i+1] - x_vals[i])  // Pendiente
+        b = y_vals[i] - m * x_vals[i]  // Intercepto
+        coeficientes.AGREGAR((m, b))  // Guardar la tupla (m, b)
+
+    DEVOLVER coeficientes
+
+FIN FUNCIÓN

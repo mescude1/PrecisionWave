@@ -1,0 +1,99 @@
+FUNCIÓN FactorizaciónLUConPivotaje(A):
+    
+    ENTRADA:
+    - A: matriz cuadrada a descomponer
+    
+    SALIDA:
+    - P: matriz de permutación
+    - L: matriz triangular inferior
+    - U: matriz triangular superior
+    
+    n = tamaño(A)  // Número de filas o columnas de A
+    L = MatrizIdentidad(n)  // Inicializar L como matriz identidad
+    U = Copiar(A)  // U comienza como una copia de A
+    P = MatrizIdentidad(n)  // Inicializar P como matriz identidad
+    
+    PARA i DESDE 0 HASTA n-1 HACER:
+        // Encontrar la fila pivote
+        fila_pivote = ÍndiceDelMáximoAbs(U[i:n, i]) + i
+
+        // Intercambiar filas en U y actualizar P y L en consecuencia
+        SI fila_pivote ≠ i ENTONCES:
+            IntercambiarFilas(U, i, fila_pivote)
+            IntercambiarFilas(P, i, fila_pivote)
+            SI i > 0 ENTONCES:
+                IntercambiarFilas(L[:, :i], i, fila_pivote)
+
+        // Eliminar entradas debajo del pivote
+        PARA j DESDE i+1 HASTA n-1 HACER:
+            SI U[i, i] == 0 ENTONCES:
+                Lanzar un error ("Se encontró un pivote cero, la matriz podría ser singular.")
+            
+            L[j, i] = U[j, i] / U[i, i]  // Calcular el multiplicador
+            U[j, i:] = U[j, i:] - L[j, i] * U[i, i:]  // Realizar eliminación
+
+    DEVOLVER P, L, U
+
+FIN FUNCIÓN
+
+
+FUNCIÓN SustituciónHaciaAdelante(L, b):
+    
+    ENTRADA:
+    - L: matriz triangular inferior
+    - b: vector de términos independientes
+    
+    SALIDA:
+    - y: solución del sistema Ly = b
+    
+    n = tamaño(b)  // Número de elementos en b
+    y = VectorCeros(n)  // Inicializar y como un vector de ceros
+    
+    PARA i DESDE 0 HASTA n-1 HACER:
+        y[i] = (b[i] - ProductoPunto(L[i, :i], y[:i])) / L[i, i]
+    
+    DEVOLVER y
+
+FIN FUNCIÓN
+
+
+FUNCIÓN SustituciónHaciaAtrás(U, y):
+    
+    ENTRADA:
+    - U: matriz triangular superior
+    - y: vector de términos independientes
+    
+    SALIDA:
+    - x: solución del sistema Ux = y
+    
+    n = tamaño(y)  // Número de elementos en y
+    x = VectorCeros(n)  // Inicializar x como un vector de ceros
+    
+    PARA i DESDE n-1 HASTA 0 PASO -1 HACER:
+        x[i] = (y[i] - ProductoPunto(U[i, i+1:], x[i+1:])) / U[i, i]
+    
+    DEVOLVER x
+
+FIN FUNCIÓN
+
+
+FUNCIÓN ResolverLUConPivotaje(A, b):
+    
+    ENTRADA:
+    - A: matriz cuadrada del sistema
+    - b: vector de términos independientes
+    
+    SALIDA:
+    - x: solución del sistema Ax = b
+    - P: matriz de permutación
+    - L: matriz triangular inferior
+    - U: matriz triangular superior
+    
+    P, L, U = FactorizaciónLUConPivotaje(A)  // Realizar la factorización LU con pivotaje
+    Pb = ProductoMatrizVector(P, b)  // Ajustar b según P
+    y = SustituciónHaciaAdelante(L, Pb)  // Resolver Ly = Pb
+    x = SustituciónHaciaAtrás(U, y)  // Resolver Ux = y
+    
+    DEVOLVER x, P, L, U
+
+FIN FUNCIÓN

@@ -1,0 +1,32 @@
+FUNCIÓN PolinomioDeLagrange(x_valores, y_valores):
+    
+    ENTRADA:
+    - x_valores: lista de coordenadas x de los puntos de datos
+    - y_valores: lista de coordenadas y de los puntos de datos
+    
+    SALIDA:
+    - polinomio: el polinomio de Lagrange como una expresión simbólica
+    
+    SI longitud(x_valores) ≠ longitud(y_valores) ENTONCES:
+        Lanzar un error ("x_valores e y_valores deben tener la misma longitud")
+    
+    Definir x como una variable simbólica  // Variable simbólica para el polinomio
+    
+    polinomio = 0  // Inicializar el polinomio
+    
+    n = longitud(x_valores)  // Número de puntos de datos
+    
+    PARA i DESDE 0 HASTA n-1 HACER:
+        término = y_valores[i]  // Inicializar el término con el valor y correspondiente
+        
+        PARA j DESDE 0 HASTA n-1 HACER:
+            SI j ≠ i ENTONCES:
+                término = término * (x - x_valores[j]) / (x_valores[i] - x_valores[j])
+        
+        polinomio = polinomio + término  // Sumar el término al polinomio
+    
+    polinomio = Simplificar(polinomio)  // Simplificar la expresión del polinomio
+    
+    DEVOLVER polinomio
+
+FIN FUNCIÓN

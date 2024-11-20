@@ -1,0 +1,43 @@
+FUNCIÓN GaussSeidel(A, b, x0, tolerancia=1e-7, max_iteraciones=100):
+
+    ENTRADA:
+    - A: matriz de coeficientes (cuadrada, no singular y preferiblemente diagonal dominante)
+    - b: vector de términos independientes
+    - x0: vector inicial de aproximaciones
+    - tolerancia: criterio de convergencia (opcional)
+    - max_iteraciones: número máximo de iteraciones permitidas (opcional)
+
+    SALIDA:
+    - x: vector aproximado de solución
+    - iteraciones: número de iteraciones realizadas
+    - convergió: indicador de si el método alcanzó la convergencia
+    - df_result: tabla de resultados con las iteraciones
+
+    n = TAMAÑO(b)  // Número de ecuaciones (tamaño del sistema)
+    x = COPIAR(x0)  // Inicializar vector de soluciones con x0
+    lista_resultados = []  // Lista para registrar los resultados de cada iteración
+
+    PARA k DESDE 0 HASTA max_iteraciones HACER:
+        x_ant = COPIAR(x)  // Copiar la solución anterior
+
+        PARA i DESDE 0 HASTA n-1 HACER:
+            s1 = SUMA(A[i][j] * x[j] PARA j DESDE 0 HASTA i-1)  // Suma de los términos anteriores
+            s2 = SUMA(A[i][j] * x_ant[j] PARA j DESDE i+1 HASTA n-1)  // Suma de los términos posteriores
+            x[i] = (b[i] - s1 - s2) / A[i][i]  // Actualizar el valor de x[i]
+
+        // Verificar convergencia
+        error = NORMA_INFINITA(x - x_ant)
+        resultado = { 'iteración': k, 'x': COPIAR(x), 'error': error }
+        lista_resultados.AGREGAR(resultado)
+
+        SI error < tolerancia ENTONCES:
+            Crear un DataFrame con lista_resultados  // Convertir la lista a tabla
+            IMPRIMIR el DataFrame  // Mostrar tabla con resultados de iteraciones
+            DEVOLVER (x, k+1, True, DataFrame)  // Algoritmo ha convergido
+
+    // Si no converge en el número máximo de iteraciones
+    Crear un DataFrame con lista_resultados  // Convertir la lista a tabla
+    IMPRIMIR el DataFrame  // Mostrar tabla con resultados de iteraciones
+    DEVOLVER (x, max_iteraciones, False, DataFrame)
+
+FIN FUNCIÓN

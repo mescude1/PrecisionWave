@@ -1,0 +1,49 @@
+FUNCIÓN CoeficientesSplineCúbico(x, y, x_nuevo):
+
+    ENTRADA:
+    - x: lista de puntos \(x\) (nodos de interpolación)
+    - y: lista de puntos \(y\) correspondientes a \(x\)
+    - x_nuevo: lista de puntos donde se desea evaluar el spline
+
+    SALIDA:
+    - y_nuevo: lista de valores interpolados en los puntos \(x_nuevo\)
+
+    n = tamaño(x) - 1  // Número de subintervalos
+    h = Diferencias(x)  // Vector de diferencias entre nodos \(h_i = x[i+1] - x[i]\)
+    alpha = VectorCeros(n + 1)  // Vector auxiliar para el sistema de ecuaciones
+    l = VectorUnos(n + 1)  // Inicializar \(l_i = 1\)
+    mu = VectorCeros(n)  // Inicializar \(mu\) como un vector de ceros
+    z = VectorCeros(n + 1)  // Inicializar \(z\) como un vector de ceros
+
+    // Paso 1: Configurar el sistema de ecuaciones
+    PARA i DESDE 1 HASTA n-1 HACER:
+        alpha[i] = (3 / h[i]) * (y[i+1] - y[i]) - (3 / h[i-1]) * (y[i] - y[i-1])
+
+    // Paso 2: Resolver el sistema con sustitución hacia adelante
+    PARA i DESDE 1 HASTA n-1 HACER:
+        l[i] = 2 * (x[i+1] - x[i-1]) - h[i-1] * mu[i-1]
+        mu[i] = h[i] / l[i]
+        z[i] = (alpha[i] - h[i-1] * z[i-1]) / l[i]
+
+    // Paso 3: Sustitución hacia atrás
+    b = VectorCeros(n)  // Coeficientes \(b_i\)
+    c = VectorCeros(n + 1)  // Coeficientes \(c_i\)
+    d = VectorCeros(n)  // Coeficientes \(d_i\)
+    PARA j DESDE n-1 HASTA 0 PASO -1 HACER:
+        c[j] = z[j] - mu[j] * c[j+1]
+        b[j] = (y[j+1] - y[j]) / h[j] - h[j] * (c[j+1] + 2 * c[j]) / 3
+        d[j] = (c[j+1] - c[j]) / (3 * h[j])
+
+    // Paso 4: Interpolación
+    y_nuevo = ListaVacía()  // Lista para almacenar los valores interpolados
+    PARA cada x_val EN x_nuevo HACER:
+        PARA i DESDE 0 HASTA n-1 HACER:
+            SI x[i] ≤ x_val ≤ x[i+1] ENTONCES:
+                dx = x_val - x[i]
+                y_val = y[i] + b[i] * dx + c[i] * dx^2 + d[i] * dx^3
+                y_nuevo.AGREGAR(y_val)
+                TERMINAR BUCLE
+    
+    DEVOLVER y_nuevo
+
+FIN FUNCIÓN

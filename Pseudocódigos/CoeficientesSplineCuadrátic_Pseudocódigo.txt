@@ -1,0 +1,38 @@
+FUNCIÓN CoeficientesSplineCuadrático(x, y, x_nuevos):
+
+    ENTRADA:
+    - x: lista de coordenadas \(x\) de los puntos
+    - y: lista de coordenadas \(y\) correspondientes a \(x\)
+    - x_nuevos: valores de \(x\) donde se desea calcular \(y\) usando la interpolación
+
+    SALIDA:
+    - y_nuevos: lista de valores interpolados \(y\) en los puntos \(x_nuevos\)
+
+    n = tamaño(x) - 1  // Número de intervalos
+    h = Diferencias(x)  // Diferencias entre los valores consecutivos de \(x\)
+    a = y[0 : n]  // Coeficientes \(a_i\) son los valores \(y_i\)
+    b = VectorDeCeros(n)  // Inicializar coeficientes \(b_i\)
+    c = VectorDeCeros(n)  // Inicializar coeficientes \(c_i\)
+
+    // Paso 1: Calcular los coeficientes \(c_i\) usando la condición de contorno natural
+    PARA i DESDE 1 HASTA n-1 HACER:
+        c[i] = ((y[i+1] - y[i]) / h[i]) - ((y[i] - y[i-1]) / h[i-1])
+    c = c / 2  // Ajustar \(c_i\) dividiendo entre 2
+
+    // Paso 2: Calcular los coeficientes \(b_i\)
+    PARA i DESDE 0 HASTA n-1 HACER:
+        b[i] = ((y[i+1] - y[i]) / h[i]) - h[i] * c[i]
+
+    // Paso 3: Interpolación para los valores \(x_nuevos\)
+    y_nuevos = ListaVacía()
+    PARA cada x_val EN x_nuevos HACER:
+        PARA i DESDE 0 HASTA n-1 HACER:
+            SI x[i] <= x_val <= x[i+1] ENTONCES:
+                dx = x_val - x[i]
+                y_val = a[i] + b[i] * dx + c[i] * dx^2
+                y_nuevos.AGREGAR(y_val)
+                ROMPER  // Salir del bucle interno
+
+    DEVOLVER y_nuevos
+
+FIN FUNCIÓN

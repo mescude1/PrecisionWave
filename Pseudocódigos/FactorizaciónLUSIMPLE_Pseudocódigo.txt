@@ -1,0 +1,84 @@
+FUNCIÓN FactorizaciónLU(A):
+    
+    ENTRADA:
+    - A: matriz cuadrada a descomponer
+    
+    SALIDA:
+    - L: matriz triangular inferior
+    - U: matriz triangular superior
+    
+    n = tamaño(A)  // Número de filas o columnas de A
+    L = MatrizIdentidad(n)  // Inicializar L como matriz identidad
+    U = Copiar(A)  // U comienza como una copia de A
+    
+    PARA i DESDE 0 HASTA n-1 HACER:
+        SI U[i, i] == 0 ENTONCES:
+            Lanzar un error ("Se encontró un pivote cero; no se puede continuar sin pivotear")
+        
+        PARA j DESDE i+1 HASTA n-1 HACER:
+            L[j, i] = U[j, i] / U[i, i]  // Calcular el multiplicador
+            U[j, i:] = U[j, i:] - L[j, i] * U[i, i:]  // Eliminar entradas debajo del pivote
+    
+    DEVOLVER L, U
+
+FIN FUNCIÓN
+
+
+FUNCIÓN SustituciónHaciaAdelante(L, b):
+    
+    ENTRADA:
+    - L: matriz triangular inferior
+    - b: vector de términos independientes
+    
+    SALIDA:
+    - y: solución del sistema Ly = b
+    
+    n = tamaño(b)  // Número de elementos en b
+    y = VectorCeros(n)  // Inicializar y como un vector de ceros
+    
+    PARA i DESDE 0 HASTA n-1 HACER:
+        y[i] = (b[i] - ProductoPunto(L[i, :i], y[:i])) / L[i, i]
+    
+    DEVOLVER y
+
+FIN FUNCIÓN
+
+
+FUNCIÓN SustituciónHaciaAtrás(U, y):
+    
+    ENTRADA:
+    - U: matriz triangular superior
+    - y: vector de términos independientes
+    
+    SALIDA:
+    - x: solución del sistema Ux = y
+    
+    n = tamaño(y)  // Número de elementos en y
+    x = VectorCeros(n)  // Inicializar x como un vector de ceros
+    
+    PARA i DESDE n-1 HASTA 0 PASO -1 HACER:
+        x[i] = (y[i] - ProductoPunto(U[i, i+1:], x[i+1:])) / U[i, i]
+    
+    DEVOLVER x
+
+FIN FUNCIÓN
+
+
+FUNCIÓN ResolverLU(A, b):
+    
+    ENTRADA:
+    - A: matriz cuadrada del sistema
+    - b: vector de términos independientes
+    
+    SALIDA:
+    - x: solución del sistema Ax = b
+    - L: matriz triangular inferior de la factorización LU
+    - U: matriz triangular superior de la factorización LU
+    
+    L, U = FactorizaciónLU(A)  // Realizar la factorización LU
+    y = SustituciónHaciaAdelante(L, b)  // Resolver Ly = b
+    x = SustituciónHaciaAtrás(U, y)  // Resolver Ux = y
+    
+    DEVOLVER x, L, U
+
+FIN FUNCIÓN
