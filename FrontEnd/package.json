@@ -41,7 +41,8 @@
     "redux": "5.0.1",
     "simplebar-react": "^3.2.5",
     "tailwind-merge": "^2.5.4",
-    "recharts": "2.13.3"
+    "recharts": "2.13.3",
+    "papaparse": "^5.4.1"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",

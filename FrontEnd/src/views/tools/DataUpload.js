@@ -10,6 +10,7 @@ import {
   CAccordionHeader,
   CAccordionItem,
 } from '@coreui/react'
+import CsvUploader from "src/views/tools/uploader";
 
 const DataUpload = () => {
   return (
@@ -17,10 +18,10 @@ const DataUpload = () => {
       <CCol xs={6}>
         <CCard className="mb-4">
           <CCardHeader>
-            <strong>Theory</strong>
+            <strong>Upload Data</strong>
           </CCardHeader>
           <CCardBody>
-
+            <CsvUploader apiEndpoint="https://precision-wave.azuloso.me/methods/regression" />
           </CCardBody>
         </CCard>
       </CCol>
