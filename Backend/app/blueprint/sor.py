@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, jsonify, request
-from Backend.app.pw_library.python_methods.sor import sor
+from app.pw_library.python_methods.sor import sor
 
 bp = Blueprint('sor', __name__, url_prefix='/methods')
 

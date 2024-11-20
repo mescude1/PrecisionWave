@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, jsonify, request
-from Backend.app.pw_library.python_methods.lagrange import lagrange_polynomial
+from app.pw_library.python_methods.lagrange import lagrange_polynomial
 
 bp = Blueprint('lagrange', __name__, url_prefix='/methods')
 

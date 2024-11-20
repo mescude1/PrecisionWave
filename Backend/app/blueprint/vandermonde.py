@@ -1,5 +1,5 @@
 from flask import Blueprint, make_response, jsonify, request
-from Backend.app.pw_library.python_methods.vandermonde import vandermonde_linear_regression
+from app.pw_library.python_methods.vandermonde import vandermonde_linear_regression
 
 bp = Blueprint('vandermonde', __name__, url_prefix='/methods')
 
